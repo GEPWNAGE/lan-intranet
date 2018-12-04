@@ -11,6 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PortalController@home')->name('home');
+
+Route::post('/authenticate', 'PortalController@authenticate')->name('authenticate');
+
+Route::get('/status', 'PortalController@status')->name('status');
