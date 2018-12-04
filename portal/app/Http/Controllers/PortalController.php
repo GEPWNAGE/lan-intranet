@@ -6,12 +6,12 @@ use UniFi_API\Client;
 
 class PortalController extends Controller
 {
-    public function home(Client $unifi)
+    public function home()
     {
         return view('home');
     }
 
-    public function authenticate()
+    public function authenticate(Client $unifi)
     {
         return redirect()->route('status');
     }
