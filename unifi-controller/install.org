@@ -24,7 +24,37 @@ set-inform http://ip-of-controller:8080/inform
 set-inform http://ip-of-controller:8080/inform
 #+END_SRC
 
+** Theory of operation
 
-** Sources
-   - https://help.ubnt.com/hc/en-us/articles/220066768-UniFi-How-to-Install-Update-via-APT-on-Debian-or-Ubuntu
-   - http://jzdocs.com/ways-to-install-a-ubiquiti-unifi-security-gateway-usg/
+   Participant flow:
+
+   1. Participant arrives at LAN, connects PC to network
+   2. Participant goes to a webpage
+   3. Participant is redirected to http://portal.gepwnage.lan
+   4. Participant enters his voucher and clicks "Register on network"
+   5. Participant is redirected to the status page
+   6. Participant has access to the network
+
+** Configuring static DNS routes
+
+   Edit /usr/lib/unifi/data/sites/default/config.gateway.json and configure as follows for static DNS:
+
+#+BEGIN_SRC json
+{
+    "system": {
+        "static-host-mapping": {
+            "host-name": {
+                "portal.gepwnage.lan": {
+                    "inet": [
+                        "10.13.42.3"
+                    ]
+                }
+            }
+        }
+    }
+}
+#+END_SRC
+   
+* Sources
+  - https://help.ubnt.com/hc/en-us/articles/220066768-UniFi-How-to-Install-Update-via-APT-on-Debian-or-Ubuntu
+  - http://jzdocs.com/ways-to-install-a-ubiquiti-unifi-security-gateway-usg/
