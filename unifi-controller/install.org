@@ -37,7 +37,7 @@ set-inform http://ip-of-controller:8080/inform
 
 ** Configuring static DNS routes
 
-   Edit /usr/lib/unifi/data/sites/default/config.gateway.json and configure as follows for static DNS:
+   Edit ~/usr/lib/unifi/data/sites/default/config.gateway.json~ and configure as follows for static DNS:
 
 #+BEGIN_SRC json
 {
