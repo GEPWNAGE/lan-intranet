@@ -10,6 +10,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.1.3",
+        "art-of-wifi/unifi-api-client": "^1.1",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0"
