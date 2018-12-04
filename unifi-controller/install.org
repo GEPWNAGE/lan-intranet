@@ -2,14 +2,27 @@
 ** Network map
 
 #+BEGIN_SRC
-internet <--->   UniFi USG <-- LAN 1 --> Unifi Controller
+internet <--->   UniFi USG <-- LAN 1 --> UniFi Controller
                       ^
                       | LAN 2
                       v
 participants <---> unmanaged switch <---> wireless AP
 #+END_SRC
 
+Most of the configuration takes place on the Unifi controller.
 
+We run the controller ourselves on Debian, with the Unifi controller software installed.
+** TODO Willem: Add description of how to install unifi controller on Debian
+** Mating UniFi Controller and USG
+   The UniFi controller and USG may not mate (connect) automatically. For this to work,
+   SSH into the USG (default username and password is ubnt:ubnt), and execute the following:
+
+#+BEGIN_SRC ssh
+mca-cli
+set-inform http://ip-of-controller:8080/inform
+# go to the controller web interface, login, go to the devices tab, approve the connection, and again:
+set-inform http://ip-of-controller:8080/inform
+#+END_SRC
 
 
 ** Sources
