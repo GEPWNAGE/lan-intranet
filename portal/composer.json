@@ -1,11 +1,11 @@
 {
     "name": "gepwnage/lan",
     "type": "project",
-    "description": "GEPWNAGE LAN Intranet",
+    "description": "GEPWNAGE LAN Portal",
     "keywords": [
         "gepwnage",
         "lan",
-        "intranet"
+        "portal"
     ],
     "license": "MIT",
     "require": {
