@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
                 config('unifi.url'),
                 config('unifi.site_id'),
                 config('unifi.version'),
-                true
+                config('unifi.verify_ssl')
             );
             $unifi_connection->login();
 

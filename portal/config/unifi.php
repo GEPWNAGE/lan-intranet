@@ -12,4 +12,6 @@ return [
 
     'version' => env('UNIFI_VERSION', '5.9.29'),
 
+    'verify_ssl' => env('UNIFI_VERIFY_SSL'),
+
 ];
