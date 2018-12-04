@@ -1,0 +1,17 @@
+* Install Unifi Controller
+** Network map
+
+#+BEGIN_SRC
+internet <--->   UniFi USG <-- LAN 1 --> Unifi Controller
+                      ^
+                      | LAN 2
+                      v
+participants <---> unmanaged switch <---> wireless AP
+#+END_SRC
+
+
+
+
+** Sources
+   - https://help.ubnt.com/hc/en-us/articles/220066768-UniFi-How-to-Install-Update-via-APT-on-Debian-or-Ubuntu
+   - http://jzdocs.com/ways-to-install-a-ubiquiti-unifi-security-gateway-usg/
