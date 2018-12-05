@@ -25,12 +25,12 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton(\UniFi_API\Client::class, function () {
             return new \UniFi_API\Client(
-                config('unifi.username'),
-                config('unifi.password'),
-                config('unifi.url'),
-                config('unifi.site_id'),
-                config('unifi.version'),
-                config('unifi.verify_ssl')
+                config('services.unifi.username'),
+                config('services.unifi.password'),
+                config('services.unifi.url'),
+                config('services.unifi.site_id'),
+                config('services.unifi.version'),
+                config('services.unifi.verify_ssl')
             );
         });
     }
