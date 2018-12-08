@@ -45,7 +45,7 @@ set-inform http://ip-of-controller:8080/inform
    2. When the voucher is entered into the portal, the portal verifies the voucher.
       And if it is valid, the lease is approved.
    
-   The relevant API calls are:
+**** API calls
 
    - ~list_clients()~, to retreive all clients so we can get the MAC address from the local IP.
      - [[https://github.com/Art-of-WiFi/UniFi-API-client/blob/master/src/Client.php#L984][API Call]]
