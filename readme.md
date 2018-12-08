@@ -20,6 +20,7 @@ and apply the credentials. Then run:
 ```php
 composer install
 php artisan key:generate
+touch database/database.sqlite
 php artisan migrate
 ```
 
