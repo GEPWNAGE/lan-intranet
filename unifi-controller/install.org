@@ -14,8 +14,9 @@ Most of the configuration takes place on the Unifi controller.
 We run the controller ourselves on Debian, with the Unifi controller software installed.
 ** TODO Willem: Add description of how to install unifi controller on Debian
 ** Mating UniFi Controller and USG
-   The UniFi controller and USG may not mate (connect) automatically. For this to work,
-   SSH into the USG (default username and password is ubnt:ubnt), and execute the following:
+   The UniFi controller and USG may not mate (connect) automatically. For this
+   to work, SSH into the USG (default username and password is ~ubnt:ubnt~), and
+   execute the following:
 
 #+BEGIN_SRC ssh
 mca-cli
@@ -26,7 +27,7 @@ set-inform http://ip-of-controller:8080/inform
 
 ** Theory of operation
 
-   Participant flow:
+*** Participant flow
 
    1. Participant arrives at LAN, connects PC to network
    2. Participant goes to a webpage
@@ -34,6 +35,22 @@ set-inform http://ip-of-controller:8080/inform
    4. Participant enters his voucher and clicks "Register on network"
    5. Participant is redirected to the status page
    6. Participant has access to the network
+   
+*** Portal <-> Unifi Controller communication
+
+   1. When the participant visits http://portal.gepwnage.lan, the portal takes
+      the IP of the user, and requests all the leases from the unifi controller.
+      From here, the portal finds the MAC address of the user, which the
+      controller needs to approve the lease.
+   2. When the voucher is entered into the portal, the portal verifies the voucher.
+      And if it is valid, the lease is approved.
+
+** Network configuration
+   As seen in the Network Map, the UniFi USG has two ports. We use LAN1 for the 'Corporate' network,
+   without captive portal. And we use LAN2 for the 'Guest' network.
+
+   Everyone, except for the controller and select circumstances, is in the LAN2 'Guest' network. Which,
+   by default, blocks all network access except for allowed users.
 
 ** Configuring static DNS routes
 
