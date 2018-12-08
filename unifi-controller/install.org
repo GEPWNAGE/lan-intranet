@@ -44,6 +44,16 @@ set-inform http://ip-of-controller:8080/inform
       controller needs to approve the lease.
    2. When the voucher is entered into the portal, the portal verifies the voucher.
       And if it is valid, the lease is approved.
+   
+   The relevant API calls are:
+
+   - ~list_clients()~, to retreive all clients so we can get the MAC address from the local IP.
+     - [[https://github.com/Art-of-WiFi/UniFi-API-client/blob/master/src/Client.php#L984][API Call]]
+   - ~authorize_guest()~, to authorize the participant on the LAN network.
+     - [[https://github.com/Art-of-WiFi/UniFi-API-client/blob/master/src/Client.php#L206][API Call]]
+   
+   Note: for API communication we use [[https://github.com/Art-of-WiFi/UniFi-API-client][art-of-wifi/unify-api-client]]. And an example for how a portal
+   can work, can be found at [[https://github.com/kaptk2/portal][kaptk2/portal]].
 
 ** Network configuration
    As seen in the Network Map, the UniFi USG has two ports. We use LAN1 for the 'Corporate' network,
