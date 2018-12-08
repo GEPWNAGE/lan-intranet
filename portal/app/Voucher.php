@@ -2,17 +2,19 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property string $id
- * @property boolean $used
+ * @property int $id
+ * @property string $key
+ * @property Carbon|null $used_at
  */
 class Voucher extends Model
 {
-    protected $keyType = 'string';
-
-    public $incrementing = false;
-
     public $timestamps = false;
+
+    protected $dates = [
+        'used_at'
+    ];
 }
