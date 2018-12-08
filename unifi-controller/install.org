@@ -13,6 +13,10 @@ Most of the configuration takes place on the Unifi controller.
 
 We run the controller ourselves on Debian, with the Unifi controller software installed.
 ** TODO Willem: Add description of how to install unifi controller on Debian
+*** Prevent suspend when closing laptop lid of controller
+    The controller runs on a laptop. To prevent suspend on lid close, edit
+    ~/etc/systemd/logind.conf~ and uncomment ~HandleLidSwitch~ and
+    ~HandleLidSwitchDocked~ and set both to ~ignore~.
 ** Mating UniFi Controller and USG
    The UniFi controller and USG may not mate (connect) automatically. For this
    to work, SSH into the USG (default username and password is ~ubnt:ubnt~), and
