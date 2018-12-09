@@ -22,6 +22,8 @@
     @method('post')
     @csrf
 
+    <input type="text" name="voucher" placeholder="Voucher"/>
+
     <button type="submit">Authenticate</button>
 
 </form>
