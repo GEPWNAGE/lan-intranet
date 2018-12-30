@@ -10,50 +10,65 @@ how to deploy the project on a live system.
 
 ### Prerequisites
 
-PHP for dev, with sqlite extension
+  - PHP with sqlite extension
 
-### Installing the portal
+## Portal
+
+### Installation
 
 After cloning, copy `.env.example` (or `.env.dev-example` for development) to `.env`,
 and apply the credentials. Then run:
 
-```php
+```bash
+# Install PHP dependencies
 composer install
+
+# Generate random hash
 php artisan key:generate
+
+# Create database
 touch database/database.sqlite
 php artisan migrate
+
+# Compile frontend resources
+npm run production
+
+# Create API user (optional)
+php artisan user:create user@somedomain.org
 ```
 
 This will get you started. If you want a complicated setup, you can run MySQL. But by
 default sqlite is used.
+
+Don't forget to check file permissions for the entire folder.
+
+### Vouchers
+
+Note: all vouchers are **single use**.
+
+To create voucher, use `php artisan voucher:create`.
+
+To list vouchers, use `php artisan voucher:list`.
+
+#### REST API
+
+- [ ] The portal
+- [ ] An API endpoint `POST /vouchers` which allows an API user to create a voucher.
+- [ ] An API endpoint `GET /vouchers` to list all vouchers.
+- [ ] An API endpoint `POST /vouchers/id` to update a voucher.
+- [ ] An API endpoint `DELETE /vouchers/id` to remove a voucher.
+
+## UniFi Controller
+
+### Installation
+
+To view more information about the controller, see [`unifi-controller/install.org`](unifi-controller/install.org)
 
 ## Deployment
 
 For deploy, follow installation. Since this doesn't need a lot of database
 writing, you will not need something like MySQL. SQLite is good enough (which
 the default config uses).
-
-## What does this provide (TODO List)
-
-Note: all vouchers are **single use**. This is because we couple hostnames to vouchers. And we
-can only have one voucher per computer.
-
-- [ ] The portal
-- [ ] An API endpoint `POST /vouchers` which allows the management application to create a voucher.
-- [ ] An API endpoint `GET /vouchers` to list all vouchers.
-- [ ] An API endpoint `POST /vouchers/id` to update a voucher (deactivate it for example).
-  - Note: this endpoint should also communicate with the controller to deactivate a voucher
-
-To view more information about the controller, look at `../unifi-controller/install.org`
-
-### Voucher types
-
-There will be two types of vouchers. Full vouchers and day vouchers. We will
-distinct between these two by specifying how long they will be valid. Full
-vouchers will not expire during the entire LAN (72 hours), while day vouchers
-will expire after 8 hours. We differentiate between the two, by specifying in
-the voucher table how much hours it is valid. Of course, we can generate
-vouchers for different amounts of hours.
 
 ## Authors
 
