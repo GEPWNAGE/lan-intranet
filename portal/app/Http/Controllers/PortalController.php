@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class PortalController extends Controller
 {
+    /** @var \UniFi_API\Client */
+    private $unifi;
+
+    public function __construct(\UniFi_API\Client $unifi)
+    {
+        $this->unifi = $unifi;
+    }
+
     public function home()
     {
         return view('home');
@@ -18,57 +26,82 @@ class PortalController extends Controller
         $voucher = Voucher::where('key', $request->get('voucher'))->first();
 
         if ($voucher === null) {
-            return response('Unknown Voucher', 401);
+            return response()->json(['reason' => 'Unknown voucher.'], 401);
         }
         if ($voucher->used_at !== null) {
-            return response('Voucher has already been used.', 401);
+            return response()->json(['reason' => 'Voucher has already been used.'], 401);
         }
 
-        $login = $unifi->login();
-        if ($login === 400) {
-            return response('Could not connect to controller.', 503);
+        try {
+            /** @var object $client */
+            $client = $this->getClient();
+        } catch (\RuntimeException $e) {
+            return response()->json(['reason' => $e->getMessage()], $e->getCode());
         }
 
-        /** @var object[]|false $clients */
-        $clients = $unifi->list_clients();
-        if (!is_array($clients)) {
-            throw new \RuntimeException('Could not retrieve client list from controller.');
-        }
-
-        $clients = array_where($clients, function ($value) use ($request) {
-            return $value->ip === $request->ip();
-        });
-        if (count($clients) === 0) {
-            throw new \RuntimeException('Client not registered with controller.');
-        }
-        if (count($clients) > 1) {
-            throw new \RuntimeException('Multiple clients with identical IP address found.');
-        }
-
-        /** @var object $client */
-        $client = array_first($clients);
-
-        if ($client->authorized) {
-            // TODO
-        }
         if (!$client->is_guest) {
-            // TODO
+            return response()->json(['reason' => 'Client is not a guest.'], 500);
+        }
+
+        // Authorize client.
+        if ($client->authorized) {
+            return $this->status();
         }
 
         $unifi->authorize_guest($client->mac, 0);
 
-        return response()->json($this->getStatusObject());
+        $voucher->used_at = now();
+        $voucher->save();
+
+        return $this->status();
     }
 
     public function status()
     {
-        return response()->json($this->getStatusObject());
+        try {
+            return response()->json($this->getStatusObject());
+        } catch (\RuntimeException $e) {
+            return response()->json(['reason' => $e->getMessage()], $e->getCode());
+        }
     }
 
     private function getStatusObject(): array
     {
-        return [
-            'ip' => '127.0.0.1',
-        ];
+        /** @var object $client */
+        $client = $this->getClient();
+
+        return array_only((array)$client, [
+            'authorized',
+            'is_guest',
+            'ip',
+            'mac',
+        ]);
+    }
+
+    private function getClient()
+    {
+        $login = $this->unifi->login();
+        if ($login === 400) {
+            throw new \RuntimeException('Could not connect to controller.', 503);
+        }
+
+        /** @var object[]|false $clients */
+        $clients = $this->unifi->list_clients();
+        if (!is_array($clients)) {
+            throw new \RuntimeException('Could not retrieve client list from controller.', 500);
+        }
+
+        $clients = array_where($clients, function ($value) {
+            return $value->ip === request()->ip();
+        });
+
+        if (empty($clients)) {
+            throw new \RuntimeException('Client not registered with controller.', 500);
+        }
+        if (count($clients) > 1) {
+            throw new \RuntimeException('Multiple clients with identical IP address found.', 500);
+        }
+
+        return array_first($clients);
     }
 }
