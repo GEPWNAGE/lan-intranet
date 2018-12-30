@@ -6,7 +6,7 @@ export default class Info extends Component {
     for (let key in this.props.data) {
       if (key === 'ip' || key === 'mac') {
         ret.push(<tr key={key}>
-          <td>{key}</td>
+          <td><strong>{key}</strong></td>
           <td>{this.props.data[key]}</td>
         </tr>);
       }
@@ -16,12 +16,6 @@ export default class Info extends Component {
   render() {
     return (
       <table>
-        <thead>
-        <tr>
-          <th>Key</th>
-          <th>Value</th>
-        </tr>
-        </thead>
         <tbody>
         {this.getBody()}
         </tbody>

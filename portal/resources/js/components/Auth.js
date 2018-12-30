@@ -21,8 +21,9 @@ export default class Auth extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <input type="text" name="voucher" onChange={this.handleVoucher}/>
-        <button>Submit</button>
+        <h2>Voucher</h2>
+        <input type="text" name="voucher" placeholder="Voucher" onChange={this.handleVoucher}/>
+        <button>Sign in</button>
       </form>
     )
   }

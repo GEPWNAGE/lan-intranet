@@ -75,7 +75,7 @@ class Main extends Component {
 export default class App extends Component {
     render() {
         return (
-            <div className="App">
+            <div className="App container">
               <header className="App-header">
                 <h1>GEPWNAGE LAN Portal</h1>
               </header>
