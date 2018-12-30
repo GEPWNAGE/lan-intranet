@@ -1,0 +1,50 @@
+<?php
+
+namespace App\Console\Commands;
+
+use App\Voucher;
+use Illuminate\Console\Command;
+
+class ListVouchers extends Command
+{
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'voucher:list
+        {--available : List only available vouchers}';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'List all vouchers in the system.';
+
+    /**
+     * Create a new command instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    /**
+     * Execute the console command.
+     *
+     * @return mixed
+     */
+    public function handle()
+    {
+        $headers = ['ID', 'Voucher', 'Used'];
+
+        $vouchers = $this->option('available')
+            ? Voucher::whereNull('used_at')->get()
+            : Voucher::all();
+
+        $this->table($headers, $vouchers);
+    }
+}

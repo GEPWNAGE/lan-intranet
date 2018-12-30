@@ -11,6 +11,6 @@
 |
 */
 
-Route::middleware('auth:api')->group(function () {
+Route::middleware('auth.basic')->group(function () {
     Route::apiResource('/voucher', 'VoucherController');
 });
