@@ -46,6 +46,15 @@ can only have one voucher per computer.
 
 To view more information about the controller, look at `../unifi-controller/install.org`
 
+### Voucher types
+
+There will be two types of vouchers. Full vouchers and day vouchers. We will
+distinct between these two by specifying how long they will be valid. Full
+vouchers will not expire during the entire LAN (72 hours), while day vouchers
+will expire after 8 hours. We differentiate between the two, by specifying in
+the voucher table how much hours it is valid. Of course, we can generate
+vouchers for different amounts of hours.
+
 ## Authors
 
 * **Pieter Kokx** - *Initial work* - [kokx](https://github.com/kokx)

@@ -15,6 +15,7 @@ class Voucher extends Model
     public $timestamps = false;
 
     protected $dates = [
-        'used_at'
+        'used_at',
+        'expires_at'
     ];
 }
