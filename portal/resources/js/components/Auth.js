@@ -19,9 +19,14 @@ export default class Auth extends Component {
     e.preventDefault();
   }
   render() {
+    let error = ''
+    if (this.props.error !== null) {
+      error = <div className="alert alert-danger" role="alert">{this.props.error}</div>;
+    }
     return (
       <form onSubmit={this.handleSubmit}>
         <h2>Voucher</h2>
+        {error}
         <input type="text" name="voucher" placeholder="Voucher" onChange={this.handleVoucher}/>
         <button>Sign in</button>
       </form>

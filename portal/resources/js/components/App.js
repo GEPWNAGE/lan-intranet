@@ -16,6 +16,7 @@ class Main extends Component {
       state: 'start',
       tries: 0,
       data: {},
+      authError: null
     };
   }
   checkStatus() {
@@ -42,9 +43,13 @@ class Main extends Component {
   handleAuth(voucher) {
     console.log(voucher);
     api.authenticate(voucher)
-      .then(data => console.log(data))
-      .catch(err => console.log('ERR', err));
-    this.checkStatus();
+      .then(data => {
+        this.setState({ state: 'start' });
+        this.checkStatus();
+      })
+      .catch(err => {
+        this.setState({ authError: err.json.reason });
+      });
   }
   componentDidMount() {
     this.checkStatus();
@@ -65,7 +70,7 @@ class Main extends Component {
         return (
           <div>
             <Info data={this.state.data}/>
-            <Auth handleAuth={this.handleAuth}/>
+            <Auth handleAuth={this.handleAuth} error={this.state.authError}/>
           </div>
         );
     }
