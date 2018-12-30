@@ -17,6 +17,17 @@
 
 <h1>{{ config('app.name') }}</h1>
 
+{{--
+There are three steps:
+
+1. We see if we have all information we need (i.e., the application can get the MAC from the IP)
+   -> Request `/status`
+2. The user inputs their voucher, and is authenticated if this is correct
+   -> Request `/authenticate`
+3. After a short while the user is connected. Show their IP, hostname and MAC
+   -> Request '/status` which reports this
+--}}
+
 <form action="{{ route('authenticate') }}" method="post">
 
     @method('post')
