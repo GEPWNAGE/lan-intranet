@@ -1,21 +1,37 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Start from "./Start";
+import api from '../api';
 
 class Main extends Component {
   constructor(props) {
     super(props);
 
-    this.handleStart = this.handleStart.bind(this);
+    this.checkStart = this.checkStart.bind(this);
 
     this.state = {
-      state: 'start'
+      state: 'start',
+      tries: 0
     };
   }
-  handleStart() {
-    this.setState({
-      state: 'auth'
-    })
+  checkStart() {
+    api.status().then(data => {
+      if (data.mac !== undefined) {
+        // if request = good, move to next state
+        this.setState({
+          state: 'auth',
+          startData: data
+        })
+      } else {
+        // otherwise, setTimeout to try this again
+        let tries = this.state.tries + 1
+        this.setState({ tries });
+        setTimeout(this.checkStart, Math.min(10000 * tries, 60000));
+      }
+    });
+  }
+  componentDidMount() {
+    this.checkStart();
   }
   render() {
     switch (this.state.state) {
