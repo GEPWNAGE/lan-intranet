@@ -11,7 +11,8 @@ class Api {
     return fetch(url, {
       method: 'POST',
       headers: {
-        'Content-Type': "application/json"
+        'Content-Type': "application/json",
+        'X-Csrf-Token': window.laravelToken
       },
       body: JSON.stringify(body)
     }).then(Api.handleResponse)

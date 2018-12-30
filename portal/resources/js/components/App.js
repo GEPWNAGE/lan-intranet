@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Start from "./Start";
 import api from '../api';
 import Auth from "./Auth";
+import Info from "./Info";
 
 class Main extends Component {
   constructor(props) {
@@ -12,7 +13,9 @@ class Main extends Component {
 
     this.state = {
       state: 'start',
-      tries: 0
+      tries: 0,
+      startData: {},
+      statusData: {}
     };
   }
   checkStart() {
@@ -44,9 +47,19 @@ class Main extends Component {
       case 'start':
         return <Start handleStart={this.handleStart}/>;
       case 'auth':
-        return <Auth/>;
+        return (
+          <div>
+            <Info data={this.state.startData}/>
+            <Auth/>
+          </div>
+        );
       case 'status':
-        return <div>TODO status</div>
+        return (
+          <div>
+            <Info data={this.state.statusData}/>
+            TODO status
+          </div>
+        );
     }
   }
 }
