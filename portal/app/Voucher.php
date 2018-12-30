@@ -16,6 +16,5 @@ class Voucher extends Model
 
     protected $dates = [
         'used_at',
-        'expires_at'
     ];
 }
