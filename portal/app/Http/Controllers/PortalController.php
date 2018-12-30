@@ -47,7 +47,7 @@ class PortalController extends Controller
             return $this->status();
         }
 
-        $unifi->authorize_guest($client->mac, 0);
+        $this->unifi->authorize_guest($client->mac, 0);
 
         $voucher->used_at = now();
         $voucher->save();
@@ -96,8 +96,8 @@ class PortalController extends Controller
             throw new \RuntimeException('Could not retrieve client list from controller.', 500);
         }
 
-        $clients = array_where($clients, function ($value) {
-            return $value->ip === request()->ip();
+        $clients = array_where($clients, function ($client) {
+            return ($client->ip ?? '') === request()->ip();
         });
 
         if (empty($clients)) {
