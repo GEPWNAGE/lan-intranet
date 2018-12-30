@@ -15,7 +15,7 @@ export default class Auth extends Component {
     this.setState({ voucher: e.target.value });
   }
   handleSubmit(e) {
-    console.log(this.state.voucher);
+    this.props.handleAuth(this.state.voucher);
     e.preventDefault();
   }
   render() {
