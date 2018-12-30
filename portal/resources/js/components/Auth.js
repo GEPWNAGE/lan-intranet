@@ -29,11 +29,11 @@ export default class Auth extends Component {
       <form onSubmit={this.handleSubmit}>
         <h2>Voucher</h2>
         <div className="form-group">
-          <label for="voucher">Voucher</label>
+          <label htmlFor="voucher">Voucher</label>
           <input type="text" id="voucher" placeholder="Voucher" onChange={this.handleVoucher} className={classNames}/>
           {error}
         </div>
-        <button type="submit" class="btn">Sign in</button>
+        <button type="submit" className="btn">Sign in</button>
       </form>
     )
   }
