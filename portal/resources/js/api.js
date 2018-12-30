@@ -24,7 +24,7 @@ class Api {
     return this.get('/status');
   }
   authenticate(voucher) {
-    return this.post('/voucher', { voucher });
+    return this.post('/authenticate', { voucher });
   }
 }
 

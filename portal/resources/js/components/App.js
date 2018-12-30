@@ -9,22 +9,22 @@ class Main extends Component {
   constructor(props) {
     super(props);
 
-    this.checkStart = this.checkStart.bind(this);
+    this.checkStatus = this.checkStatus.bind(this);
+    this.handleAuth = this.handleAuth.bind(this);
 
     this.state = {
       state: 'start',
       tries: 0,
-      startData: {},
-      statusData: {}
+      data: {},
     };
   }
-  checkStart() {
+  checkStatus() {
     api.status()
       .then(data => {
         // if request = good, move to next state
         this.setState({
-          state: 'auth',
-          startData: data
+          state: 'loaded',
+          data
         })
       })
       .catch(err => {
@@ -32,32 +32,40 @@ class Main extends Component {
           // setTimeout to try this again in a bit
           let tries = this.state.tries + 1;
           this.setState({ tries });
-          setTimeout(this.checkStart, Math.min(10000 * tries, 60000));
+          setTimeout(this.checkStatus, Math.min(10000 * tries, 60000));
         } else {
           // TODO: handle this?
           console.log(err);
         }
       });
   }
+  handleAuth(voucher) {
+    console.log(voucher);
+    api.authenticate(voucher)
+      .then(data => console.log(data))
+      .catch(err => console.log('ERR', err));
+    this.checkStatus();
+  }
   componentDidMount() {
-    this.checkStart();
+    this.checkStatus();
   }
   render() {
     switch (this.state.state) {
       case 'start':
         return <Start handleStart={this.handleStart}/>;
-      case 'auth':
+      case 'loaded':
+        if (this.state.data.authorized) {
+          return (
+            <div>
+              You have all teh Internetz!
+              <Info data={this.state.data}/>
+            </div>
+          );
+        }
         return (
           <div>
-            <Info data={this.state.startData}/>
-            <Auth/>
-          </div>
-        );
-      case 'status':
-        return (
-          <div>
-            <Info data={this.state.statusData}/>
-            TODO status
+            <Info data={this.state.data}/>
+            <Auth handleAuth={this.handleAuth}/>
           </div>
         );
     }
