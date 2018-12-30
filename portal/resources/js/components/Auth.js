@@ -19,10 +19,21 @@ export default class Auth extends Component {
     e.preventDefault();
   }
   render() {
+    let error = '';
+    let classNames = 'form-control';
+    if (this.props.error !== null) {
+      error = <div className="invalid-feedback">{this.props.error}</div>;
+      classNames += ' is-invalid';
+    }
     return (
       <form onSubmit={this.handleSubmit}>
-        <input type="text" name="voucher" onChange={this.handleVoucher}/>
-        <button>Submit</button>
+        <h2>Voucher</h2>
+        <div className="form-group">
+          <label htmlFor="voucher">Voucher</label>
+          <input type="text" id="voucher" placeholder="Voucher" onChange={this.handleVoucher} className={classNames}/>
+          {error}
+        </div>
+        <button type="submit" className="btn">Sign in</button>
       </form>
     )
   }
