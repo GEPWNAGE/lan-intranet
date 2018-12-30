@@ -10,12 +10,10 @@
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}" type="text/css" />
 
-    <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
-
 </head>
 <body>
 
-<h1>{{ config('app.name') }}</h1>
+<div id="app"></div>
 
 {{--
 There are three steps:
@@ -28,16 +26,7 @@ There are three steps:
    -> Request '/status` which reports this
 --}}
 
-<form action="{{ route('authenticate') }}" method="post">
-
-    @method('post')
-    @csrf
-
-    <input type="text" name="voucher" placeholder="Voucher"/>
-
-    <button type="submit">Authenticate</button>
-
-</form>
+<script src="{{ asset('js/app.js') }}"></script>
 
 </body>
 </html>
