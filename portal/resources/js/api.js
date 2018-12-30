@@ -1,4 +1,12 @@
 class Api {
+  static handleResponse(response) {
+    if (response.ok) {
+      return response.json()
+    }
+    return response.json().then(json => {
+      throw {json, status: response.status}
+    })
+  }
   post(url, body) {
     return fetch(url, {
       method: 'POST',
@@ -6,11 +14,13 @@ class Api {
         'Content-Type': "application/json"
       },
       body: JSON.stringify(body)
-    })
+    }).then(Api.handleResponse)
+  }
+  get(url) {
+    return fetch(url).then(Api.handleResponse);
   }
   status() {
-    return fetch('/status')
-      .then(response => response.json());
+    return this.get('/status');
   }
   authenticate(voucher) {
     return this.post('/voucher', { voucher });
