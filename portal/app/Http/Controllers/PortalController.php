@@ -43,7 +43,6 @@ class PortalController extends Controller
             return response()->json(['reason' => 'Client is not a guest.'], 500);
         }
 
-        // Authorize client.
         if ($client->authorized) {
             return $this->status();
         }
