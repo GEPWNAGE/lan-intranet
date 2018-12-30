@@ -26,21 +26,21 @@ class PortalController extends Controller
         $voucher = Voucher::where('key', $request->get('voucher'))->first();
 
         if ($voucher === null) {
-            return response()->json(['reason' => 'Unknown voucher.'], 401);
+            return $this->getExceptionResponse(new \Exception('Unknown voucher.', 401));
         }
         if ($voucher->used_at !== null) {
-            return response()->json(['reason' => 'Voucher has already been used.'], 401);
+            return $this->getExceptionResponse(new \Exception('Voucher has already been used.', 401));
         }
 
         try {
-            /** @var object $client */
+            /** @var object|null $client */
             $client = $this->getClient();
-        } catch (\RuntimeException $e) {
-            return response()->json(['reason' => $e->getMessage()], $e->getCode());
+        } catch (\Exception $e) {
+            return $this->getExceptionResponse($e);
         }
 
         if (!$client->is_guest) {
-            return response()->json(['reason' => 'Client is not a guest.'], 500);
+            return $this->getExceptionResponse(new \Exception('Client is not a guest.', 500));
         }
 
         if ($client->authorized) {
@@ -59,22 +59,28 @@ class PortalController extends Controller
     {
         try {
             return response()->json($this->getStatusObject());
-        } catch (\RuntimeException $e) {
-            return response()->json(['reason' => $e->getMessage()], $e->getCode());
+        } catch (\Exception $e) {
+            return $this->getExceptionResponse($e);
         }
     }
 
     private function getStatusObject(): array
     {
-        /** @var object $client */
-        $client = $this->getClient();
+        $client = (array)$this->getClient();
 
-        return array_only((array)$client, [
+        return array_only($client, [
             'authorized',
             'is_guest',
             'ip',
             'mac',
         ]);
+    }
+
+    private function getExceptionResponse(\Exception $e)
+    {
+        return response()->json([
+            'reason' => $e->getMessage(),
+        ], $e->getCode());
     }
 
     private function getClient()
@@ -95,7 +101,7 @@ class PortalController extends Controller
         });
 
         if (empty($clients)) {
-            throw new \RuntimeException('Client not registered with controller.', 500);
+            throw new \Exception('Client not (yet) found.', 409);
         }
         if (count($clients) > 1) {
             throw new \RuntimeException('Multiple clients with identical IP address found.', 500);
