@@ -4,8 +4,15 @@ export default class Start extends Component {
   render() {
     return (
       <div>
-        Status
-        <button onClick={this.props.handleStart}>next</button>
+        <p>
+          Loading your data.
+        </p>
+        <p>
+          Please wait a minute.
+        </p>
+        <p>
+          If this takes more then a few minutes, please contact someone from GEPWNAGE.
+        </p>
       </div>
     );
   }
