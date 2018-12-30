@@ -39,11 +39,12 @@ class ListVouchers extends Command
      */
     public function handle()
     {
-        $headers = ['ID', 'Voucher', 'Used'];
+        $headers = ['Voucher', 'Used'];
+        $fields = ['key', 'used_at'];
 
         $vouchers = $this->option('available')
-            ? Voucher::whereNull('used_at')->get()
-            : Voucher::all();
+            ? Voucher::whereNull('used_at')->get(['key', 'used_at'])
+            : Voucher::all($fields);
 
         $this->table($headers, $vouchers);
     }
