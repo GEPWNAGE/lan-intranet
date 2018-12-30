@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Start from "./Start";
 import api from '../api';
+import Auth from "./Auth";
 
 class Main extends Component {
   constructor(props) {
@@ -15,20 +16,25 @@ class Main extends Component {
     };
   }
   checkStart() {
-    api.status().then(data => {
-      if (data.mac !== undefined) {
+    api.status()
+      .then(data => {
         // if request = good, move to next state
         this.setState({
           state: 'auth',
           startData: data
         })
-      } else {
-        // otherwise, setTimeout to try this again
-        let tries = this.state.tries + 1
-        this.setState({ tries });
-        setTimeout(this.checkStart, Math.min(10000 * tries, 60000));
-      }
-    });
+      })
+      .catch(err => {
+        if (err.status === 409) {
+          // setTimeout to try this again in a bit
+          let tries = this.state.tries + 1;
+          this.setState({ tries });
+          setTimeout(this.checkStart, Math.min(10000 * tries, 60000));
+        } else {
+          // TODO: handle this?
+          console.log(err);
+        }
+      });
   }
   componentDidMount() {
     this.checkStart();
@@ -38,7 +44,7 @@ class Main extends Component {
       case 'start':
         return <Start handleStart={this.handleStart}/>;
       case 'auth':
-        return <div>TODO auth</div>;
+        return <Auth/>;
       case 'status':
         return <div>TODO status</div>
     }
