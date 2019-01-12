@@ -64,16 +64,16 @@ class PortalController extends Controller
         }
     }
 
-    private function getStatusObject(): array
+    private function getStatusObject() :array
     {
         $client = (array)$this->getClient();
 
-        return response()->json(array_only($client, [
+        return array_only($client, [
             'authorized',
             'is_guest',
             'ip',
             'mac',
-        ]));
+        ]);
     }
 
     private function getExceptionResponse(\Exception $e)

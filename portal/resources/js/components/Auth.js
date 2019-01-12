@@ -29,7 +29,8 @@ export default class Auth extends Component {
       <form onSubmit={this.handleSubmit}>
         <h2>Voucher</h2>
         <div className="form-group">
-          <label htmlFor="voucher">Voucher</label>
+          <label htmlFor="voucher">Please enter your voucher below<br/>
+            to get access to the internet.</label>
           <input type="text" id="voucher" placeholder="Voucher" onChange={this.handleVoucher} className={classNames}/>
           {error}
         </div>

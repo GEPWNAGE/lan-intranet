@@ -4,6 +4,8 @@ import Start from "./Start";
 import api from '../api';
 import Auth from "./Auth";
 import Info from "./Info";
+import logo from '../../img/logo_pacman_large10.png'
+import welcome from '../../img/welcome-internet.gif'
 
 class Main extends Component {
   constructor(props) {
@@ -62,7 +64,8 @@ class Main extends Component {
         if (this.state.data.authorized) {
           return (
             <div>
-              You have all teh Internetz!
+              <h2>Welcome to the Internet!</h2>
+              <img src={welcome}/>
               <Info data={this.state.data}/>
             </div>
           );
@@ -81,10 +84,18 @@ export default class App extends Component {
     render() {
         return (
             <div className="App container">
-              <header className="App-header">
-                <h1>GEPWNAGE LAN Portal</h1>
-              </header>
-              <Main/>
+              <div className="centercontainer">
+                <header className="App-header">
+                  <h1>
+                    <img src={logo} className="logo"/>
+                    GEPWNAGE
+                  </h1>
+                  <h2>LAN Portal</h2>
+                </header>
+              </div>
+              <div className="centercontainer">
+                <Main/>
+              </div>
             </div>
         );
     }

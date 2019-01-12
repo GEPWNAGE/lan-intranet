@@ -5,15 +5,12 @@ export default class Start extends Component {
   render() {
     return (
       <div className="text-center">
-        <p>
-          Loading your data.
-        </p>
         <img src={beer} className='spin-img mx-auto d-block'/>
+        <h4>
+          Loading your client details
+        </h4>
         <p>
-          Please wait a minute.
-        </p>
-        <p>
-          If this takes more then a few minutes, please contact someone from GEPWNAGE.
+          If this takes more than a few minutes,<br/> please contact someone from GEPWNAGE.
         </p>
       </div>
     );
