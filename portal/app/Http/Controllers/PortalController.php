@@ -68,12 +68,12 @@ class PortalController extends Controller
     {
         $client = (array)$this->getClient();
 
-        return array_only($client, [
+        return response()->json(array_only($client, [
             'authorized',
             'is_guest',
             'ip',
             'mac',
-        ]);
+        ]));
     }
 
     private function getExceptionResponse(\Exception $e)

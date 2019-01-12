@@ -6,7 +6,7 @@ namespace App\Faker;
 
 use Faker\Provider\Lorem;
 
-class Gepwnage extends Lorem
+class GEPWNAGE extends Lorem
 {
     protected static $wordList = [
         "bulbasaur",
