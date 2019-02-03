@@ -1,0 +1,14 @@
+$panel-padding: 1em;
+$panel-bg: #013370;
+
+.Panel {
+    display: flex;
+    flex-direction: column;
+    padding: $panel-padding;
+
+    background: $panel-bg;
+
+    &__inner {
+        background: red;
+    }
+}
