@@ -1,9 +1,10 @@
-$panel-padding: 1em;
-$panel-bg: #013370;
+@import '../variables';
 
 .Panel {
     display: flex;
     flex-direction: column;
+
+    margin: $panel-margin;
     padding: $panel-padding;
 
     background: $panel-bg;

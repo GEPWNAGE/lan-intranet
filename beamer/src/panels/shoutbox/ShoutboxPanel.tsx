@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import Panel from '../Panel';
 import useShoutbox from './useShoutbox';
 
 interface ShoutboxPanelProps {
@@ -12,7 +13,7 @@ export default function ShoutboxPanel({
     const [messages] = useShoutbox();
 
     return (
-        <div>
+        <Panel>
             {messages.map((msg) => (
                 <div key={msg.id}>
                     <strong>{msg.username}</strong>
@@ -20,6 +21,6 @@ export default function ShoutboxPanel({
                     <time>{msg.time.toLocaleString()}</time>
                 </div>
             ))}
-        </div>
+        </Panel>
     );
 }
