@@ -3,13 +3,7 @@ import * as React from 'react';
 import Panel from '../Panel';
 import useShoutbox from './useShoutbox';
 
-interface ShoutboxPanelProps {
-    inputEnabled?: boolean;
-}
-
-export default function ShoutboxPanel({
-    inputEnabled = false,
-}: ShoutboxPanelProps) {
+export default function ShoutboxPanel() {
     const [messages] = useShoutbox();
 
     return (
