@@ -12,14 +12,31 @@ server.listen(port);
 
 app.get('/', (req, res) => res.send('Hello, World!'));
 
+// TODO: Set this only in development
+if (true) {
+    app.use(function(req, res, next) {
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header(
+            'Access-Control-Allow-Headers',
+            'Origin, X-Requested-With, Content-Type, Accept',
+        );
+        next();
+    });
+}
+
+app.get('/api/shoutbox', (req, res) => {
+    // TODO: Add some kind of pagination, we don't need to send all messages
+    res.json({ messages });
+});
+
 const shoutbox = io.of('/shoutbox');
 
 // Send mock messages
 const mockUsers = [casual.username, casual.username, casual.username];
 let prevMessageId = 0;
 const messages = [
-    generateMessage({ time: new Date(Date.now() - (60 * 1000)) }),
-    generateMessage({ time: new Date(Date.now() - (100 * 1000)) }),
+    generateMessage({ time: new Date(Date.now() - 60 * 1000) }),
+    generateMessage({ time: new Date(Date.now() - 100 * 1000) }),
 ];
 
 function generateMessage({ time = new Date() } = {}) {
@@ -36,7 +53,7 @@ function emitMessage() {
     messages.push(message);
     shoutbox.emit('shoutbox message', message);
 
-    setTimeout(emitMessage, casual.integer(2000, 10000));
+    setTimeout(emitMessage, casual.integer(2000, 60000));
 }
 
 emitMessage();
