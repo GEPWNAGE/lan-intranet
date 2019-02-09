@@ -6,20 +6,18 @@ import './PanelGroup.scss';
 export interface PanelGroupProps {
     children: React.ReactNode;
     direction: 'row' | 'column';
-    width?: any;
-    height?: any;
+    flex?: string;
 }
 
 export default function PanelGroup({
     children,
     direction,
-    width,
-    height,
+    flex,
 }: PanelGroupProps) {
     return (
         <div
             className={cx('PanelGroup', `PanelGroup--${direction}`)}
-            style={{ width, height }}
+            style={{ flex }}
         >
             {children}
         </div>

@@ -9,7 +9,7 @@
 html {
     height: 100%;
 
-    font: 16px 'Work Sans', sans-serif;
+    font: 32px 'Work Sans', sans-serif;
     color: $text-primary;
 }
 
@@ -21,6 +21,7 @@ body {
 }
 
 #root {
+    display: flex;
     height: 100%;
     padding: $panel-margin;
 }

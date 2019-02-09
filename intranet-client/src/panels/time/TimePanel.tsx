@@ -1,13 +1,15 @@
 import * as React from 'react';
 
-import Panel from '../Panel';
+import Panel, { PanelProps } from '../Panel';
 import useTime from './useTime';
 
-export default function TimePanel() {
+export type TimePanelProps = PanelProps;
+
+export default function TimePanel({ ...panelProps }: TimePanelProps) {
     const [time] = useTime();
 
     return (
-        <Panel>
+        <Panel {...panelProps}>
             <div className="TimePanel">
                 <div className="TimePanel__time">
                     {/* nl-NL to ensure 24 hour time formatting */}
