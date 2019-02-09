@@ -9,7 +9,7 @@
 html {
     height: 100%;
 
-    font: 32px 'Work Sans', sans-serif;
+    font: 28px 'Work Sans', sans-serif;
     color: $text-primary;
 }
 
@@ -17,6 +17,7 @@ body {
     height: 100%;
     margin: 0;
 
+    line-height: 1.3;
     background: $beamer-bg;
 }
 

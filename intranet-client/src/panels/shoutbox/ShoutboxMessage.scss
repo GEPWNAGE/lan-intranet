@@ -1,0 +1,29 @@
+@import '../../variables';
+
+.ShoutboxMessage {
+    display: flex;
+    flex-direction: column;
+
+    // Margin between messages
+    & + & {
+        margin-top: 1em;
+    }
+
+    &__header {
+        display: flex;
+        flex-direction: row;
+    }
+
+    &__username {
+        font-weight: 600;
+    }
+
+    &__time {
+        margin-left: 0.5em;
+        color: $text-secondary;
+    }
+
+    &__body {
+        margin: 0;
+    }
+}
