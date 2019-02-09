@@ -2,15 +2,20 @@ import * as React from 'react';
 
 import './Panel.scss';
 
-export interface PanelProps {
+export interface PanelProps extends React.HTMLAttributes<HTMLDivElement> {
     children?: React.ReactNode;
     flex?: string;
 }
 
-export default function Panel({ children, flex }: PanelProps) {
+function Panel(
+    { children, flex, ...otherProps }: PanelProps,
+    ref: React.Ref<HTMLDivElement>,
+) {
     return (
-        <div className="Panel" style={{ flex }}>
+        <div ref={ref} className="Panel" style={{ flex }} {...otherProps}>
             <div className="Panel__inner">{children}</div>
         </div>
     );
 }
+
+export default React.forwardRef(Panel);
