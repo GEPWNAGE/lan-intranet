@@ -1,4 +1,5 @@
 import * as React from 'react';
+import classNames from 'classnames';
 
 import './Panel.scss';
 
@@ -8,13 +9,13 @@ export interface PanelProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 function Panel(
-    { children, flex, style, ...otherProps }: PanelProps,
+    { children, flex, className, style, ...otherProps }: PanelProps,
     ref: React.Ref<HTMLDivElement>,
 ) {
     return (
         <div
             ref={ref}
-            className="Panel"
+            className={classNames('Panel', className)}
             style={{ flex, ...style }}
             {...otherProps}
         >
