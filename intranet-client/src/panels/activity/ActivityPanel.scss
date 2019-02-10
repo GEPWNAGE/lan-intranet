@@ -1,11 +1,11 @@
 @import '../../variables';
 
 .Activity {
-    line-height: 1.4em;
+    line-height: 1.2;
 
     &__title {
-        margin: 0;
-        font-size: 1.2em;
+        margin: 0 0 .1em;
+        font-size: 1.3em;
     }
 
     &__details {
