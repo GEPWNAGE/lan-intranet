@@ -13,7 +13,8 @@ class TexVouchers extends Command
      * @var string
      */
     protected $signature = 'voucher:latex
-        {--available : Print only available vouchers}';
+        {--available : Print only available vouchers}
+        {--from-id= : Only show vouchers starting with the given id}';
 
     /**
      * The console command description.
@@ -39,12 +40,16 @@ class TexVouchers extends Command
      */
     public function handle()
     {
-        $headers = ['Voucher', 'Used'];
-        $fields = ['id', 'key', 'used_at'];
+        $qb = Voucher::query();
 
-        $vouchers = $this->option('available')
-            ? Voucher::whereNull('used_at')->get(['key', 'used_at'])
-            : Voucher::all($fields);
+        if ($this->option('from-id') !== null && is_numeric($this->option('from-id'))) {
+            $qb->where('id', '>=', (int) $this->option('from-id'));
+        }
+        if ($this->option('available')) {
+            $qb->whereNull('used_at');
+        }
+
+        $vouchers = $qb->get(['id', 'key', 'used_at']);
 
         $tex = "";
 
