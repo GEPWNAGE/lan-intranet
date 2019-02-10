@@ -207,6 +207,10 @@ class GEPWNAGE extends Lorem
         "saffron",
         "fuchsia",
         "cinnabar",
+        "explodes",
+        "rocket",
+        "server",
+        "client"
     ];
 
     /**
