@@ -7,7 +7,7 @@
     overflow: auto;
 
     margin: $panel-margin;
-    padding: $panel-padding;
+    padding: (0.75 * $panel-padding) $panel-padding;
 
     background: $panel-bg;
 

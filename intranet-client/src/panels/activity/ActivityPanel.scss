@@ -1,0 +1,14 @@
+@import '../../variables';
+
+.Activity {
+    line-height: 1.4em;
+
+    &__title {
+        margin: 0;
+        font-size: 1.2em;
+    }
+
+    &__details {
+        color: $text-secondary;
+    }
+}
