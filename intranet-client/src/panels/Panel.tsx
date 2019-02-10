@@ -8,11 +8,16 @@ export interface PanelProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 function Panel(
-    { children, flex, ...otherProps }: PanelProps,
+    { children, flex, style, ...otherProps }: PanelProps,
     ref: React.Ref<HTMLDivElement>,
 ) {
     return (
-        <div ref={ref} className="Panel" style={{ flex }} {...otherProps}>
+        <div
+            ref={ref}
+            className="Panel"
+            style={{ flex, ...style }}
+            {...otherProps}
+        >
             <div className="Panel__inner">{children}</div>
         </div>
     );
