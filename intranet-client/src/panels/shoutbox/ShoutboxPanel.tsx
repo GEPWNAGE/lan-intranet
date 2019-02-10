@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useRef } from 'react';
 
+import usePrevious from '../../helpers/usePrevious';
 import { useScrollBottom } from '../../helpers/useScrollBottom';
 import Panel, { PanelProps } from '../Panel';
 import { ShoutboxMessage } from './ShoutboxMessage';
@@ -11,7 +12,8 @@ export type ShoutboxPanelProps = PanelProps;
 export default function ShoutboxPanel({ ...panelProps }: ShoutboxPanelProps) {
     const panelRef = useRef(null);
     const [messages] = useShoutbox();
-    const onPanelScroll = useScrollBottom(panelRef);
+    const prevMessageCount = usePrevious(messages.length);
+    const onPanelScroll = useScrollBottom(panelRef, prevMessageCount !== 0);
 
     return (
         <Panel {...panelProps} ref={panelRef} onScroll={onPanelScroll}>
