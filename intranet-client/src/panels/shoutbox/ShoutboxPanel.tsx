@@ -23,7 +23,7 @@ export default function ShoutboxPanel(panelGroupProps: ShoutboxPanelProps) {
                 <Shoutbox messages={messages} />
             </Panel>
             <Panel
-                flex="0 0 100px"
+                flex="0 0 auto"
                 style={{ justifyContent: 'center', alignItems: 'center' }}
             >
                 gepwnage.lan/shoutbox
