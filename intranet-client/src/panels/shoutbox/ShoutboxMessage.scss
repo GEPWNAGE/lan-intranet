@@ -9,6 +9,16 @@
         margin-top: 1em;
     }
 
+    &--merged {
+        .ShoutboxMessage + & {
+            margin-top: 0;
+        }
+
+        .ShoutboxMessage__header {
+            display: none;
+        }
+    }
+
     &__header {
         display: flex;
         flex-direction: row;

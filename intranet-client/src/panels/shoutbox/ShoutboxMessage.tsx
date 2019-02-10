@@ -1,15 +1,21 @@
 import * as React from 'react';
+import cx from 'classnames';
 
 import { Message } from './useShoutbox';
 import './ShoutboxMessage.scss';
 
 interface ShoutboxMessageProps {
     message: Message;
+    merged: boolean;
 }
 
-export function ShoutboxMessage({ message }: ShoutboxMessageProps) {
+export function ShoutboxMessage({ message, merged }: ShoutboxMessageProps) {
     return (
-        <article className="ShoutboxMessage">
+        <article
+            className={cx('ShoutboxMessage', {
+                'ShoutboxMessage--merged': merged,
+            })}
+        >
             <header className="ShoutboxMessage__header">
                 <span className="ShoutboxMessage__username">
                     {message.username}
