@@ -2,11 +2,10 @@ import * as React from 'react';
 import cx from 'classnames';
 
 import './PanelGroup.scss';
+import { PanelProps } from './Panel';
 
-export interface PanelGroupProps {
-    children: React.ReactNode;
+export interface PanelGroupProps extends PanelProps {
     direction: 'row' | 'column';
-    flex?: string;
 }
 
 export default function PanelGroup({
