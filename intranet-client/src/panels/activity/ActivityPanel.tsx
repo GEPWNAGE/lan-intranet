@@ -1,27 +1,43 @@
 import * as React from 'react';
+import { animated } from 'react-spring';
 
+import useSlider from '../../helpers/useSlider';
 import Panel from '../Panel';
 import './ActivityPanel.scss';
 
 interface Activity {
-    id: number;
     title: string;
     details: string;
 }
 
 export default function ActivityPanel() {
-    const activity: Activity = {
-        id: 1,
-        title: 'Tournament: Keep Talking and Nobody Explodes',
-        details: 'Soos at 16:00',
-    };
+    const activities: Activity[] = [
+        {
+            title: 'Tournament: Keep Talking and Nobody Explodes',
+            details: 'Downstairs lounge at 16:00',
+        },
+        {
+            title: 'Dinner: Fries & Snacks',
+            details: 'Courtyard at 19:00',
+        },
+    ];
+
+    const trans = useSlider(activities, 10000);
 
     return (
-        <Panel style={{ justifyContent: 'center' }}>
-            <div className="Activity">
-                <h1 className="Activity__title">{activity.title}</h1>
-                <span className="Activity__details">{activity.details}</span>
-            </div>
+        <Panel className="ActivityPanel">
+            {trans.map(({ item, props, key }) => (
+                <animated.div
+                    key={key}
+                    className="Activity"
+                    style={props}
+                >
+                    <h1 className="Activity__title">{activities[item].title}</h1>
+                    <span className="Activity__details">
+                        {activities[item].details}
+                    </span>
+                </animated.div>
+            ))}
         </Panel>
     );
 }
