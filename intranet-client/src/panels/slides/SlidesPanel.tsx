@@ -1,8 +1,7 @@
-import { useState } from 'react';
 import * as React from 'react';
-import { useTransition, animated } from 'react-spring';
+import { animated } from 'react-spring';
 
-import { useInterval } from '../../helpers/useInterval';
+import useSlider from '../../helpers/useSlider';
 import Panel, { PanelProps } from '../Panel';
 import './SlidesPanel.scss';
 
@@ -24,17 +23,7 @@ export default function SlidesPanel({ ...otherProps }: SlidesPanelProps) {
         { logo: letstalkLogo, color: '#ffffff' },
     ];
 
-    const [index, setIndex] = useState(0);
-    useInterval(() => {
-        setIndex((index) => (index + 1) % logos.length);
-    }, 10000);
-
-    const trans = useTransition(index, (p) => p, {
-        initial: { opacity: 1, transform: 'translate3d(0%,0,0)' },
-        from: { opacity: 0, transform: 'translate3d(100%,0,0)' },
-        enter: { opacity: 1, transform: 'translate3d(0%,0,0)' },
-        leave: { opacity: 0, transform: 'translate3d(-50%,0,0)' },
-    } as any);
+    const trans = useSlider(logos, 10000, 5000);
 
     return (
         <Panel className="SlidesPanel">
