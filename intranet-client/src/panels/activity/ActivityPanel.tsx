@@ -26,18 +26,21 @@ export default function ActivityPanel() {
 
     return (
         <Panel className="ActivityPanel">
-            {trans.map(({ item, props, key }) => (
-                <animated.div
-                    key={key}
-                    className="Activity"
-                    style={props}
-                >
-                    <h1 className="Activity__title">{activities[item].title}</h1>
-                    <span className="Activity__details">
-                        {activities[item].details}
-                    </span>
-                </animated.div>
-            ))}
+            {trans.map(
+                ({ item, props, key }) =>
+                    item && (
+                        <animated.div
+                            key={key}
+                            className="Activity"
+                            style={props}
+                        >
+                            <h1 className="Activity__title">{item.title}</h1>
+                            <span className="Activity__details">
+                                {item.details}
+                            </span>
+                        </animated.div>
+                    ),
+            )}
         </Panel>
     );
 }

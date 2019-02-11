@@ -16,24 +16,24 @@ interface Logo {
     color: string;
 }
 
-export default function SlidesPanel({ ...otherProps }: SlidesPanelProps) {
-    const logos: Logo[] = [
-        { logo: gepwnageLogo, color: '#013370' },
-        { logo: prodriveLogo, color: '#ffffff' },
-        { logo: letstalkLogo, color: '#ffffff' },
-    ];
+const logos: Logo[] = [
+    { logo: gepwnageLogo, color: '#013370' },
+    { logo: prodriveLogo, color: '#ffffff' },
+    { logo: letstalkLogo, color: '#ffffff' },
+];
 
+export default function SlidesPanel({ ...otherProps }: SlidesPanelProps) {
     const trans = useSlider(logos, 10000, 5000);
 
     return (
         <Panel className="SlidesPanel">
             {trans.map(({ item, props, key }) => (
-                <animated.div
+                item && <animated.div
                     key={key}
                     className="SlidesPanel__slide"
-                    style={{ ...props, backgroundColor: logos[item].color }}
+                    style={{ ...props, backgroundColor: item.color }}
                 >
-                    <img className="SlidesPanel__logo" src={logos[item].logo} />
+                    <img className="SlidesPanel__logo" src={item.logo} />
                 </animated.div>
             ))}
         </Panel>
