@@ -8,11 +8,21 @@ import './SlidesPanel.scss';
 
 import prodriveLogo from './data/prodrive-logo.svg';
 import letstalkLogo from './data/letstalk-logo.png';
+import gepwnageLogo from './data/gepwnage-logo.png';
 
 export type SlidesPanelProps = PanelProps;
 
+interface Logo {
+    logo: string;
+    color: string;
+}
+
 export default function SlidesPanel({ ...otherProps }: SlidesPanelProps) {
-    const logos: string[] = [prodriveLogo, letstalkLogo];
+    const logos: Logo[] = [
+        { logo: gepwnageLogo, color: '#013370' },
+        { logo: prodriveLogo, color: '#ffffff' },
+        { logo: letstalkLogo, color: '#ffffff' },
+    ];
 
     const [index, setIndex] = useState(0);
     useInterval(() => {
@@ -32,9 +42,9 @@ export default function SlidesPanel({ ...otherProps }: SlidesPanelProps) {
                 <animated.div
                     key={key}
                     className="SlidesPanel__slide"
-                    style={props}
+                    style={{ ...props, backgroundColor: logos[item].color }}
                 >
-                    <img className="SlidesPanel__logo" src={logos[item]} />
+                    <img className="SlidesPanel__logo" src={logos[item].logo} />
                 </animated.div>
             ))}
         </Panel>
