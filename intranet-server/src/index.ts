@@ -2,10 +2,22 @@ import * as express from 'express';
 import { Server } from 'http';
 import * as socketIo from 'socket.io';
 import * as casual from 'casual';
+import * as sqlite3 from 'sqlite3';
 
 const app = express();
 const server = new Server(app);
 const io = socketIo(server);
+
+let db = new sqlite3.Database('database.sqlite');
+
+db.serialize(() => {
+    // create shoutbox table
+    db.run("CREATE TABLE IF NOT EXISTS shoutbox" +
+        "(id integer not null primary key autoincrement, " +
+        "sender varchar not null, " +
+        "message text not null)");
+});
+
 
 const port = 3030;
 server.listen(port);
