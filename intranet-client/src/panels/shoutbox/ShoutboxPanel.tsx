@@ -26,7 +26,8 @@ export default function ShoutboxPanel(panelGroupProps: ShoutboxPanelProps) {
                 flex="0 0 auto"
                 style={{ justifyContent: 'center', alignItems: 'center' }}
             >
-                gepwnage.lan/shoutbox
+                <span className="text-secondary">More info:</span>{' '}
+                <strong>http://gepwnage.lan</strong>
             </Panel>
         </PanelGroup>
     );

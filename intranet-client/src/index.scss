@@ -26,3 +26,8 @@ body {
     height: 100%;
     padding: $panel-margin;
 }
+
+// Helper classes
+.text-secondary {
+    color: $text-secondary;
+}
