@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { animated } from 'react-spring';
+import useFetch from '../../helpers/useFetch';
 
 import useSlider from '../../helpers/useSlider';
 import Panel from '../Panel';
@@ -10,17 +11,17 @@ interface Activity {
     details: string;
 }
 
+async function handleResponse(res: Response): Promise<Activity[]> {
+    const { activities } = await res.json();
+    return activities;
+}
+
 export default function ActivityPanel() {
-    const activities: Activity[] = [
-        {
-            title: 'Tournament: Keep Talking and Nobody Explodes',
-            details: 'Downstairs lounge at 16:00',
-        },
-        {
-            title: 'Dinner: Fries & Snacks',
-            details: 'Courtyard at 19:00',
-        },
-    ];
+    const activities = useFetch<Activity[]>(
+        'http://localhost:3030/api/activities',
+        [],
+        handleResponse,
+    );
 
     const trans = useSlider(activities, 10000);
 
