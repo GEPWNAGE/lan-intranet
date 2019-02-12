@@ -10,7 +10,7 @@ import TimePanel from './panels/time/TimePanel';
 
 export default function App() {
     return (
-        <SocketProvider url="http://localhost:3030/shoutbox">
+        <SocketProvider url="/shoutbox">
             <PanelGroup direction="row" flex="0 0 100%">
                 <PanelGroup direction="column" flex="5 1">
                     <SlidesPanel />

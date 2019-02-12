@@ -19,7 +19,7 @@ async function handleResponse(res: Response): Promise<Activity[]> {
 export default function useActivities(): Activity[] {
     const [version, setVersion] = useState(0);
     const activities = useFetch<Activity[]>(
-        { version, url: 'http://localhost:3030/api/activities' },
+        { version, url: '/api/activities' },
         [],
         handleResponse,
     );

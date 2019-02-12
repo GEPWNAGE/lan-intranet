@@ -67,7 +67,7 @@ export default function useShoutbox(): [Message[]] {
 
     // Initial request to get existing messages
     useEffect(() => {
-        fetch('http://localhost:3030/api/shoutbox')
+        fetch('/api/shoutbox')
             .then((res) => res.json())
             .then((json) =>
                 dispatch({
