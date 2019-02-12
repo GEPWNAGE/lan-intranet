@@ -107,7 +107,7 @@ if (true) {
 
 app.get('/api/nick', (req, res) => {
     getNickAndHostnameFromIp(req.connection.remoteAddress, (nick, hostname) => {
-        res.json({ nick });
+        res.json({ nick, hostname });
     });
 });
 
@@ -295,20 +295,24 @@ function getHostnameFromIp(ip : string, callback = (hostname: string) => {}) {
 
 function getNickAndHostnameFromIp(ip : string, callback = (nick: string, hostname: string) => {}) {
     getHostnameFromIp(ip, hostname => {
-        const sql = "SELECT nick FROM nicknames WHERE hostname = ?";
-        db.all(sql, [hostname], (err, rows) => {
-            if (err !== null) {
-                console.log(err);
-                return;
-            }
+        getNickFromHostname(hostname, nick => callback(nick, hostname));
+    });
+}
 
-            let nick = null;
+function getNickFromHostname(hostname: string, callback = (nick: string) => {}) {
+    const sql = "SELECT nick FROM nicknames WHERE hostname = ?";
+    db.all(sql, [hostname], (err, rows) => {
+        if (err !== null) {
+            console.log(err);
+            return;
+        }
 
-            if (rows.length > 0) {
-                nick = rows[0].nick;
-            }
+        let nick = null;
 
-            callback(nick, hostname);
-        });
+        if (rows.length > 0) {
+            nick = rows[0].nick;
+        }
+
+        callback(nick);
     });
 }
