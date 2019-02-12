@@ -17,8 +17,22 @@ app.use(bodyParser.json());
 app.set('views', path.resolve(__dirname, 'views'));
 app.set('view engine', 'twig');
 
+const BUILD_DIR = path.resolve(__dirname, '../../intranet-client/build');
+app.use('/static', express.static(path.resolve(BUILD_DIR, 'static')));
+
 // Load routes
 app.use(routes);
+
+// Set entrypoints
+const { entrypoints } = require(path.resolve(BUILD_DIR, 'manifest.json'));
+Object.keys(entrypoints).forEach((key) => {
+    Object.keys(entrypoints[key]).forEach((type) => {
+        entrypoints[key][type] = entrypoints[key][type].map(
+            (url: string) => `/${url}`,
+        );
+    });
+});
+app.locals.entrypoints = entrypoints;
 
 const server = new Server(app);
 const io = socketIo(server);
