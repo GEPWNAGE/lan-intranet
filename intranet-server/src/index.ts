@@ -1,7 +1,6 @@
 import * as express from 'express';
 import { Server } from 'http';
 import * as socketIo from 'socket.io';
-import * as casual from 'casual';
 import * as sqlite3 from 'sqlite3';
 import * as bodyParser from 'body-parser';
 import * as dns from 'dns';
@@ -20,7 +19,7 @@ db.serialize(() => {
     // shoutbox
     db.run("CREATE TABLE IF NOT EXISTS shoutbox " +
         "(id integer not null primary key autoincrement, " +
-        "username varchar not null, " +
+        "hostname varchar not null, " +
         "body text not null, " +
         "sent_at varchar not null)");
 
@@ -77,6 +76,10 @@ db.serialize(() => {
         "FOREIGN KEY (activity_id) REFERENCES activities(id), " +
         "UNIQUE(activity_id, hostname))");
 
+    db.run("CREATE TABLE IF NOT EXISTS nicknames " +
+		"(hostname varchar not null primary key, " +
+		"nick varchar not null)");
+
     // set the activities sequence correctly
     db.run("DELETE FROM sqlite_sequence");
     db.run("INSERT INTO sqlite_sequence VALUES ('activities', 5)");
@@ -102,9 +105,61 @@ if (true) {
     });
 }
 
+app.get('/api/nick', (req, res) => {
+    getNickAndHostnameFromIp(req.connection.remoteAddress, (nick, hostname) => {
+        res.json({ nick, hostname });
+    });
+});
+
+app.post('/api/nick', (req, res) => {
+	if (req.body.nick === undefined || typeof req.body.nick !== 'string') {
+		res.status(400).json({error: "No nick given"});
+		return;
+	}
+
+	const nick = req.body.nick;
+
+	// get the hostnme
+	getHostnameFromIp(req.connection.remoteAddress, hostname => {
+		// check if we already have a username
+		const sql = "SELECT hostname FROM nicknames WHERE hostname = ?";
+		db.all(sql, [hostname], (err, rows) => {
+			if (err !== null) {
+				console.log(err);
+				return;
+			}
+
+			if (rows.length > 0) {
+				const sql = "UPDATE nicknames SET nick = ? WHERE hostname = ?";
+				db.run(sql, [nick, hostname], err => {
+					if (err !== null) {
+						console.log(err);
+						return;
+					}
+
+					res.json("Nickname updated");
+				})
+			} else {
+				const sql = "INSERT INTO nicknames VALUES (?, ?)";
+				db.run(sql, [hostname, nick], err => {
+					if (err !== null) {
+						console.log(err);
+						return;
+					}
+
+					res.json("Nickname created");
+				})
+			}
+		})
+	});
+});
+
 app.get('/api/shoutbox', (req, res) => {
     // for now, we simply do not allow scroll back, just send the last 20 messages
-    const sql = "SELECT id, username, body, sent_at FROM shoutbox ORDER BY id ASC LIMIT 20";
+    // TODO: obtain the nickname in the query
+    const sql = "SELECT s.id, s.hostname, s.body, s.sent_at, n.nick FROM shoutbox AS s " +
+        "LEFT JOIN nicknames AS n ON (s.hostname = n.hostname) " +
+        "ORDER BY id ASC LIMIT 20";
     db.all(sql, (err, rows) => {
         if (err !== null) {
             console.log(err);
@@ -113,7 +168,9 @@ app.get('/api/shoutbox', (req, res) => {
 
         const messages = rows.map(row => ({
             id: row.id,
-            username: row.username,
+            nick: row.nick,
+            username: row.nick !== null ? row.nick + " [" + row.hostname + "]" : row.hostname,
+            hostname: row.hostname,
             body: row.body,
             time: row.sent_at
         }));
@@ -202,22 +259,31 @@ app.post('/api/activities/:activityId([0-9]+)/subscriptions', (req, res) => {
 // websocket for shoutbox events
 const shoutbox = io.of('/shoutbox');
 
-function sendMessage(username: string, body: string, time = new Date()) {
+function sendMessage(hostname: string, body: string, time = new Date()) {
     // save the message in the database
-    const sql = "INSERT INTO shoutbox (id, username, body, sent_at) VALUES (NULL, ?, ?, ?)";
-    db.run(sql, [username, body, time.toJSON()], function(err) {
+    const sql = "INSERT INTO shoutbox (id, hostname, body, sent_at) VALUES (NULL, ?, ?, ?)";
+    db.run(sql, [hostname, body, time.toJSON()], function(err) {
         if (err !== null) {
             console.log("SQLite error!", err);
             return;
         }
-        // emit the message to the shoutbox
-        const message = {
-            id: this.lastID,
-            username,
-            body,
-            time
-        };
-        shoutbox.emit('shoutbox message', message);
+
+        getNickFromHostname(hostname, nick => {
+            let username = hostname;
+            if (nick !== null) {
+                username = nick + " [" + hostname + "]";
+            }
+            // emit the message to the shoutbox
+            const message = {
+                id: this.lastID,
+                nick,
+                username,
+                hostname,
+                body,
+                time
+            };
+            shoutbox.emit('shoutbox message', message);
+        });
     });
 
 }
@@ -238,5 +304,29 @@ function getHostnameFromIp(ip : string, callback = (hostname: string) => {}) {
         }
 
         callback(hostname);
+    });
+}
+
+function getNickAndHostnameFromIp(ip : string, callback = (nick: string, hostname: string) => {}) {
+    getHostnameFromIp(ip, hostname => {
+        getNickFromHostname(hostname, nick => callback(nick, hostname));
+    });
+}
+
+function getNickFromHostname(hostname: string, callback = (nick: string) => {}) {
+    const sql = "SELECT nick FROM nicknames WHERE hostname = ?";
+    db.all(sql, [hostname], (err, rows) => {
+        if (err !== null) {
+            console.log(err);
+            return;
+        }
+
+        let nick = null;
+
+        if (rows.length > 0) {
+            nick = rows[0].nick;
+        }
+
+        callback(nick);
     });
 }
