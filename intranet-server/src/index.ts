@@ -1,7 +1,6 @@
 import * as express from 'express';
 import { Server } from 'http';
 import * as socketIo from 'socket.io';
-import * as casual from 'casual';
 import * as sqlite3 from 'sqlite3';
 import * as bodyParser from 'body-parser';
 import * as dns from 'dns';
@@ -107,23 +106,9 @@ if (true) {
 }
 
 app.get('/api/nick', (req, res) => {
-	getHostnameFromIp(req.connection.remoteAddress, hostname => {
-		const sql = "SELECT hostname, nick FROM nicknames WHERE hostname = ?";
-		db.all(sql, [hostname], (err, rows) => {
-			if (err !== null) {
-				console.log(err);
-				return;
-			}
-
-			if (rows.length == 0) {
-				res.json({nickname: hostname});
-				return;
-			}
-			const row = rows[0];
-
-			res.json({nickname: row.nick});
-		});
-	});
+    getNickAndHostnameFromIp(req.connection.remoteAddress, (nick, hostname) => {
+        res.json({ nick });
+    });
 });
 
 app.post('/api/nick', (req, res) => {
@@ -305,5 +290,25 @@ function getHostnameFromIp(ip : string, callback = (hostname: string) => {}) {
         }
 
         callback(hostname);
+    });
+}
+
+function getNickAndHostnameFromIp(ip : string, callback = (nick: string, hostname: string) => {}) {
+    getHostnameFromIp(ip, hostname => {
+        const sql = "SELECT nick FROM nicknames WHERE hostname = ?";
+        db.all(sql, [hostname], (err, rows) => {
+            if (err !== null) {
+                console.log(err);
+                return;
+            }
+
+            let nick = null;
+
+            if (rows.length > 0) {
+                nick = rows[0].nick;
+            }
+
+            callback(nick, hostname);
+        });
     });
 }
