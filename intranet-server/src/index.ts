@@ -14,53 +14,73 @@ const io = socketIo(server);
 // first initialize the database
 const db = new sqlite3.Database('database.sqlite');
 db.serialize(() => {
-    // create shoutbox table
-    db.run("CREATE TABLE IF NOT EXISTS shoutbox" +
+    db.run("PRAGMA foreign_keys=OFF");
+    db.run("BEGIN TRANSACTION");
+
+    // shoutbox
+    db.run("CREATE TABLE IF NOT EXISTS shoutbox " +
         "(id integer not null primary key autoincrement, " +
         "username varchar not null, " +
         "body text not null, " +
         "sent_at varchar not null)");
 
-    db.run("CREATE TABLE IF NOT EXISTS activities" +
+    // activities
+    db.run("CREATE TABLE IF NOT EXISTS activities " +
         "(id integer not null primary key autoincrement, " +
         "title varchar not null, " +
         "details varchar not null, " +
+        "can_subscribe boolean not null check(can_subscribe in(0, 1)), " +
         "starts_at datetime not null)");
 
+    // activities data
     db.run("DELETE FROM activities");
 
     db.run("INSERT INTO activities VALUES " +
         "(1, " +
         "'Tournament: Xonotic', " +
         "'Main room, Saturday at 12:00', " +
+        "1," +
         "'2019-02-16 12:00:00')");
 
     db.run("INSERT INTO activities VALUES " +
         "(2, " +
         "'Tournament: Keep Talking and Nobody Explodes', " +
         "'Main room stage, Saturday at 16:00', " +
+        "1," +
         "'2019-02-16 16:00:00')");
 
     db.run("INSERT INTO activities VALUES " +
         "(3, " +
         "'Dinner: Fries & Snacks', " +
         "'Courtyard, Saturday at 19:00', " +
+        "0," +
         "'2019-02-16 19:00:00')");
 
     db.run("INSERT INTO activities VALUES " +
         "(4, " +
         "'Tournament: Just Dance', " +
         "'Downstairs lounge, Saturday at 23:00', " +
+        "0," +
         "'2019-02-16 23:00:00')");
 
     db.run("INSERT INTO activities VALUES " +
         "(5, " +
         "'Tournament: Rocket League', " +
         "'Downstairs lounge, Sunday at 12:00', " +
+        "1," +
         "'2019-02-17 12:00:00')");
 
+    db.run("CREATE TABLE IF NOT EXISTS subscriptions " +
+        "(id integer not null primary key autoincrement, " +
+        "activity_id inter not null," +
+        "hostname varchar not null," +
+        "FOREIGN KEY (activity_id) REFERENCES activities(id))");
+
+    // set the activities sequence correctly
     db.run("DELETE FROM sqlite_sequence");
     db.run("INSERT INTO sqlite_sequence VALUES ('activities', 5)");
+
+    db.run("COMMIT");
 });
 
 
@@ -126,7 +146,7 @@ app.post('/api/shoutbox', (req, res) => {
 });
 
 app.get('/api/activities', (req, res) => {
-    const sql = "SELECT id, title, details FROM activities WHERE starts_at > datetime('now')";
+    const sql = "SELECT id, title, details, can_subscribe FROM activities WHERE starts_at > datetime('now')";
     db.all(sql, (err, activities) => {
         if (err !== null) {
             console.log(err);
