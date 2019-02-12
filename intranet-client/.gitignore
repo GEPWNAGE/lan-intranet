@@ -2,6 +2,7 @@
 
 # project files
 webpack.manifest.json
+.env
 
 # dependencies
 /node_modules

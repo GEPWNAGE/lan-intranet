@@ -1,10 +1,14 @@
-import * as express from 'express';
+import express from 'express';
 import { Server } from 'http';
 import * as path from 'path';
-import * as socketIo from 'socket.io';
-import * as bodyParser from 'body-parser';
+import socketIo from 'socket.io';
+import bodyParser from 'body-parser';
+import dotenv from 'dotenv';
 
 import routes from './routes';
+
+// Load vars from .env file
+dotenv.config();
 
 const app = express();
 
@@ -18,10 +22,22 @@ app.set('view engine', 'twig');
 const CLIENT_DIR = path.resolve(__dirname, '../../intranet-client');
 app.use('/static', express.static(path.resolve(CLIENT_DIR, 'build/static')));
 
+// TODO: Set this only in development (or remove it altogether?)
+app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header(
+        'Access-Control-Allow-Headers',
+        'Origin, X-Requested-With, Content-Type, Accept',
+    );
+    next();
+});
+
 // Load routes
 app.use(routes);
 
 const MANIFEST_PATH = path.resolve(CLIENT_DIR, 'webpack.manifest.json');
+const ASSETS_URL =
+    app.get('env') === 'production' ? '/' : process.env.WEBPACK_DEV_SERVER_URL;
 
 // Function to get entry files of a specific entrypoint
 app.locals.entrypoints = function(key: string, type: string) {
@@ -38,7 +54,7 @@ app.locals.entrypoints = function(key: string, type: string) {
     }
 
     // Rewrite the urls
-    return entrypoints[type].map((url: string) => `/${url}`);
+    return entrypoints[type].map((url: string) => ASSETS_URL + url);
 };
 
 const server = new Server(app);
@@ -48,15 +64,3 @@ export const ioShoutbox = io.of('/shoutbox');
 
 const port = 3030;
 server.listen(port);
-
-// TODO: Set this only in development (or remove it altogether?)
-if (true) {
-    app.use(function(req, res, next) {
-        res.header('Access-Control-Allow-Origin', '*');
-        res.header(
-            'Access-Control-Allow-Headers',
-            'Origin, X-Requested-With, Content-Type, Accept',
-        );
-        next();
-    });
-}

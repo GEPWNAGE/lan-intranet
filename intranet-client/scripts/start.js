@@ -71,7 +71,7 @@ checkBrowsers(paths.appPath, isInteractive)
       // We have not found a port.
       return;
     }
-    const config = configFactory('development');
+    const config = configFactory('development', { host: HOST, port });
     const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
     const appName = require(paths.appPackageJson).name;
     const urls = prepareUrls(protocol, HOST, port);
