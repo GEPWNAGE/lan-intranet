@@ -122,8 +122,8 @@ app.get('/api/shoutbox', (req, res) => {
 });
 
 app.post('/api/shoutbox', (req, res) => {
-    if (req.body.body === undefined) {
-        res.json({ error: "No message given" });
+    if (req.body.body === undefined || typeof req.body.body !== 'string') {
+        res.status(400).json({ error: "No message given" });
         return;
     }
 
