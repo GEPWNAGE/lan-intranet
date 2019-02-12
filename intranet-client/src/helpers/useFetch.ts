@@ -5,17 +5,20 @@ function handleJSON(res: Response) {
 }
 
 export default function useFetch<V>(
-    url: string,
+    url: string | { version: number, url: string },
     initialValue: V,
     handleResponse: (res: Response) => Promise<V> = handleJSON,
 ) {
+    const actualUrl = typeof url === 'string' ? url : url.url;
+    const version = typeof url === 'string' ? null : url.version;
+
     const [value, setValue] = useState(initialValue);
 
     useEffect(() => {
-        fetch(url)
+        fetch(actualUrl)
             .then(handleResponse)
             .then(setValue);
-    }, [url]);
+    }, [actualUrl, version]);
 
     return value;
 }
