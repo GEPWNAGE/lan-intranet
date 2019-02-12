@@ -1,19 +1,15 @@
 {% extends "layout.twig" %}
 
 {% block head_links %}
-    {% for url in entrypoints.beamer.css  %}
+    {% for url in entrypoints.website.css  %}
         <link rel="stylesheet" href="{{ url }}">
     {% endfor %}
 {% endblock %}
 
 {% block body_scripts %}
-    {% for url in entrypoints.beamer.js  %}
+    {% for url in entrypoints.website.js  %}
         <script src="{{ url }}"></script>
     {% endfor %}
 {% endblock %}
 
-{% block title %}Beamer - GEPWNAGE LAN{% endblock %}
-
-{% block content %}
-    <div id="root"></div>
-{% endblock %}
+{% block title %}Intranet - GEPWNAGE LAN{% endblock %}
