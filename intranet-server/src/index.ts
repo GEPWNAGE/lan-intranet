@@ -74,7 +74,8 @@ db.serialize(() => {
         "(id integer not null primary key autoincrement, " +
         "activity_id inter not null," +
         "hostname varchar not null," +
-        "FOREIGN KEY (activity_id) REFERENCES activities(id))");
+        "FOREIGN KEY (activity_id) REFERENCES activities(id), " +
+        "UNIQUE(activity_id, hostname))");
 
     // set the activities sequence correctly
     db.run("DELETE FROM sqlite_sequence");
@@ -127,22 +128,11 @@ app.post('/api/shoutbox', (req, res) => {
         return;
     }
 
-    // obtain the IP and the hostname, so we can display the hostname as username
-    const ip = req.connection.remoteAddress;
-    dns.reverse(ip, (err, allDomains) => {
-        const domains = allDomains.filter(domain => domain !== 'localhost');
-        let username = 'unknown';
-        if (domains.length >= 1) {
-            username = domains[0];
-        }
-        if (username.endsWith(".gepwnage.lan")) {
-            username = username.replace(".gepwnage.lan", "");
-        }
-
-        sendMessage(username, req.body.body);
+    getHostnameFromIp(req.connection.remoteAddress, hostname => {
+        sendMessage(hostname, req.body.body);
 
         res.json("Message sent");
-    });
+    })
 });
 
 app.get('/api/activities', (req, res) => {
@@ -154,6 +144,12 @@ app.get('/api/activities', (req, res) => {
         }
 
         res.json({ activities });
+    });
+});
+
+app.post('/api/activities/:activityId/subscriptions', (req, res) => {
+    getHostnameFromIp(req.connection.remoteAddress, hostname => {
+        res.json({ params: req.params, hostname });
     });
 });
 
@@ -178,4 +174,23 @@ function sendMessage(username: string, body: string, time = new Date()) {
         shoutbox.emit('shoutbox message', message);
     });
 
+}
+
+function getHostnameFromIp(ip : string, callback = (hostname: string) => {}) {
+	dns.reverse(ip, (err, domains) => {
+        let hostname = domains[0];
+
+        for (let i in domains) {
+            let domain = domains[i];
+            if (domain.endsWith(".gepwnage.lan")) {
+                hostname = domain.replace(".gepwnage.lan", "");
+                break;
+            }
+            if (domain !== 'localhost') {
+                hostname = domain;
+            }
+        }
+
+        callback(hostname);
+    });
 }
