@@ -126,7 +126,7 @@ app.post('/api/shoutbox', (req, res) => {
 });
 
 app.get('/api/activities', (req, res) => {
-    const sql = "SELECT id, title, details FROM activities WHERE starts_at > date('now')";
+    const sql = "SELECT id, title, details FROM activities WHERE starts_at > datetime('now')";
     db.all(sql, (err, activities) => {
         if (err !== null) {
             console.log(err);
