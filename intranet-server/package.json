@@ -16,7 +16,7 @@
   "scripts": {
     "start:production": "cross-env NODE_ENV=production ts-node src/index.ts",
     "start": "cross-env NODE_ENV=development ts-node src/index.ts",
-    "watch": "nodemon --watch src --ext ts,twig"
+    "watch": "nodemon --watch src --ext ts"
   },
   "devDependencies": {
     "@types/dotenv": "^6.1.0",

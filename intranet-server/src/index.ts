@@ -7,6 +7,8 @@ import dotenv from 'dotenv';
 
 import routes from './routes';
 
+const twig = require('twig');
+
 // Load vars from .env file
 dotenv.config();
 
@@ -18,6 +20,8 @@ app.use(bodyParser.json());
 // Configure views
 app.set('views', path.resolve(__dirname, 'views'));
 app.set('view engine', 'twig');
+
+twig.cache(app.get('view cache') === true);
 
 const CLIENT_DIR = path.resolve(__dirname, '../../intranet-client');
 app.use('/static', express.static(path.resolve(CLIENT_DIR, 'build/static')));
