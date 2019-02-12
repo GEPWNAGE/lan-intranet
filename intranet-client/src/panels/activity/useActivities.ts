@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useState } from 'react';
 import useFetch from '../../helpers/useFetch';
 import { useInterval } from '../../helpers/useInterval';
 
