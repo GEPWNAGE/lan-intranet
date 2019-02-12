@@ -74,8 +74,8 @@ app.post('/api/shoutbox', (req, res) => {
         if (domains.length >= 1) {
             username = domains[0];
         }
-        if (username.endsWith(".lan")) {
-            username = username.replace(".lan", "");
+        if (username.endsWith(".gepwnage.lan")) {
+            username = username.replace(".gepwnage.lan", "");
         }
 
         sendMessage(username, req.body.body);
