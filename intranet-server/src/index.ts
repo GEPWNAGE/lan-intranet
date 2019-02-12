@@ -157,17 +157,20 @@ app.post('/api/nick', (req, res) => {
 app.get('/api/shoutbox', (req, res) => {
     // for now, we simply do not allow scroll back, just send the last 20 messages
     // TODO: obtain the nickname in the query
-    const sql = "SELECT id, hostname, body, sent_at FROM shoutbox ORDER BY id ASC LIMIT 20";
+    const sql = "SELECT s.id, s.hostname, s.body, s.sent_at, n.nick FROM shoutbox AS s " +
+        "LEFT JOIN nicknames AS n ON (s.hostname = n.hostname) " +
+        "ORDER BY id ASC LIMIT 20";
     db.all(sql, (err, rows) => {
         if (err !== null) {
             console.log(err);
             return;
         }
 
-
         const messages = rows.map(row => ({
             id: row.id,
-            username: row.hostname,
+            nick: row.nick,
+            username: row.nick !== null ? row.nick + " [" + row.hostname + "]" : row.hostname,
+            hostname: row.hostname,
             body: row.body,
             time: row.sent_at
         }));
