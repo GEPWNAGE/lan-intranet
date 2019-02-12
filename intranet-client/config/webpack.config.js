@@ -585,7 +585,9 @@ module.exports = function(webpackEnv) {
         }),
 
         new WebpackAssetsManifest({
+          output: path.resolve(__dirname, '../webpack.manifest.json'),
           entrypoints: true,
+          writeToDisk: true,
         }),
     ].filter(Boolean),
     // Some libraries import Node modules but don't use them in the browser.
