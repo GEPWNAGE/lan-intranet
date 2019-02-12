@@ -3,8 +3,11 @@ import { Server } from 'http';
 import * as socketIo from 'socket.io';
 import * as casual from 'casual';
 import * as sqlite3 from 'sqlite3';
+import * as bodyParser from 'body-parser';
+import * as dns from 'dns';
 
 const app = express();
+app.use(bodyParser.json())
 const server = new Server(app);
 const io = socketIo(server);
 
@@ -57,6 +60,30 @@ app.get('/api/shoutbox', (req, res) => {
     });
 });
 
+app.post('/api/shoutbox', (req, res) => {
+    if (req.body.body === undefined) {
+        res.json({ error: "No message given" });
+        return;
+    }
+
+    // obtain the IP and the hostname, so we can display the hostname as username
+    const ip = req.connection.remoteAddress;
+    dns.reverse(ip, (err, allDomains) => {
+        const domains = allDomains.filter(domain => domain !== 'localhost');
+        let username = 'unknown';
+        if (domains.length >= 1) {
+            username = domains[0];
+        }
+        if (username.endsWith(".lan")) {
+            username = username.replace(".lan", "");
+        }
+
+        sendMessage(username, req.body.body);
+
+        res.json("Message sent");
+    });
+});
+
 const shoutbox = io.of('/shoutbox');
 
 // Send mock messages
@@ -93,13 +120,3 @@ function generateMessage({ time = new Date() } = {}) {
         time,
     };
 }
-
-function emitMessage() {
-    const message = generateMessage();
-
-    sendMessage(message.username, message.body);
-
-    setTimeout(emitMessage, casual.integer(2000, 60000));
-}
-
-emitMessage();
