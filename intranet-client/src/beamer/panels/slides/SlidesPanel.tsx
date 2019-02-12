@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { animated } from 'react-spring';
 
-import useSlider from '../../helpers/useSlider';
+import useSlider from '../../../helpers/useSlider';
 import Panel, { PanelProps } from '../Panel';
 import './SlidesPanel.scss';
 

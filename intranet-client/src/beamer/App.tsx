@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { SocketProvider } from './helpers/useSocket';
+import { SocketProvider } from '../helpers/useSocket';
 import ActivityPanel from './panels/activity/ActivityPanel';
 import PanelGroup from './panels/PanelGroup';
 

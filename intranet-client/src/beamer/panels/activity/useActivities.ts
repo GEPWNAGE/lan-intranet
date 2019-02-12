@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import useFetch from '../../helpers/useFetch';
-import { useInterval } from '../../helpers/useInterval';
+import useFetch from '../../../helpers/useFetch';
+import { useInterval } from '../../../helpers/useInterval';
 
 export interface Activity {
     id: number;

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { useRef } from 'react';
 
-import usePrevious from '../../helpers/usePrevious';
-import { useScrollBottom } from '../../helpers/useScrollBottom';
+import usePrevious from '../../../helpers/usePrevious';
+import { useScrollBottom } from '../../../helpers/useScrollBottom';
 import Panel, { PanelProps } from '../Panel';
 import PanelGroup from '../PanelGroup';
 import { Shoutbox } from './Shoutbox';

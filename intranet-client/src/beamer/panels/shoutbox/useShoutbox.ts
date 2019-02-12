@@ -1,6 +1,6 @@
 import { useEffect, useReducer } from 'react';
 
-import useSocket from '../../helpers/useSocket';
+import useSocket from '../../../helpers/useSocket';
 
 export interface Message {
     id: number;
