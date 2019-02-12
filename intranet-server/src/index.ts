@@ -99,14 +99,8 @@ app.get('/api/activities', (req, res) => {
     });
 });
 
+// websocket for shoutbox events
 const shoutbox = io.of('/shoutbox');
-
-// Send mock messages
-const mockUsers = [casual.username, casual.username, casual.username];
-const messages = [
-    generateMessage({ time: new Date(Date.now() - 60 * 1000) }),
-    generateMessage({ time: new Date(Date.now() - 100 * 1000) }),
-];
 
 function sendMessage(username: string, body: string, time = new Date()) {
     // save the message in the database
@@ -126,12 +120,4 @@ function sendMessage(username: string, body: string, time = new Date()) {
         shoutbox.emit('shoutbox message', message);
     });
 
-}
-
-function generateMessage({ time = new Date() } = {}) {
-    return {
-        username: casual.random_element(mockUsers),
-        body: casual.sentence,
-        time,
-    };
 }
