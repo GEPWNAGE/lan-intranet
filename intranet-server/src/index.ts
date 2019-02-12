@@ -20,6 +20,47 @@ db.serialize(() => {
         "username varchar not null, " +
         "body text not null, " +
         "sent_at varchar not null)");
+
+    db.run("CREATE TABLE IF NOT EXISTS activities" +
+        "(id integer not null primary key autoincrement, " +
+        "title varchar not null, " +
+        "details varchar not null, " +
+        "starts_at datetime not null)");
+
+    db.run("DELETE FROM activities");
+
+    db.run("INSERT INTO activities VALUES " +
+        "(1, " +
+        "'Tournament: Xonotic', " +
+        "'Main room, Saturday at 12:00', " +
+        "'2019-02-16 12:00:00')");
+
+    db.run("INSERT INTO activities VALUES " +
+        "(2, " +
+        "'Tournament: Keep Talking and Nobody Explodes', " +
+        "'Main room stage, Saturday at 16:00', " +
+        "'2019-02-16 16:00:00')");
+
+    db.run("INSERT INTO activities VALUES " +
+        "(3, " +
+        "'Dinner: Fries & Snacks', " +
+        "'Courtyard, Saturday at 19:00', " +
+        "'2019-02-16 19:00:00')");
+
+    db.run("INSERT INTO activities VALUES " +
+        "(4, " +
+        "'Tournament: Just Dance', " +
+        "'Downstairs lounge, Saturday at 23:00', " +
+        "'2019-02-16 23:00:00')");
+
+    db.run("INSERT INTO activities VALUES " +
+        "(5, " +
+        "'Tournament: Rocket League', " +
+        "'Downstairs lounge, Sunday at 12:00', " +
+        "'2019-02-17 12:00:00')");
+
+    db.run("DELETE FROM sqlite_sequence");
+    db.run("INSERT INTO sqlite_sequence VALUES ('activities', 5)");
 });
 
 
@@ -85,17 +126,14 @@ app.post('/api/shoutbox', (req, res) => {
 });
 
 app.get('/api/activities', (req, res) => {
-    res.json({
-        activities: [
-            {
-                title: 'Tournament: Keep Talking and Nobody Explodes',
-                details: 'Downstairs lounge at 16:00',
-            },
-            {
-                title: 'Dinner: Fries & Snacks',
-                details: 'Courtyard at 19:00',
-            },
-        ],
+    const sql = "SELECT id, title, details FROM activities WHERE starts_at > date('now')";
+    db.all(sql, (err, activities) => {
+        if (err !== null) {
+            console.log(err);
+            return;
+        }
+
+        res.json({ activities });
     });
 });
 
