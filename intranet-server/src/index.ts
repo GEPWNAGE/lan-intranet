@@ -147,12 +147,29 @@ app.get('/api/activities', (req, res) => {
     });
 });
 
+app.get('/api/activities/:activityId([0-9]+)/subscriptions', (req, res) => {
+    if (req.params.activityId === undefined) {
+        res.status(400).json({error: "No activity specified"});
+        return;
+    }
+	let activityId = parseInt(req.params.activityId, 10);
+
+	const sql = "SELECT id, activity_id, hostname FROM subscriptions WHERE activity_id = ?";
+	db.all(sql, [activityId], (err, subscriptions) => {
+	    if (err !== null) {
+	        console.log(err);
+	        return;
+        }
+
+	    res.json({subscriptions});
+    })
+});
+
 app.post('/api/activities/:activityId([0-9]+)/subscriptions', (req, res) => {
 	if (req.params.activityId === undefined) {
 	    res.status(400).json({error: "No activity specified"});
 	    return;
     }
-
 	let activityId = parseInt(req.params.activityId, 10);
 
 	const sql = "SELECT id, can_subscribe FROM activities WHERE id = ?";
