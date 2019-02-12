@@ -147,10 +147,39 @@ app.get('/api/activities', (req, res) => {
     });
 });
 
-app.post('/api/activities/:activityId/subscriptions', (req, res) => {
-    getHostnameFromIp(req.connection.remoteAddress, hostname => {
-        res.json({ params: req.params, hostname });
-    });
+app.post('/api/activities/:activityId([0-9]+)/subscriptions', (req, res) => {
+	if (req.params.activityId === undefined) {
+	    res.status(400).json({error: "No activity specified"});
+	    return;
+    }
+
+	let activityId = parseInt(req.params.activityId, 10);
+
+	const sql = "SELECT id, can_subscribe FROM activities WHERE id = ?";
+	db.get(sql, [ activityId ], (err, row) => {
+	    if (err !== null) {
+	        console.log(err);
+	        return;
+        }
+
+	    if (row.can_subscribe != 1) {
+	        res.status(403).json({error: "Cannot subscribe to this activity"});
+	        return;
+        }
+
+	    // get the hostname and insert
+
+        getHostnameFromIp(req.connection.remoteAddress, hostname => {
+        	const sql = "INSERT INTO subscriptions VALUES (NULL, ?, ?)";
+        	db.run(sql, [activityId, hostname], err => {
+        	    if (err !== null) {
+        	        res.status(400).json({error: "Already subscribed"});
+        	        return;
+                }
+                res.json("Subscribed to activity");
+            });
+        });
+    })
 });
 
 // websocket for shoutbox events
