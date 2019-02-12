@@ -19,7 +19,7 @@ db.serialize(() => {
     // shoutbox
     db.run("CREATE TABLE IF NOT EXISTS shoutbox " +
         "(id integer not null primary key autoincrement, " +
-        "username varchar not null, " +
+        "hostname varchar not null, " +
         "body text not null, " +
         "sent_at varchar not null)");
 
@@ -156,16 +156,18 @@ app.post('/api/nick', (req, res) => {
 
 app.get('/api/shoutbox', (req, res) => {
     // for now, we simply do not allow scroll back, just send the last 20 messages
-    const sql = "SELECT id, username, body, sent_at FROM shoutbox ORDER BY id ASC LIMIT 20";
+    // TODO: obtain the nickname in the query
+    const sql = "SELECT id, hostname, body, sent_at FROM shoutbox ORDER BY id ASC LIMIT 20";
     db.all(sql, (err, rows) => {
         if (err !== null) {
             console.log(err);
             return;
         }
 
+
         const messages = rows.map(row => ({
             id: row.id,
-            username: row.username,
+            username: row.hostname,
             body: row.body,
             time: row.sent_at
         }));
@@ -254,22 +256,31 @@ app.post('/api/activities/:activityId([0-9]+)/subscriptions', (req, res) => {
 // websocket for shoutbox events
 const shoutbox = io.of('/shoutbox');
 
-function sendMessage(username: string, body: string, time = new Date()) {
+function sendMessage(hostname: string, body: string, time = new Date()) {
     // save the message in the database
-    const sql = "INSERT INTO shoutbox (id, username, body, sent_at) VALUES (NULL, ?, ?, ?)";
-    db.run(sql, [username, body, time.toJSON()], function(err) {
+    const sql = "INSERT INTO shoutbox (id, hostname, body, sent_at) VALUES (NULL, ?, ?, ?)";
+    db.run(sql, [hostname, body, time.toJSON()], function(err) {
         if (err !== null) {
             console.log("SQLite error!", err);
             return;
         }
-        // emit the message to the shoutbox
-        const message = {
-            id: this.lastID,
-            username,
-            body,
-            time
-        };
-        shoutbox.emit('shoutbox message', message);
+
+        getNickFromHostname(hostname, nick => {
+            let username = hostname;
+            if (nick !== null) {
+                username = nick + " [" + hostname + "]";
+            }
+            // emit the message to the shoutbox
+            const message = {
+                id: this.lastID,
+                nick,
+                username,
+                hostname,
+                body,
+                time
+            };
+            shoutbox.emit('shoutbox message', message);
+        });
     });
 
 }
