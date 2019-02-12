@@ -1,13 +1,13 @@
 {% extends "layout.twig" %}
 
 {% block head_links %}
-    {% for url in entrypoints.beamer.css  %}
+    {% for url in entrypoints('beamer', 'css')  %}
         <link rel="stylesheet" href="{{ url }}">
     {% endfor %}
 {% endblock %}
 
 {% block body_scripts %}
-    {% for url in entrypoints.beamer.js  %}
+    {% for url in entrypoints('beamer', 'js')  %}
         <script src="{{ url }}"></script>
     {% endfor %}
 {% endblock %}

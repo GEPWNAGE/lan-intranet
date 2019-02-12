@@ -17,22 +17,31 @@ app.use(bodyParser.json());
 app.set('views', path.resolve(__dirname, 'views'));
 app.set('view engine', 'twig');
 
-const BUILD_DIR = path.resolve(__dirname, '../../intranet-client/build');
-app.use('/static', express.static(path.resolve(BUILD_DIR, 'static')));
+const CLIENT_DIR = path.resolve(__dirname, '../../intranet-client');
+app.use('/static', express.static(path.resolve(CLIENT_DIR, 'build/static')));
 
 // Load routes
 app.use(routes);
 
-// Set entrypoints
-const { entrypoints } = require(path.resolve(BUILD_DIR, 'manifest.json'));
-Object.keys(entrypoints).forEach((key) => {
-    Object.keys(entrypoints[key]).forEach((type) => {
-        entrypoints[key][type] = entrypoints[key][type].map(
-            (url: string) => `/${url}`,
-        );
-    });
-});
-app.locals.entrypoints = entrypoints;
+const MANIFEST_PATH = path.resolve(CLIENT_DIR, 'webpack.manifest.json');
+
+// Function to get entry files of a specific entrypoint
+app.locals.entrypoints = function(key: string, type: string) {
+    delete require.cache[require.resolve(MANIFEST_PATH)];
+
+    const manifest = require(MANIFEST_PATH);
+    if (!(key in manifest.entrypoints)) {
+        return [];
+    }
+
+    const entrypoints = manifest.entrypoints[key];
+    if (!(type in entrypoints)) {
+        return [];
+    }
+
+    // Rewrite the urls
+    return entrypoints[type].map((url: string) => `/${url}`);
+};
 
 const server = new Server(app);
 const io = socketIo(server);
