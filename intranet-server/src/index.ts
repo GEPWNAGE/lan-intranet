@@ -1,12 +1,25 @@
 import * as express from 'express';
 import { Server } from 'http';
+import * as path from 'path';
 import * as socketIo from 'socket.io';
 import * as sqlite3 from 'sqlite3';
 import * as bodyParser from 'body-parser';
 import * as dns from 'dns';
 
+import routes from './routes';
+
 const app = express();
-app.use(bodyParser.json())
+
+// Express Config
+app.use(bodyParser.json());
+
+// Configure views
+app.set('views', path.resolve(__dirname, 'views'));
+app.set('view engine', 'twig');
+
+// Load routes
+app.use(routes);
+
 const server = new Server(app);
 const io = socketIo(server);
 
@@ -90,8 +103,6 @@ db.serialize(() => {
 
 const port = 3030;
 server.listen(port);
-
-app.get('/', (req, res) => res.send('Hello, World!'));
 
 // TODO: Set this only in development
 if (true) {
