@@ -106,6 +106,26 @@ if (true) {
     });
 }
 
+app.get('/api/nick', (req, res) => {
+	getHostnameFromIp(req.connection.remoteAddress, hostname => {
+		const sql = "SELECT hostname, nick FROM nicknames WHERE hostname = ?";
+		db.all(sql, [hostname], (err, rows) => {
+			if (err !== null) {
+				console.log(err);
+				return;
+			}
+
+			if (rows.length == 0) {
+				res.json({nickname: hostname});
+				return;
+			}
+			const row = rows[0];
+
+			res.json({nickname: row.nick});
+		});
+	});
+});
+
 app.post('/api/nick', (req, res) => {
 	if (req.body.nick === undefined || typeof req.body.nick !== 'string') {
 		res.status(400).json({error: "No nick given"});
