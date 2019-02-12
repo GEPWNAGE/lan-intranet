@@ -84,6 +84,21 @@ app.post('/api/shoutbox', (req, res) => {
     });
 });
 
+app.get('/api/activities', (req, res) => {
+    res.json({
+        activities: [
+            {
+                title: 'Tournament: Keep Talking and Nobody Explodes',
+                details: 'Downstairs lounge at 16:00',
+            },
+            {
+                title: 'Dinner: Fries & Snacks',
+                details: 'Courtyard at 19:00',
+            },
+        ],
+    });
+});
+
 const shoutbox = io.of('/shoutbox');
 
 // Send mock messages

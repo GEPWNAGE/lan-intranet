@@ -11,6 +11,10 @@
 
     background: $panel-bg;
 
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
     &__inner {
     }
 }
