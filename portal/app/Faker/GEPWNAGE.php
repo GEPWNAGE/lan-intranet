@@ -210,7 +210,11 @@ class GEPWNAGE extends Lorem
         "explodes",
         "rocket",
         "server",
-        "client"
+        "client",
+        "linux",
+        "password",
+        "delete",
+        "backspace"
     ];
 
     /**
