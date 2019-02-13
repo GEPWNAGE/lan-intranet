@@ -1,3 +1,3 @@
-import './index.scss';
+import 'bootstrap';
 
-console.log('Hello, World!');
+import './index.scss';
