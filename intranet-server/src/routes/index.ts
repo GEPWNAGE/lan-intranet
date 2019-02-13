@@ -32,7 +32,7 @@ router.get('/activity/:activityId([0-9]+)', (req, res) => {
 
     const sql = "SELECT id, title, details, can_subscribe FROM activities WHERE id = ?";
     db.get(sql, [activityId], (err, activity) => {
-        if (err !== null || activity === null) {
+        if (err !== null || activity === undefined) {
             console.log(err);
             res.render('website/error');
             return;
