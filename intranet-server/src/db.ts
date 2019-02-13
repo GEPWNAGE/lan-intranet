@@ -106,10 +106,18 @@ interface All {
 export const dbAll: All = promisify(db.all.bind(db));
 
 interface Run {
-    (sql: string): Promise<void>;
-    (sql: string, ...params: any[]): Promise<void>;
+    (sql: string): Promise<RunResult>;
+    (sql: string, ...params: any[]): Promise<RunResult>;
 }
-export const dbRun: Run = promisify(db.run.bind(db));
+// @ts-ignore
+db.run[promisify.custom] = (...params: any[]) => new Promise((resolve, reject) => {
+    // @ts-ignore
+    db.run(...params, function (err) {
+        if (err) return reject(err);
+        resolve(this);
+    });
+});
+export const dbRun: Run = promisify(db.run);
 
 interface Get {
     (sql: string): Promise<any>;

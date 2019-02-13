@@ -185,13 +185,13 @@ async function sendMessage(hostname: string, body: string, time = new Date()) {
         'INSERT INTO shoutbox (id, hostname, body, sent_at) VALUES (NULL, ?, ?, ?)';
 
     try {
-        await dbRun(sql, [hostname, body, time.toJSON()]);
+        const { lastID } = await dbRun(sql, [hostname, body, time.toJSON()]);
         const nick = await getNickFromHostname(hostname);
         const username = getUsername(nick, hostname);
 
         // emit the message to the shoutbox
         const message = {
-            id: this.lastID,
+            id: lastID,
             nick,
             username,
             hostname,
@@ -204,5 +204,7 @@ async function sendMessage(hostname: string, body: string, time = new Date()) {
         return;
     }
 }
+
+sendMessage('localhost', 'test message', new Date());
 
 export default router;
