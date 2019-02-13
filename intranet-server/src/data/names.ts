@@ -7,6 +7,10 @@ const dnsReverse = promisify(dns.reverse);
 
 export async function getHostnameFromIp(ip: string) {
     try {
+        if (ip.startsWith('::ffff:')) {
+            ip = ip.replace('::ffff:', '');
+        }
+
         const domains = await dnsReverse(ip);
 
         let hostname = domains[0];
