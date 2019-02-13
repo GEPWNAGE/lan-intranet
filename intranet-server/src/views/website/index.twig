@@ -5,5 +5,31 @@
 {% block website_content %}
     <div class="container mt-4">
         Hello, World!
+
+        <div class="card" style="width: 40rem;">
+            <div class="card-body">
+                <strong>username</strong>
+                <p>message</p>
+            </div>
+            <div class="card-footer">
+                <form action="/">
+                    <div class="form-row">
+                        <div class="col-auto flex-grow-1">
+                            <input
+                                type="text"
+                                name="message"
+                                class="form-control"
+                                placeholder="Message..."
+                            >
+                        </div>
+                        <div class="col flex-grow-0">
+                            <button type="submit" class="btn btn-primary">
+                                Shout!
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 {% endblock %}
