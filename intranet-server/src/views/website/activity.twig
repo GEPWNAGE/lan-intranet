@@ -9,15 +9,20 @@
                 <strong>{{ activity.title }}</strong>
             </div>
             <div class="card-body">
+                <p>
                 {{ activity.details }}
-
+                </p>
+                <p>
                 Participants:
-
+                </p>
                 <ul>
                     {% for subscription in activity.subscriptions %}
-                        <li>{{ subscription.hostname }}</li>
+                        <li>{{ subscription.username }}</li>
                     {% endfor %}
                 </ul>
+            </div>
+            <div class="card-footer">
+                TODO: React-element to subscribe
             </div>
         </div>
 

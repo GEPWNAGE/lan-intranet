@@ -38,7 +38,9 @@ router.get('/activity/:activityId([0-9]+)', (req, res) => {
             return;
         }
 
-        const sql = "SELECT id, hostname FROM subscriptions WHERE activity_id = ?";
+        const sql = "SELECT s.id, s.hostname, n.nick FROM subscriptions AS s " +
+            "LEFT JOIN nicknames AS n ON (s.hostname = n.hostname)" +
+            "WHERE s.activity_id = ?";
         db.all(sql, [activityId], (err, rows) => {
             if (err !== null) {
                 console.log(err);
@@ -46,7 +48,10 @@ router.get('/activity/:activityId([0-9]+)', (req, res) => {
                 return;
             }
 
-            activity.subscriptions = rows;
+            activity.subscriptions = rows.map(s => ({
+                username: s.nick === null ? s.hostname : s.nick + ' [' + s.hostname + ']',
+                ...s
+            }));
 
             res.render('website/activity', { activity });
         });
