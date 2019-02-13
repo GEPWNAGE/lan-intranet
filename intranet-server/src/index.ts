@@ -45,11 +45,15 @@ const MANIFEST_PATH = path.resolve(CLIENT_DIR, 'webpack.manifest.json');
 const ASSETS_URL =
     app.get('env') === 'production' ? '/' : process.env.WEBPACK_DEV_SERVER_URL;
 
+function getManifest(): any {
+    delete require.cache[require.resolve(MANIFEST_PATH)];
+    return require(MANIFEST_PATH);
+}
+
 // Function to get entry files of a specific entrypoint
 app.locals.entrypoints = function(key: string, type: string) {
-    delete require.cache[require.resolve(MANIFEST_PATH)];
+    const manifest = getManifest();
 
-    const manifest = require(MANIFEST_PATH);
     if (!(key in manifest.entrypoints)) {
         return [];
     }
@@ -61,6 +65,16 @@ app.locals.entrypoints = function(key: string, type: string) {
 
     // Rewrite the urls
     return entrypoints[type].map((url: string) => ASSETS_URL + url);
+};
+
+app.locals.static = function(key: string) {
+    const manifest = getManifest();
+
+    if (!(key in manifest)) {
+        return null;
+    }
+
+    return ASSETS_URL + manifest[key];
 };
 
 const server = new Server(app);

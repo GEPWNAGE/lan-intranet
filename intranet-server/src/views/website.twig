@@ -66,5 +66,35 @@
         </div>
     </nav>
 
-    {% block website_content %}{% endblock %}
+    {% block website_content %}
+        <main>{% block website_main %}{% endblock %}</main>
+        {% block website_footer %}
+            <footer class="bg-light mt-auto py-5">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-sm">
+                            <h6>Questions?</h6>
+                            Please talk to someone from GEPWNAGE
+                        </div>
+                        <div class="col-sm">
+                            <div class="d-flex align-items-center justify-content-end">
+                                <img
+                                    class="mr-sm-4"
+                                    style="max-width: 200px;"
+                                    src="{{ static('static/media/prodrive-logo.svg') }}"
+                                    alt="Prodrive Technologies"
+                                >
+                                <img
+                                    style="max-width: 180px;"
+                                    src="{{ static('static/media/letstalk-logo.png') }}"
+                                    alt="Let's Talk"
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        {% endblock %}
+
+    {% endblock %}
 {% endblock %}

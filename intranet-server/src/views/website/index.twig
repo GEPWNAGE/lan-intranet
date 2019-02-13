@@ -2,34 +2,21 @@
 
 {% set nav_active = 'home' %}
 
-{% block website_content %}
+{% block website_main %}
+    <div class="jumbotron jumbotron-fluid bg-gepwnage-blue text-white">
+        <div class="container">
+            <h1 class="font-weight-light">
+                <span class="d-inline-block">Welcome</span>
+                <span class="d-inline-block">to the party!</span>
+            </h1>
+            <p class="lead">
+                This intranet contains details about the schedule,
+                tournaments
+                and a shoutbox to chat with your fellow gamers.
+            </p>
+        </div>
+    </div>
     <div class="container mt-4">
         Hello, World!
-
-        <div class="card" style="width: 40rem;">
-            <div class="card-body">
-                <strong>username</strong>
-                <p>message</p>
-            </div>
-            <div class="card-footer">
-                <form action="/">
-                    <div class="form-row">
-                        <div class="col-auto flex-grow-1">
-                            <input
-                                type="text"
-                                name="message"
-                                class="form-control"
-                                placeholder="Message..."
-                            >
-                        </div>
-                        <div class="col flex-grow-0">
-                            <button type="submit" class="btn btn-primary">
-                                Shout!
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
     </div>
 {% endblock %}
