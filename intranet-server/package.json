@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/twig": "^1.12.2",
     "casual": "^1.6.0",
     "cross-env": "^5.2.0",
     "dotenv": "^6.2.0",

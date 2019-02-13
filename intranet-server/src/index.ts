@@ -4,10 +4,10 @@ import * as path from 'path';
 import socketIo from 'socket.io';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
+import * as twig from 'twig';
 
 import routes from './routes';
 
-const twig = require('twig');
 
 // Load vars from .env file
 dotenv.config();
