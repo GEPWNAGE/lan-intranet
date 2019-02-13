@@ -1,0 +1,18 @@
+{% extends "../website.twig" %}
+
+{% set nav_active = 'schedule' %}
+
+{% block website_content %}
+    <div class="container mt-4">
+        {% for activity in activities %}
+            <div class="card" style="width: 40rem">
+                <div class="card-body">
+                    <strong>{{ activity.title }}</strong>
+                </div>
+                <div class="card-footer">
+                    {{ activity.details }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
