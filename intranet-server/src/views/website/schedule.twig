@@ -7,7 +7,7 @@
         {% for activity in activities %}
             <div class="card" style="width: 40rem">
                 <div class="card-body">
-                    <strong>{{ activity.title }}</strong>
+                    <a href="/activity/{{ activity.id }}">{{ activity.title }}</a>
                 </div>
                 <div class="card-footer">
                     {{ activity.details }}

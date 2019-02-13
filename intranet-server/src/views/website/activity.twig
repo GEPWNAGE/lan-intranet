@@ -1,0 +1,22 @@
+{% extends "../website.twig" %}
+
+{% set nav_active = 'tournament' %}
+
+{% block website_content %}
+    <div class="container mt-4">
+        <div class="card" style="width: 40rem">
+            <div class="card-body">
+                <strong>{{ activity.title }}</strong>
+            </div>
+            <div class="card-footer">
+                {{ activity.details }}
+            </div>
+        </div>
+
+        <ul>
+            {% for subscription in activity.subscriptions %}
+                <li>{{ subscription.hostname }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
