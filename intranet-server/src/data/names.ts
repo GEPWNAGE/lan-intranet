@@ -2,10 +2,17 @@ import * as dns from 'dns';
 import { promisify } from 'util';
 
 import { dbAll } from '../db';
+import {Request} from "express";
 
 const dnsReverse = promisify(dns.reverse);
 
-export async function getHostnameFromIp(ip: string) {
+export async function getHostnameFromIp(req: Request) {
+    let ip = req.connection.remoteAddress;
+
+    if ((ip === '::1' || ip === '127.0.0.1') && req.header('X-Forwarded-For') !== undefined) {
+        ip = req.header('X-Forwarded-For');
+    }
+
     try {
         if (ip.startsWith('::ffff:')) {
             ip = ip.replace('::ffff:', '');

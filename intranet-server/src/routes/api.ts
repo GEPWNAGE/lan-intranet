@@ -11,7 +11,7 @@ import { ioShoutbox } from '../index';
 const router = Router();
 
 router.get('/nick', async (req, res) => {
-    const hostname = await getHostnameFromIp(req.connection.remoteAddress);
+    const hostname = await getHostnameFromIp(req);
     const nickname = await getNickFromHostname(hostname);
 
     res.json({
@@ -29,9 +29,7 @@ router.post('/nick', async (req, res) => {
     const nick: string = req.body.nick;
 
     // get the hostname
-    const hostname: string = await getHostnameFromIp(
-        req.connection.remoteAddress,
-    );
+    const hostname: string = await getHostnameFromIp(req);
 
     try {
         // check if we already have a username
@@ -95,7 +93,7 @@ router.post('/shoutbox', async (req, res) => {
         return;
     }
 
-    const hostname = await getHostnameFromIp(req.connection.remoteAddress);
+    const hostname = await getHostnameFromIp(req);
     sendMessage(hostname, req.body.body);
     res.json('Message sent');
 });
@@ -158,9 +156,7 @@ router.post(
             }
 
             // get the hostname and insert
-            const hostname = await getHostnameFromIp(
-                req.connection.remoteAddress,
-            );
+            const hostname = await getHostnameFromIp(req);
 
             try {
                 await dbRun('INSERT INTO subscriptions VALUES (NULL, ?, ?)', [
