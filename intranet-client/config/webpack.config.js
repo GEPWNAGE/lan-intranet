@@ -470,7 +470,7 @@ module.exports = function(webpackEnv, devOptions) {
     },
     plugins: [
       // Generates an `index.html` file with the <script> injected.
-      new HtmlWebpackPlugin(
+      /*new HtmlWebpackPlugin(
         Object.assign(
           {},
           {
@@ -494,7 +494,7 @@ module.exports = function(webpackEnv, devOptions) {
               }
             : undefined
         )
-      ),
+      ),*/
       // Inlines the webpack runtime script. This script is too small to warrant
       // a network request.
       isEnvProduction &&
