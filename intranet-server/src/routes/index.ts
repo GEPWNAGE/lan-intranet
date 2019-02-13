@@ -22,7 +22,7 @@ router.use(async (req, res, next) => {
 });
 
 router.get('/', (req, res) => {
-    res.render('website/index');
+    res.render('website/welcome');
 });
 
 router.get('/beamer', (req, res) => {
