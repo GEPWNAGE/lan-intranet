@@ -1,6 +1,9 @@
+import { ReactNode, Ref, UIEventHandler, useRef } from 'react';
 import * as React from 'react';
+import usePrevious from '../../../helpers/usePrevious';
+import { useScrollBottom } from '../../../helpers/useScrollBottom';
 
-import { ShoutboxMessage } from './ShoutboxMessage';
+import useShoutbox from './useShoutbox';
 import { Message } from './useShoutbox';
 
 // Duration in which messages from the same user should be merged
@@ -14,19 +17,40 @@ function shouldMerge(prevMsg: Message, msg: Message): boolean {
 }
 
 export interface ShoutboxProps {
-    messages: Message[];
+    renderContainer(props: {
+        ref: Ref<any>;
+        onScroll: UIEventHandler<HTMLElement>;
+        children: ReactNode;
+    }): JSX.Element;
+    renderMessage(props: {
+        key: number;
+        message: Message;
+        merged: boolean;
+    }): JSX.Element;
 }
 
-export function Shoutbox({ messages }: ShoutboxProps) {
-    return (
-        <>
-            {messages.map((msg, index) => (
-                <ShoutboxMessage
-                    key={msg.id}
-                    message={msg}
-                    merged={index > 0 && shouldMerge(messages[index - 1], msg)}
-                />
-            ))}
-        </>
+export default function Shoutbox({
+    renderContainer,
+    renderMessage,
+}: ShoutboxProps) {
+    const [messages] = useShoutbox();
+    const prevMessageCount = usePrevious(messages.length);
+
+    const containerRef = useRef(null);
+    const onContainerScroll = useScrollBottom(
+        containerRef,
+        prevMessageCount !== 0,
     );
+
+    return renderContainer({
+        ref: containerRef,
+        onScroll: onContainerScroll,
+        children: messages.map((message, index) =>
+            renderMessage({
+                key: message.id,
+                message,
+                merged: index > 0 && shouldMerge(messages[index - 1], message),
+            }),
+        ),
+    });
 }

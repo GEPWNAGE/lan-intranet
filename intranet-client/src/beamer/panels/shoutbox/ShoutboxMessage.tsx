@@ -4,7 +4,7 @@ import cx from 'classnames';
 import { Message } from './useShoutbox';
 import './ShoutboxMessage.scss';
 
-interface ShoutboxMessageProps {
+export interface ShoutboxMessageProps {
     message: Message;
     merged: boolean;
 }
