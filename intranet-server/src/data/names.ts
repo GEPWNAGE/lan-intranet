@@ -9,7 +9,7 @@ const dnsReverse = promisify(dns.reverse);
 export async function getHostnameFromIp(req: Request) {
     let ip = req.connection.remoteAddress;
 
-    if ((ip === '::1' || ip === '127.0.0.1') && req.header('X-Forwarded-For') !== undefined) {
+    if ((ip === '::1' || ip === '127.0.0.1' || ip === '::ffff:127.0.0.1') && req.header('X-Forwarded-For') !== undefined) {
         ip = req.header('X-Forwarded-For');
     }
 
