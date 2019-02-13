@@ -45,6 +45,7 @@ const sassModuleRegex = /\.module\.(scss|sass)$/;
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
 module.exports = function(webpackEnv, devOptions) {
   const { host, port } = devOptions || {};
+  const devPublicPath = `http://${host}:${port}/`;
 
   const isEnvDevelopment = webpackEnv === 'development';
   const isEnvProduction = webpackEnv === 'production';
@@ -54,7 +55,7 @@ module.exports = function(webpackEnv, devOptions) {
   // In development, we always serve from the root. This makes config easier.
   const publicPath = isEnvProduction
     ? paths.servedPath
-    : isEnvDevelopment && '/';
+    : isEnvDevelopment && devPublicPath;
   // Some apps do not use client-side routing with pushState.
   // For these, "homepage" can be set to "." to enable relative asset paths.
   const shouldUseRelativeAssetPaths = publicPath === './';
@@ -130,14 +131,14 @@ module.exports = function(webpackEnv, devOptions) {
     entry: {
       beamer: [
         ...(isEnvDevelopment ? [
-            require.resolve('webpack-dev-server/client') + `?http://${host}:${port}`,
+            require.resolve('webpack-dev-server/client') + `?${devPublicPath}`,
             require.resolve('webpack/hot/dev-server'),
         ] : []),
         path.resolve(paths.appSrc, 'beamer/index'),
       ],
       website: [
         ...(isEnvDevelopment ? [
-            require.resolve('webpack-dev-server/client') + `?http://${host}:${port}`,
+            require.resolve('webpack-dev-server/client') + `?${devPublicPath}`,
             require.resolve('webpack/hot/dev-server'),
         ] : []),
         path.resolve(paths.appSrc, 'website/index'),
