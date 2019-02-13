@@ -5,9 +5,9 @@ import useSlider from '../../../helpers/useSlider';
 import Panel, { PanelProps } from '../Panel';
 import './SlidesPanel.scss';
 
-import prodriveLogo from './data/prodrive-logo.svg';
-import letstalkLogo from './data/letstalk-logo.png';
-import gepwnageLogo from './data/gepwnage-logo.png';
+import prodriveLogo from '../../../logos/prodrive-logo.svg';
+import letstalkLogo from '../../../logos/letstalk-logo.png';
+import gepwnageLogo from '../../../logos/gepwnage-logo.png';
 
 export type SlidesPanelProps = PanelProps;
 
