@@ -69,7 +69,7 @@ db.serialize(() => {
         'INSERT INTO activities VALUES ' +
             '(5, ' +
             "'Tournament: Rocket League', " +
-            "'Downstairs lounge, Sunday at 12:00', " +
+            "'Main room, Sunday at 12:00', " +
             '1,' +
             "'2019-02-17 12:00:00')",
     );

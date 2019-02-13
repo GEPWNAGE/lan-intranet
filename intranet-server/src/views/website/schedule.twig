@@ -2,17 +2,20 @@
 
 {% set nav_active = 'schedule' %}
 
-{% block website_content %}
-    <div class="container mt-4">
-        {% for activity in activities %}
-            <div class="card" style="width: 40rem">
-                <div class="card-header">
-                    <a href="/activity/{{ activity.id }}">{{ activity.title }}</a>
-                </div>
-                <div class="card-body">
-                    {{ activity.details }}
-                </div>
+{% block website_main %}
+    <main class="my-4">
+        <div class="container">
+            <h3 class="mb-3">Schedule</h3>
+
+            <div class="list-group">
+                {% for activity in activities %}
+                    <div class="list-group-item">
+                        <h5>{{ activity.title }}</h5>
+                        <p class="mb-1">{{ activity.details }}</p>
+                        <a href="/activity/{{ activity.id }}">More info</a>
+                    </div>
+                {% endfor %}
             </div>
-        {% endfor %}
-    </div>
+        </div>
+    </main>
 {% endblock %}
