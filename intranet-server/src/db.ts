@@ -1,4 +1,5 @@
-import sqlite3 from 'sqlite3';
+import sqlite3, { RunResult, Statement } from 'sqlite3';
+import { promisify } from 'util';
 
 const db = new sqlite3.Database('database.sqlite');
 
@@ -96,3 +97,22 @@ db.serialize(() => {
 });
 
 export default db;
+
+// Export promisified methods
+interface All {
+    (sql: string): Promise<any[]>;
+    (sql: string, ...params: any[]): Promise<any[]>;
+}
+export const dbAll: All = promisify(db.all.bind(db));
+
+interface Run {
+    (sql: string): Promise<void>;
+    (sql: string, ...params: any[]): Promise<void>;
+}
+export const dbRun: Run = promisify(db.run.bind(db));
+
+interface Get {
+    (sql: string): Promise<any>;
+    (sql: string, ...params: any[]): Promise<any>;
+}
+export const dbGet: Get = promisify(db.get.bind(db));

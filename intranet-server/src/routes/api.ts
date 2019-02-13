@@ -1,72 +1,74 @@
-import * as dns from 'dns';
 import { Router } from 'express';
 
+import { dbAll, dbGet, dbRun } from '../db';
+import {
+    getHostnameFromIp,
+    getNickFromHostname,
+    getUsername,
+} from '../data/names';
 import { ioShoutbox } from '../index';
-import db from '../db';
 
 const router = Router();
 
-router.get('/nick', (req, res) => {
-    getNickAndHostnameFromIp(req.connection.remoteAddress, (nick, hostname) => {
-        res.json({ nick, hostname });
+router.get('/nick', async (req, res) => {
+    const hostname = await getHostnameFromIp(req.connection.remoteAddress);
+    const nickname = await getNickFromHostname(hostname);
+
+    res.json({
+        nick: nickname,
+        hostname,
     });
 });
 
-router.post('/nick', (req, res) => {
+router.post('/nick', async (req, res) => {
     if (req.body.nick === undefined || typeof req.body.nick !== 'string') {
         res.status(400).json({ error: 'No nick given' });
         return;
     }
 
-    const nick = req.body.nick;
+    const nick: string = req.body.nick;
 
-    // get the hostnme
-    getHostnameFromIp(req.connection.remoteAddress, (hostname) => {
+    // get the hostname
+    const hostname: string = await getHostnameFromIp(
+        req.connection.remoteAddress,
+    );
+
+    try {
         // check if we already have a username
-        const sql = 'SELECT hostname FROM nicknames WHERE hostname = ?';
-        db.all(sql, [hostname], (err, rows) => {
-            if (err !== null) {
-                console.log(err);
-                return;
-            }
+        const rows = await dbAll(
+            'SELECT hostname FROM nicknames WHERE hostname = ?',
+            [hostname],
+        );
 
-            if (rows.length > 0) {
-                const sql = 'UPDATE nicknames SET nick = ? WHERE hostname = ?';
-                db.run(sql, [nick, hostname], (err) => {
-                    if (err !== null) {
-                        console.log(err);
-                        return;
-                    }
-
-                    res.json('Nickname updated');
-                });
-            } else {
-                const sql = 'INSERT INTO nicknames VALUES (?, ?)';
-                db.run(sql, [hostname, nick], (err) => {
-                    if (err !== null) {
-                        console.log(err);
-                        return;
-                    }
-
-                    res.json('Nickname created');
-                });
-            }
-        });
-    });
+        if (rows.length > 0) {
+            await dbRun('UPDATE nicknames SET nick = ? WHERE hostname = ?', [
+                nick,
+                hostname,
+            ]);
+            res.json('Nickname updated');
+        } else {
+            await dbRun('INSERT INTO nicknames VALUES (?, ?)', [
+                hostname,
+                nick,
+            ]);
+            res.json('Nickname created');
+        }
+    } catch (err) {
+        console.log(err);
+        return;
+    }
 });
 
-router.get('/shoutbox', (req, res) => {
+router.get('/shoutbox', async (req, res) => {
     // for now, we simply do not allow scroll back, just send the last 20 messages
     // TODO: obtain the nickname in the query
     const sql =
         'SELECT s.id, s.hostname, s.body, s.sent_at, n.nick FROM shoutbox AS s ' +
         'LEFT JOIN nicknames AS n ON (s.hostname = n.hostname) ' +
         'ORDER BY id ASC LIMIT 20';
-    db.all(sql, (err, rows) => {
-        if (err !== null) {
-            console.log(err);
-            return;
-        }
+
+    try {
+        const rows = await dbAll(sql);
 
         const messages = rows.map((row) => ({
             id: row.id,
@@ -81,166 +83,126 @@ router.get('/shoutbox', (req, res) => {
         }));
 
         res.json({ messages });
-    });
+    } catch (err) {
+        console.log(err);
+        return;
+    }
 });
 
-router.post('/shoutbox', (req, res) => {
+router.post('/shoutbox', async (req, res) => {
     if (req.body.body === undefined || typeof req.body.body !== 'string') {
         res.status(400).json({ error: 'No message given' });
         return;
     }
 
-    getHostnameFromIp(req.connection.remoteAddress, (hostname) => {
-        sendMessage(hostname, req.body.body);
-
-        res.json('Message sent');
-    });
+    const hostname = await getHostnameFromIp(req.connection.remoteAddress);
+    sendMessage(hostname, req.body.body);
+    res.json('Message sent');
 });
 
-router.get('/activities', (req, res) => {
+router.get('/activities', async (req, res) => {
     const sql =
         "SELECT id, title, details, can_subscribe, starts_at FROM activities WHERE starts_at > datetime('now')";
-    db.all(sql, (err, activities) => {
-        if (err !== null) {
-            console.log(err);
-            return;
-        }
 
+    try {
+        const activities = await dbAll(sql);
         res.json({ activities });
-    });
-});
-
-router.get('/activities/:activityId([0-9]+)/subscriptions', (req, res) => {
-    if (req.params.activityId === undefined) {
-        res.status(400).json({ error: 'No activity specified' });
+    } catch (err) {
+        console.log(err);
         return;
     }
-    let activityId = parseInt(req.params.activityId, 10);
+});
 
-    const sql =
-        'SELECT id, activity_id, hostname FROM subscriptions WHERE activity_id = ?';
-    db.all(sql, [activityId], (err, subscriptions) => {
-        if (err !== null) {
+router.get(
+    '/activities/:activityId([0-9]+)/subscriptions',
+    async (req, res) => {
+        if (req.params.activityId === undefined) {
+            res.status(400).json({ error: 'No activity specified' });
+            return;
+        }
+        let activityId = parseInt(req.params.activityId, 10);
+
+        const sql =
+            'SELECT id, activity_id, hostname FROM subscriptions WHERE activity_id = ?';
+
+        try {
+            const subscriptions = dbAll(sql, [activityId]);
+            res.json({ subscriptions });
+        } catch (err) {
             console.log(err);
             return;
         }
+    },
+);
 
-        res.json({ subscriptions });
-    });
-});
-
-router.post('/activities/:activityId([0-9]+)/subscriptions', (req, res) => {
-    if (req.params.activityId === undefined) {
-        res.status(400).json({ error: 'No activity specified' });
-        return;
-    }
-    let activityId = parseInt(req.params.activityId, 10);
-
-    const sql = 'SELECT id, can_subscribe FROM activities WHERE id = ?';
-    db.get(sql, [activityId], (err, row) => {
-        if (err !== null) {
-            console.log(err);
+router.post(
+    '/activities/:activityId([0-9]+)/subscriptions',
+    async (req, res) => {
+        if (req.params.activityId === undefined) {
+            res.status(400).json({ error: 'No activity specified' });
             return;
         }
+        let activityId = parseInt(req.params.activityId, 10);
 
-        if (row.can_subscribe != 1) {
-            res.status(403).json({
-                error: 'Cannot subscribe to this activity',
-            });
-            return;
-        }
+        try {
+            const row = await dbGet(
+                'SELECT id, can_subscribe FROM activities WHERE id = ?',
+                [activityId],
+            );
 
-        // get the hostname and insert
+            if (row.can_subscribe != 1) {
+                res.status(403).json({
+                    error: 'Cannot subscribe to this activity',
+                });
+                return;
+            }
 
-        getHostnameFromIp(req.connection.remoteAddress, (hostname) => {
-            const sql = 'INSERT INTO subscriptions VALUES (NULL, ?, ?)';
-            db.run(sql, [activityId, hostname], (err) => {
-                if (err !== null) {
-                    res.status(400).json({ error: 'Already subscribed' });
-                    return;
-                }
+            // get the hostname and insert
+            const hostname = await getHostnameFromIp(
+                req.connection.remoteAddress,
+            );
+
+            try {
+                await dbRun('INSERT INTO subscriptions VALUES (NULL, ?, ?)', [
+                    activityId,
+                    hostname,
+                ]);
                 res.json('Subscribed to activity');
-            });
-        });
-    });
-});
+            } catch (err) {
+                res.status(400).json({ error: 'Already subscribed' });
+                return;
+            }
+        } catch (err) {
+            console.log(err);
+            return;
+        }
+    },
+);
 
-function sendMessage(hostname: string, body: string, time = new Date()) {
+async function sendMessage(hostname: string, body: string, time = new Date()) {
     // save the message in the database
     const sql =
         'INSERT INTO shoutbox (id, hostname, body, sent_at) VALUES (NULL, ?, ?, ?)';
-    db.run(sql, [hostname, body, time.toJSON()], function(err) {
-        if (err !== null) {
-            console.log('SQLite error!', err);
-            return;
-        }
 
-        getNickFromHostname(hostname, (nick) => {
-            let username = hostname;
-            if (nick !== null) {
-                username = nick + ' [' + hostname + ']';
-            }
-            // emit the message to the shoutbox
-            const message = {
-                id: this.lastID,
-                nick,
-                username,
-                hostname,
-                body,
-                time,
-            };
-            ioShoutbox.emit('shoutbox message', message);
-        });
-    });
-}
+    try {
+        await dbRun(sql, [hostname, body, time.toJSON()]);
+        const nick = await getNickFromHostname(hostname);
+        const username = getUsername(nick, hostname);
 
-function getHostnameFromIp(ip: string, callback = (hostname: string) => {}) {
-    dns.reverse(ip, (err, domains) => {
-        let hostname = domains[0];
-
-        for (let i in domains) {
-            let domain = domains[i];
-            if (domain.endsWith('.gepwnage.lan')) {
-                hostname = domain.replace('.gepwnage.lan', '');
-                break;
-            }
-            if (domain !== 'localhost') {
-                hostname = domain;
-            }
-        }
-
-        callback(hostname);
-    });
-}
-
-function getNickAndHostnameFromIp(
-    ip: string,
-    callback = (nick: string, hostname: string) => {},
-) {
-    getHostnameFromIp(ip, (hostname) => {
-        getNickFromHostname(hostname, (nick) => callback(nick, hostname));
-    });
-}
-
-function getNickFromHostname(
-    hostname: string,
-    callback = (nick: string) => {},
-) {
-    const sql = 'SELECT nick FROM nicknames WHERE hostname = ?';
-    db.all(sql, [hostname], (err, rows) => {
-        if (err !== null) {
-            console.log(err);
-            return;
-        }
-
-        let nick = null;
-
-        if (rows.length > 0) {
-            nick = rows[0].nick;
-        }
-
-        callback(nick);
-    });
+        // emit the message to the shoutbox
+        const message = {
+            id: this.lastID,
+            nick,
+            username,
+            hostname,
+            body,
+            time,
+        };
+        ioShoutbox.emit('shoutbox message', message);
+    } catch (err) {
+        console.log('SQLite error!', err);
+        return;
+    }
 }
 
 export default router;
