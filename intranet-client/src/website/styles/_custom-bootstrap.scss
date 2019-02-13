@@ -1,3 +1,5 @@
-$theme-colors: (
-    'gepwnage-blue': #013370,
-);
+@import 'variables';
+
+h1, h2, h3 {
+    font-weight: $font-weight-base;
+}
