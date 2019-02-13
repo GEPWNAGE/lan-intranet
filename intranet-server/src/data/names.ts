@@ -13,6 +13,10 @@ export async function getHostnameFromIp(ip: string) {
 
         const domains = await dnsReverse(ip);
 
+        if (domains.length === 0 && (ip === '::1' || ip === '127.0.0.1')) {
+            return 'localhost';
+        }
+
         let hostname = domains[0];
 
         for (let i in domains) {
