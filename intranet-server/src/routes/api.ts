@@ -205,6 +205,4 @@ async function sendMessage(hostname: string, body: string, time = new Date()) {
     }
 }
 
-sendMessage('localhost', 'test message', new Date());
-
 export default router;
