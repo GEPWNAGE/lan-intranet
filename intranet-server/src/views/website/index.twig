@@ -3,19 +3,21 @@
 {% set nav_active = 'home' %}
 
 {% block website_main %}
-    <div class="jumbotron jumbotron-fluid bg-gepwnage-blue text-white">
-        <div class="container">
-            <h1 class="font-weight-light">
-                <span class="d-inline-block">Welcome</span>
-                <span class="d-inline-block">to the party!</span>
-            </h1>
-            <p class="lead">
-                This intranet contains details about the schedule, tournaments
-                and a shoutbox to chat with your fellow gamers.
-            </p>
+    <main class="d-flex flex-column flex-grow-1">
+        <div class="d-flex align-items-center flex-grow-1 mb-0 d-flex jumbotron jumbotron-fluid bg-gepwnage-blue text-white">
+            <div class="container">
+                <h1 class="font-weight-light">
+                    <span class="d-inline-block">Welcome</span>
+                    <span class="d-inline-block">to the party!</span>
+                </h1>
+                <p class="lead">
+                    This intranet contains details about the
+                    <a href="/schedule">schedule</a>,
+                    <a href="/tournaments">tournaments</a>
+                    and a <a href="/shoutbox">shoutbox</a>
+                    to chat with your fellow gamers.
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="container mt-4">
-        Hello, World!
-    </div>
+    </main>
 {% endblock %}
