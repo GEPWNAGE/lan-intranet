@@ -6,10 +6,10 @@
     <div class="container mt-4">
         {% for activity in activities %}
             <div class="card" style="width: 40rem">
-                <div class="card-body">
+                <div class="card-header">
                     <a href="/activity/{{ activity.id }}">{{ activity.title }}</a>
                 </div>
-                <div class="card-footer">
+                <div class="card-body">
                     {{ activity.details }}
                 </div>
             </div>
