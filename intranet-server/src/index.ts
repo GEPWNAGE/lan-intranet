@@ -7,6 +7,7 @@ import dotenv from 'dotenv';
 import * as twig from 'twig';
 
 import routes from './routes';
+import apiRoutes from './routes/api';
 
 
 // Load vars from .env file
@@ -37,6 +38,7 @@ app.use(function(req, res, next) {
 });
 
 // Load routes
+app.use('/api', apiRoutes);
 app.use(routes);
 
 const MANIFEST_PATH = path.resolve(CLIENT_DIR, 'webpack.manifest.json');

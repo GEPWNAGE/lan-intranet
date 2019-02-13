@@ -9,8 +9,6 @@ import db from '../db';
 
 const router = Router();
 
-router.use('/api', apiRoutes);
-
 router.use(async (req, res, next) => {
     const hostname = await getHostnameFromIp(req.connection.remoteAddress);
     const nick = await getNickFromHostname(hostname);
