@@ -79,4 +79,8 @@ router.get('/activity/:activityId([0-9]+)', (req, res) => {
     });
 });
 
+router.get('/shoutbox', (req, res) => {
+    res.render('website/shoutbox');
+});
+
 export default router;
