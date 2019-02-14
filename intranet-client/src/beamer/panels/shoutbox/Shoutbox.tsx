@@ -7,7 +7,7 @@ import useShoutbox from './useShoutbox';
 import { Message } from './useShoutbox';
 
 // Duration in which messages from the same user should be merged
-const MERGE_DURATION = 10 * 60 * 60 * 1000;
+const MERGE_DURATION = 10 * 60 * 1000;
 
 function shouldMerge(prevMsg: Message, msg: Message): boolean {
     return (
