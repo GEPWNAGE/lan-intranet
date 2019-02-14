@@ -67,7 +67,7 @@ router.get('/shoutbox', async (req, res) => {
     const sql =
         'SELECT s.id, s.hostname, s.body, s.sent_at, n.nick FROM shoutbox AS s ' +
         'LEFT JOIN nicknames AS n ON (s.hostname = n.hostname) ' +
-        'ORDER BY id ASC LIMIT 20';
+        'ORDER BY id DESC LIMIT 20';
 
     try {
         const rows = await dbAll(sql);
