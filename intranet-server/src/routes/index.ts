@@ -4,9 +4,7 @@ import {
     getNickFromHostname,
     getUsername,
 } from '../data/names';
-import apiRoutes from './api';
 import db, { dbAll, dbRun } from '../db';
-import { hostname } from 'os';
 
 const router = Router();
 
