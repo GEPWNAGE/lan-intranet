@@ -17,6 +17,7 @@ const app = express();
 
 // Express Config
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Configure views
 app.set('views', path.resolve(__dirname, 'views'));

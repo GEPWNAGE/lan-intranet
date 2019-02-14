@@ -53,7 +53,7 @@
                             class="nav-link dropdown-toggle"
                             data-toggle="dropdown"
                         >
-                            Hello, <strong>{{ username }}</strong>
+                            Hello, <strong>{{ username|e }}</strong>
                         </a>
                         <div class="dropdown-menu">
                             <a href="/change-nickname" class="dropdown-item">

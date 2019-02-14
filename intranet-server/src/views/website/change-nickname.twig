@@ -1,0 +1,34 @@
+{% extends "../website.twig" %}
+
+{% set nav_active = 'change-nickname' %}
+
+{% block website_main %}
+    <main class="my-4">
+        <div class="container">
+            <div class="card">
+                <div class="card-body">
+                    <dl>
+                        <dt>Hostname</dt>
+                        <dd>{{ hostname|e }}</dd>
+                        <dt>Nickname</dt>
+                        <dd>{{ nick|e }}</dd>
+                        <dt>Displayed as</dt>
+                        <dd>{{ username|e }}</dd>
+                    </dl>
+                </div>
+                <div class="card-footer">
+                    <form method="post" action="/change-nickname">
+                        <div class="form-row">
+                            <div class="col-auto flex-grow-1">
+                                <input value="{{ nick|e }}" name="nickname" type="text" class="form-control" placeholder="Nickname"/>
+                            </div>
+                            <div class="col-auto">
+                                <button class="btn btn-primary">Change nickname</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
