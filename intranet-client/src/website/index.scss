@@ -3,6 +3,7 @@
 @import 'styles/custom-bootstrap';
 
 @import 'styles/jumbotron';
+@import 'styles/navbar';
 
 html {
     height: 100%;
@@ -12,4 +13,8 @@ body {
     display: flex;
     flex-direction: column;
     height: 100%;
+
+    // Compensate for `position: absolute;` navbar
+    padding-top: $navbar-brand-height + ($navbar-brand-padding-y * 2) +
+        ($navbar-padding-y * 2);
 }
