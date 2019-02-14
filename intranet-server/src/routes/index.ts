@@ -44,7 +44,7 @@ router.get('/schedule', (req, res) => {
     });
 });
 
-router.get('/activity/:activityId([0-9]+)', (req, res) => {
+const getActivity = (req: any, res: any) => {
     const activityId = parseInt(req.params.activityId);
 
     const sql =
@@ -78,7 +78,10 @@ router.get('/activity/:activityId([0-9]+)', (req, res) => {
             res.render('website/activity', { activity });
         });
     });
-});
+};
+
+router.get('/activity/:activityId([0-9]+)', getActivity);
+router.get('/activity/:activityId([0-9]+)/subscribe', getActivity);
 
 router.post('/activity/:activityId([0-9]+)/subscribe', async (req, res) => {
     const activityId = parseInt(req.params.activityId);
