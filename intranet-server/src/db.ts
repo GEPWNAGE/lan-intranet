@@ -61,7 +61,7 @@ db.serialize(() => {
             '(4, ' +
             "'Tournament: Just Dance', " +
             "'Downstairs lounge, Saturday at 23:00', " +
-            '0,' +
+            '1,' +
             "'2019-02-16 23:00:00')",
     );
 
