@@ -88,8 +88,6 @@ router.get('/change-nickname', (req, res) => {
     });
 });
 router.post('/change-nickname', async (req, res) => {
-	console.log(req.body);
-
 	// obtain the new nickname
 	let nick = res.locals.nick;
 	if (req.body.nickname !== undefined && typeof req.body.nickname === "string") {
