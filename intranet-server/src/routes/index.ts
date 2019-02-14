@@ -93,6 +93,9 @@ router.post('/change-nickname', async (req, res) => {
 	if (req.body.nickname !== undefined && typeof req.body.nickname === "string") {
 		nick = req.body.nickname;
     }
+	if (nick.length > 32) {
+	    nick = nick.substr(0, 32);
+    }
     const hostname = res.locals.hostname;
 	const username = getUsername(nick, hostname);
 

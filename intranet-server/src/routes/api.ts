@@ -26,7 +26,11 @@ router.post('/nick', async (req, res) => {
         return;
     }
 
-    const nick: string = req.body.nick;
+    let nick: string = req.body.nick;
+
+    if (nick.length > 32) {
+        nick = nick.substr(0, 32);
+    }
 
     // get the hostname
     const hostname: string = await getHostnameFromIp(req);
