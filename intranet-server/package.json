@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/serve-favicon": "^2.2.30",
     "@types/twig": "^1.12.2",
     "casual": "^1.6.0",
     "cross-env": "^5.2.0",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
+    "serve-favicon": "^2.5.0",
     "socket.io": "^2.2.0",
     "sqlite3": "^4.0.6",
     "ts-node": "^8.0.2",

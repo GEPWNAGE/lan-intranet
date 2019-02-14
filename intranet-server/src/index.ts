@@ -5,6 +5,7 @@ import socketIo from 'socket.io';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import * as twig from 'twig';
+import serveFavicon from 'serve-favicon';
 
 import routes from './routes';
 import apiRoutes from './routes/api';
@@ -18,6 +19,8 @@ const app = express();
 // Express Config
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(serveFavicon(__dirname + "/favicon.ico"));
 
 // Configure views
 app.set('views', path.resolve(__dirname, 'views'));
