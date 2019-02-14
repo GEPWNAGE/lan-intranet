@@ -12,6 +12,7 @@
                 <p>
                 {{ activity.details }}
                 </p>
+                {% if activity.can_subscribe == 1 %}
                 <p>
                 Participants:
                 </p>
@@ -20,10 +21,13 @@
                         <li>{{ subscription.username }}</li>
                     {% endfor %}
                 </ul>
+                {% endif %}
             </div>
+            {% if activity.can_subscribe == 1 %}
             <div class="card-footer">
                 TODO: React-element to subscribe
             </div>
+            {% endif %}
         </div>
 
     </div>
