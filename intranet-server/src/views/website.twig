@@ -18,7 +18,12 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-gepwnage-blue">
         <div class="container">
             <a href="/" class="navbar-brand">
-                GEPWNAGE LAN 2019
+                <img
+                    src="{{ static('static/images/logo.png') }}"
+                    alt="GEPWNAGE"
+                    height="30"
+                    class="d-inline-block align-top mr-2"
+                >GEPWNAGE LAN 2019
             </a>
             <button
                 class="navbar-toggler"
@@ -40,7 +45,10 @@
                         <a class="nav-link" href="/schedule">Schedule</a>
                     </li>
                     <li class="nav-item{{ nav_active == 'competitions' ? ' active' : '' }}">
-                        <a class="nav-link" href="/competitions">Competitions</a>
+                        <a
+                            class="nav-link"
+                            href="/competitions"
+                        >Competitions</a>
                     </li>
                     <li class="nav-item{{ nav_active == 'shoutbox' ? ' active' : '' }}">
                         <a class="nav-link" href="/shoutbox">Shoutbox</a>
