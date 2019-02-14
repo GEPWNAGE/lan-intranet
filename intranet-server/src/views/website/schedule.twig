@@ -11,8 +11,7 @@
                 {% for activity in activities %}
                     <div class="list-group-item">
                         <h5>{{ activity.title }}</h5>
-                        <p class="mb-1">{{ activity.details }}</p>
-                        <a href="/activity/{{ activity.id }}">More info</a>
+                        <p class="mb-0">{{ activity.details }}</p>
                     </div>
                 {% endfor %}
             </div>
