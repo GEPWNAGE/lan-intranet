@@ -6,7 +6,7 @@ import WebsiteShoutboxMessage from './WebsiteShoutboxMessage';
 
 export default function WebsiteShoutbox() {
     return (
-        <div className="card flex-grow-1">
+        <div className="card flex-grow-1" style={{ maxHeight: 600 }}>
             <Shoutbox
                 renderContainer={({ ref, onScroll, children }) => (
                     <div
