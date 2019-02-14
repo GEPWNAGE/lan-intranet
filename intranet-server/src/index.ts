@@ -75,7 +75,7 @@ app.locals.static = function(key: string) {
     const manifest = getManifest();
 
     if (!(key in manifest)) {
-        return null;
+        return ASSETS_URL + key;
     }
 
     return ASSETS_URL + manifest[key];

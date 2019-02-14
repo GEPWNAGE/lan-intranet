@@ -1,0 +1,54 @@
+{% extends "../website.twig" %}
+
+{% set nav_active = 'tournaments' %}
+
+{% block website_main %}
+    <main class="my-4 d-flex flex-column flex-grow-1">
+        <div class="container d-flex flex-column flex-grow-1">
+            <h4 class="mb-sm-0">Tournaments</h4>
+            <div class="row">
+                {% for tournament in tournaments %}
+                    <div class="col-sm-6">
+                        <div class="card mb-3 my-sm-3">
+                            <img
+                                src="{{ static(tournament.header) }}"
+                                alt="{{ tournament.title }}"
+                                class="card-img-top"
+                            >
+                            <div class="card-body border-top">
+                                <div class="row align-items-center">
+                                    <div class="col-auto my-1">
+                                        <h5 class="card-title">{{ tournament.title }}</h5>
+                                        <h6 class="card-subtitle text-muted">
+                                            {{ tournament.details }}
+                                        </h6>
+                                    </div>
+                                    {% if tournament.can_subscribe %}
+                                        <div class="mt-3 mt-sm-0 col-auto flex-shrink-1 ml-sm-auto d-flex flex-sm-column align-items-center">
+                                            <a
+                                                href="/activity/{{ tournament.id }}"
+                                                class="btn btn-outline-primary mr-2 mr-sm-0"
+                                            >
+                                                Join Tournament
+                                            </a>
+                                            <small class="text-muted">
+                                                {{ tournament.num_participants }}
+                                                participant{{ tournament.num_participants == 1 ? '' : 's' }}
+                                            </small>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="card-footer bg-light border-top">
+                                <p class="mb-0">
+                                    {{ tournament.description }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </main>
+{% endblock %}
