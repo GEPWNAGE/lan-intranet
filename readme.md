@@ -50,13 +50,35 @@ To create voucher, use `php artisan voucher:create`.
 
 To list vouchers, use `php artisan voucher:list`.
 
-#### REST API
+### Printing
 
-- [ ] The portal
-- [ ] An API endpoint `POST /vouchers` which allows an API user to create a voucher.
-- [ ] An API endpoint `GET /vouchers` to list all vouchers.
-- [ ] An API endpoint `POST /vouchers/id` to update a voucher.
-- [ ] An API endpoint `DELETE /vouchers/id` to remove a voucher.
+To print the vouchers, execute the following steps, on a computer with latex
+installed (preferably the texlive-full distribution):
+
+1. `php artisan voucher:latex`
+2. `cd resource/latex`
+3. `make`
+4. Print `pages.pdf`
+
+### Importing the list of vouchers on a different machine
+
+The machine on which the portal runs will likely not have latex and it is much
+better to generate the vouchers before the LAN (we don't have a printer at the
+LAN). Thus, we want to transport the voucher list from where we generate them,
+to the actual machine on which the portal runs.
+
+The easiest way to do this, is to simply copy the `database/database.sqlite` to
+the portal machine. We simply hope this works.
+
+Because that may not work, it is also easy to generate a list of vouchers using sqlite:
+
+- `sqlite3 database/database.sqlite ".dump vouchers" > vouchers.sql`
+
+And to import (note that this has to happen on a clean database):
+
+- remove `database/database.sqlite` if it exists
+- `php artisan migrate`
+- `sqlite3 database/database.sqlite < vouchers.sql`
 
 ## UniFi Controller
 
