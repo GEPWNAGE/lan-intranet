@@ -32,7 +32,7 @@ db.serialize(() => {
     db.run(
         'INSERT INTO activities VALUES ' +
             '(1, ' +
-            "'Tournament: Xonotic', " +
+            "'Competition: Xonotic', " +
             "'Main room, Saturday at 12:00', " +
             '1,' +
             "'2019-02-16 12:00:00')",
@@ -41,7 +41,7 @@ db.serialize(() => {
     db.run(
         'INSERT INTO activities VALUES ' +
             '(2, ' +
-            "'Tournament: Keep Talking and Nobody Explodes', " +
+            "'Competition: Keep Talking and Nobody Explodes', " +
             "'Main room stage, Saturday at 16:00', " +
             '1,' +
             "'2019-02-16 16:00:00')",
@@ -59,7 +59,7 @@ db.serialize(() => {
     db.run(
         'INSERT INTO activities VALUES ' +
             '(4, ' +
-            "'Tournament: Just Dance', " +
+            "'Competition: Just Dance', " +
             "'Downstairs lounge, Saturday at 23:00', " +
             '1,' +
             "'2019-02-16 23:00:00')",
@@ -68,7 +68,7 @@ db.serialize(() => {
     db.run(
         'INSERT INTO activities VALUES ' +
             '(5, ' +
-            "'Tournament: Rocket League', " +
+            "'Competition: Rocket League', " +
             "'Main room, Sunday at 12:00', " +
             '1,' +
             "'2019-02-17 12:00:00')",

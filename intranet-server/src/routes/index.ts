@@ -184,18 +184,18 @@ router.post('/change-nickname', async (req, res) => {
     });
 });
 
-router.get('/tournaments', async (req, res) => {
+router.get('/competitions', async (req, res) => {
     try {
         const rows = await dbAll(`
             SELECT a.id, title, details, can_subscribe, COUNT(s.id) as num_participants
             FROM activities a
             LEFT JOIN subscriptions s on a.id = s.activity_id
-            WHERE a.title LIKE 'Tournament%'
+            WHERE a.title LIKE 'Competition%'
             GROUP BY a.id
         `);
 
         // Don't worry, I hate myself too.
-        function getTournamentProps(row: any) {
+        function getCompetitionProps(row: any) {
             if (row.title.includes('Xonotic')) {
                 return {
                     header: 'static/images/xonotic.jpg',
@@ -228,13 +228,13 @@ router.get('/tournaments', async (req, res) => {
             }
         }
 
-        const tournaments = rows.map((row) => ({
+        const competitions = rows.map((row) => ({
             ...row,
-            title: row.title.replace('Tournament: ', ''),
-            ...getTournamentProps(row),
+            title: row.title.replace('Competition: ', ''),
+            ...getCompetitionProps(row),
         }));
 
-        res.render('website/tournaments', { tournaments });
+        res.render('website/competitions', { competitions });
     } catch (err) {
         throw err;
     }
