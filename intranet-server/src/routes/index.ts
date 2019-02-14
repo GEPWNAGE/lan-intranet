@@ -66,14 +66,16 @@ const getActivity = (req: any, res: any) => {
             }
 
             activity.subscriptions = rows.map((s) => ({
-                username:
-                    s.nick === null
-                        ? s.hostname
-                        : s.nick + ' [' + s.hostname + ']',
+                username: getUsername(s.nick, s.hostname),
                 ...s,
             }));
 
-            res.render('website/activity', { activity });
+            // Find out whether the current user is already subscribed
+            const { hostname } = res.locals;
+            const is_subscribed =
+                rows.findIndex((s) => s.hostname === hostname) !== -1;
+
+            res.render('website/activity', { activity, is_subscribed });
         });
     });
 };
@@ -100,34 +102,35 @@ router.post('/activity/:activityId([0-9]+)/subscribe', async (req, res) => {
                     res.locals.hostname,
                 ]);
             } catch (err) {
-                console.log(err);
-                res.render('website/error');
-                return;
+                // Ignore constraint errors (probably unique clause violation)
+                if (err.code !== 'SQLITE_CONSTRAINT') {
+                    console.log(err);
+                    res.render('website/error');
+                    return;
+                }
             }
         }
 
-        const sql =
-            'SELECT s.id, s.hostname, n.nick FROM subscriptions AS s ' +
-            'LEFT JOIN nicknames AS n ON (s.hostname = n.hostname)' +
-            'WHERE s.activity_id = ?';
-        db.all(sql, [activityId], (err, rows) => {
-            if (err !== null) {
-                console.log(err);
-                res.render('website/error');
-                return;
-            }
-
-            activity.subscriptions = rows.map((s) => ({
-                username:
-                    s.nick === null
-                        ? s.hostname
-                        : s.nick + ' [' + s.hostname + ']',
-                ...s,
-            }));
-
-            res.render('website/activity', { activity });
-        });
+        // Return to activity page
+        res.redirect(`/activity/${activityId}`);
     });
+});
+
+router.post('/activity/:activityId([0-9]+)/unsubscribe', async (req, res) => {
+    const activityId = parseInt(req.params.activityId);
+
+    try {
+        await dbRun('DELETE FROM subscriptions AS s WHERE s.activity_id = ? AND s.hostname = ?', [
+            activityId,
+            res.locals.hostname,
+        ]);
+        // Return to activity page
+        res.redirect(`/activity/${activityId}`);
+    } catch (err) {
+        console.log(err);
+        res.render('website/error');
+        return;
+    }
 });
 
 router.get('/change-nickname', (req, res) => {
