@@ -29,6 +29,7 @@ export default function WebsiteShoutboxForm() {
                             type="text"
                             className="form-control"
                             placeholder="Shout something..."
+                            autoFocus
                         />
                     </div>
                     <div className="col-auto">

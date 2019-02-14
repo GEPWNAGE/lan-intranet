@@ -6,10 +6,15 @@ import WebsiteShoutboxMessage from './WebsiteShoutboxMessage';
 
 export default function WebsiteShoutbox() {
     return (
-        <div className="card">
+        <div className="card flex-grow-1">
             <Shoutbox
                 renderContainer={({ ref, onScroll, children }) => (
-                    <div className="card-body" ref={ref} onScroll={onScroll}>
+                    <div
+                        className="card-body overflow-auto"
+                        style={{ flexBasis: 300 }}
+                        ref={ref}
+                        onScroll={onScroll}
+                    >
                         {children}
                     </div>
                 )}
