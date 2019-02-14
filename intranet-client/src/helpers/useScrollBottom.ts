@@ -14,12 +14,18 @@ export function useScrollBottom(
     useEffect(() => {
         if (container.current && isScrolledToBottom.current) {
             const el = container.current;
+            const scrollTop = el.scrollTop + Math.max(scrollBottom(el), 1000);
 
-            el.scrollTo({
-                left: el.scrollLeft,
-                top: el.scrollTop + Math.max(scrollBottom(el), 1000),
-                behavior: smooth ? 'smooth' : 'auto',
-            });
+            if ('scrollTo' in el) {
+                el.scrollTo({
+                    left: el.scrollLeft,
+                    top: scrollTop,
+                    behavior: smooth ? 'smooth' : 'auto',
+                });
+            } else {
+                // @ts-ignore
+                el.scrollTop = scrollTop;
+            }
         }
     });
 
