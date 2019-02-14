@@ -8,17 +8,17 @@ export default function WebsiteShoutboxMessage({
     return (
         <div>
             {!merged && (
-                <header>
-                    <strong>{message.username}</strong>
-                    <span>
+                <header className="mt-2">
+                    <strong>{message.username}</strong>{' '}
+                    <time>
                         {message.time.toLocaleString('nl-NL', {
                             hour: '2-digit',
                             minute: '2-digit',
                         })}
-                    </span>
+                    </time>
                 </header>
             )}
-            <p>{message.body}</p>
+            <p className="mb-0">{message.body}</p>
         </div>
     );
 }

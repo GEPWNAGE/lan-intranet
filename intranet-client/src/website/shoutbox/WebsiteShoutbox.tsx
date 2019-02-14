@@ -10,7 +10,7 @@ export default function WebsiteShoutbox() {
             <Shoutbox
                 renderContainer={({ ref, onScroll, children }) => (
                     <div
-                        className="card-body overflow-auto"
+                        className="card-body overflow-auto pt-2"
                         style={{ flexBasis: 300 }}
                         ref={ref}
                         onScroll={onScroll}
