@@ -69,22 +69,23 @@
     {% block website_content %}
         {% block website_main %}{% endblock %}
         {% block website_footer %}
-            <footer class="bg-light mt-auto py-5">
+            <footer class="bg-light mt-auto py-4 py-sm-5">
                 <div class="container">
                     <div class="row align-items-center">
-                        <div class="col-sm">
+                        <div class="col-sm mb-4 mb-sm-0">
                             <h6>Questions?</h6>
                             Please talk to someone from GEPWNAGE
                         </div>
                         <div class="col-sm">
-                            <div class="d-flex align-items-center justify-content-end">
+                            <div class="row align-items-center justify-content-center justify-content-sm-end">
                                 <img
-                                    class="mr-sm-4"
+                                    class="col-auto mb-4 mb-sm-0"
                                     style="max-width: 200px;"
                                     src="{{ static('static/media/prodrive-logo.svg') }}"
                                     alt="Prodrive Technologies"
                                 >
                                 <img
+                                    class="col-auto"
                                     style="max-width: 180px;"
                                     src="{{ static('static/media/letstalk-logo.png') }}"
                                     alt="Let's Talk"
