@@ -18,14 +18,20 @@
                 </p>
                 <ul>
                     {% for subscription in activity.subscriptions %}
-                        <li>{{ subscription.username }}</li>
+                        <li>{{ subscription.username|e }}</li>
                     {% endfor %}
                 </ul>
                 {% endif %}
             </div>
             {% if activity.can_subscribe == 1 %}
             <div class="card-footer">
-                TODO: React-element to subscribe
+                <form method="post" action="/activity/{{ activity.id }}/subscribe">
+                    <div class="form-row">
+                        <div class="col-auto">
+                            <button class="btn btn-primary">Join</button>
+                        </div>
+                    </div>
+                </form>
             </div>
             {% endif %}
         </div>
