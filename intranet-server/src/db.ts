@@ -37,7 +37,7 @@ db.serialize(() => {
             "'Competition: Xonotic', " +
             "'Main room, Saturday at 12:00', " +
             "'static/images/xonotic.jpg', " +
-            `'Shoot yourself to the top with Xonotic, an addictive
+            `'Shoot yourself to the top with Xonotic 1v1, an addictive
                 arena-style first person shooter with crisp movement
                 and a wide array of weapons. It combines intuitive
                 mechanics with in-your-face action to elevate your
