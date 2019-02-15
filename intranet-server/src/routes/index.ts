@@ -190,51 +190,17 @@ router.post('/change-nickname', async (req, res) => {
 router.get('/competitions', async (req, res) => {
     try {
         const rows = await dbAll(`
-            SELECT a.id, title, details, can_subscribe, COUNT(s.id) as num_participants
+            SELECT a.id, a.title, a.details, a.header, a.description, a.can_subscribe, COUNT(s.id) as num_participants
             FROM activities a
             LEFT JOIN subscriptions s on a.id = s.activity_id
-            WHERE a.title LIKE 'Competition%'
+            WHERE a.can_subscribe = 1
             GROUP BY a.id
+            ORDER BY a.starts_at ASC
         `);
-
-        // Don't worry, I hate myself too.
-        function getCompetitionProps(row: any) {
-            if (row.title.includes('Xonotic')) {
-                return {
-                    header: 'static/images/xonotic.jpg',
-                    description: '???',
-                };
-            } else if (row.title.includes('Just Dance')) {
-                return {
-                    header: 'static/images/just-dance.png',
-                    description: '???',
-                };
-            } else if (row.title.includes('Keep Talking')) {
-                return {
-                    header: 'static/images/keep-talking.png',
-                    description: `
-                        We'll provide the game and bomb defusal manuals. You 
-                        provide a team of 2 to 4 people and a very specific set 
-                        of skills. (Personalized bomb defusal manuals are 
-                        allowed.)
-                    `,
-                };
-            } else if (row.title.includes('Rocket League')) {
-                return {
-                    header: 'static/images/rocket-league.jpg',
-                    description: `
-                        We'll be playing 2v2 soccar matches on a LAN server in a
-                        double-elimination tournament. Please make sure you have
-                        a copy of the game installed on your system!
-                    `,
-                };
-            }
-        }
 
         const competitions = rows.map((row) => ({
             ...row,
-            title: row.title.replace('Competition: ', ''),
-            ...getCompetitionProps(row),
+            title: row.title.replace('Competition: ', '')
         }));
 
         res.render('website/competitions', { competitions });
