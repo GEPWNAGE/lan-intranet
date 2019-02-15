@@ -1,0 +1,28 @@
+{% extends "../website.twig" %}
+
+{% set nav_active = 'welcome' %}
+
+{% block website_main %}
+    <main class="d-flex flex-column flex-grow-1">
+        <div class="d-flex align-items-center flex-grow-1 mb-0 d-flex jumbotron jumbotron-fluid bg-gepwnage-blue text-white">
+            <div class="container">
+                <h1 class="font-weight-light">
+                    <span class="d-inline-block">Welcome</span>
+                    <span class="d-inline-block">to the party!</span>
+                </h1>
+                <p class="lead">
+                    This intranet contains details about the
+                    <a href="/schedule">schedule</a>,
+                    <a href="/competitions">competitions</a>
+                    and a <a href="/shoutbox">shoutbox</a>
+                    to chat with your fellow gamers.
+                </p>
+                <p class="mt-5">
+                    <strong>LAN address:</strong>
+                    <code>{{ hostname }}.gepwnage.lan</code> <br>
+                    <small>Others on the LAN can connect to you via this address.</small>
+                </p>
+            </div>
+        </div>
+    </main>
+{% endblock %}

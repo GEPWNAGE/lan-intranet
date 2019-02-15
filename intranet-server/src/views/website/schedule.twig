@@ -1,0 +1,20 @@
+{% extends "../website.twig" %}
+
+{% set nav_active = 'schedule' %}
+
+{% block website_main %}
+    <main class="my-4">
+        <div class="container">
+            <h4 class="mb-3">Schedule</h4>
+
+            <div class="list-group">
+                {% for activity in activities %}
+                    <div class="list-group-item">
+                        <h5>{{ activity.title }}</h5>
+                        <p class="mb-0">{{ activity.details }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+{% endblock %}

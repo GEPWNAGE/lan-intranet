@@ -109,6 +109,7 @@ the default config uses).
 
 * **Pieter Kokx** - *Initial work* - [kokx](https://github.com/kokx)
 * **Willem Mouwen** - *Initial work* - [wmouwen](https://github.com/wmouwen)
+* **Koen Klaren** - *Intranet* - [Mesoptier](https://github.com/Mesoptier)
 
 See also the list of [contributors](https://github.com/GEPWNAGE/lan/contributors) who participated in this project.
 

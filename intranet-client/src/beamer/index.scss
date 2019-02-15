@@ -1,0 +1,33 @@
+@import 'variables';
+
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:400,600');
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+
+    font: 28px 'Work Sans', sans-serif;
+    color: $text-primary;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+
+    line-height: 1.3;
+    background: $beamer-bg;
+}
+
+#root {
+    display: flex;
+    height: 100%;
+    padding: $panel-margin;
+}
+
+// Helper classes
+.text-secondary {
+    color: $text-secondary;
+}

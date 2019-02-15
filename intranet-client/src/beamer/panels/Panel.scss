@@ -1,0 +1,20 @@
+@import '../variables';
+
+.Panel {
+    flex: 1 1;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+
+    margin: $panel-margin;
+    padding: (0.75 * $panel-padding) $panel-padding;
+
+    background: $panel-bg;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    &__inner {
+    }
+}

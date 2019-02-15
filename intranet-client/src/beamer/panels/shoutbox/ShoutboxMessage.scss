@@ -1,0 +1,50 @@
+@import '../../variables';
+
+.ShoutboxMessage {
+    display: flex;
+    flex-direction: column;
+
+    @keyframes fade-in {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    animation: 500ms ease fade-in;
+
+    // Margin between messages
+    & + & {
+        margin-top: 1em;
+    }
+
+    &--merged {
+        .ShoutboxMessage + & {
+            margin-top: 0;
+        }
+
+        .ShoutboxMessage__header {
+            display: none;
+        }
+    }
+
+    &__header {
+        display: flex;
+        flex-direction: row;
+    }
+
+    &__username {
+        font-weight: 600;
+    }
+
+    &__time {
+        margin-left: 0.5em;
+        color: $text-secondary;
+    }
+
+    &__body {
+        margin: 0;
+    }
+}
