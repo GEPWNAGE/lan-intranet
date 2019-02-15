@@ -33,75 +33,86 @@ db.serialize(() => {
 
     db.run(
         'INSERT INTO activities VALUES ' +
-            '(1, ' +
-            "'Competition: Xonotic', " +
-            "'Main room, Saturday at 12:00', " +
-            "'static/images/xonotic.jpg', " +
-            `'Shoot yourself to the top with Xonotic 1v1, an addictive
+        '(1, ' +
+        "'Official Opening', " +
+        "'Saturday at 0:00', " +
+        "'', " +
+        `'', ` +
+        '0,' +
+        "'2019-02-16 00:00:00')",
+    );
+
+    db.run(
+        'INSERT INTO activities VALUES ' +
+        '(2, ' +
+        "'Competition: Xonotic', " +
+        "'Main room, Saturday at 12:00', " +
+        "'static/images/xonotic.jpg', " +
+        `'Shoot yourself to the top with Xonotic 1v1, an addictive
                 arena-style first person shooter with crisp movement
                 and a wide array of weapons. It combines intuitive
                 mechanics with in-your-face action to elevate your
                 heart rate. BEST OF ALL IT''S FREE.', ` +
-            '1,' +
-            "'2019-02-16 12:00:00')",
+        '1,' +
+        "'2019-02-16 12:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
-            '(2, ' +
-            "'Competition: Keep Talking and Nobody Explodes', " +
-            "'Main room stage, Saturday at 16:00', " +
-            "'static/images/keep-talking.png', " +
-            `'We will provide the game and bomb defusal manuals. You
+        '(3, ' +
+        "'Competition: Keep Talking and Nobody Explodes', " +
+        "'Main room stage, Saturday at 16:00', " +
+        "'static/images/keep-talking.png', " +
+        `'We will provide the game and bomb defusal manuals. You
                 provide a team of 2 to 4 people and a very specific set
                 of skills. (Personalized bomb defusal manuals are
                 allowed.)', ` +
-            '1,' +
-            "'2019-02-16 16:00:00')",
+        '1,' +
+        "'2019-02-16 16:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
-            '(3, ' +
-            "'Dinner: Fries & Snacks', " +
-            "'Courtyard, Saturday at 19:00', " +
-            "'', " +
-            "'', " +
-            '0,' +
-            "'2019-02-16 19:00:00')",
+        '(4, ' +
+        "'Dinner: Fries & Snacks', " +
+        "'Courtyard, Saturday at 19:00', " +
+        "'', " +
+        "'', " +
+        '0,' +
+        "'2019-02-16 19:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
-            '(4, ' +
-            "'Competition: Just Dance', " +
-            "'Downstairs lounge, Saturday at 23:00', " +
-            "'static/images/just-dance.png', " +
-            `'Show off your dance moves with Just Dance 2019, the ultimate
+        '(5, ' +
+        "'Competition: Just Dance', " +
+        "'Downstairs lounge, Saturday at 23:00', " +
+        "'static/images/just-dance.png', " +
+        `'Show off your dance moves with Just Dance 2019, the ultimate
                 party game with 40 hot tracks from chart-topping hits to
                 family favorites, including "Finesse (Remix)" by Bruno
                 Mars Ft. Cardi B., "Bang Bang Bang" by BIGBANG,
                 "Shaky Shaky" by Daddy Yankee and more!', ` +
-            '1,' +
-            "'2019-02-16 23:00:00')",
-    );
-
-    db.run(
-        'INSERT INTO activities VALUES ' +
-            '(5, ' +
-            "'Competition: Rocket League', " +
-            "'Main room, Sunday at 12:00', " +
-            "'static/images/rocket-league.jpg', " +
-            `'You will be playing 2v2 soccar matches on a LAN server in a
-                double-elimination tournament. Please make sure you have
-                a copy of the game installed on your system!', ` +
-            '1,' +
-            "'2019-02-17 12:00:00')",
+        '1,' +
+        "'2019-02-16 23:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(6, ' +
+        "'Competition: Rocket League', " +
+        "'Main room, Sunday at 12:00', " +
+        "'static/images/rocket-league.jpg', " +
+        `'You will be playing 2v2 soccar matches on a LAN server in a
+                double-elimination tournament. Please make sure you have
+                a copy of the game installed on your system!', ` +
+        '1,' +
+        "'2019-02-17 12:00:00')",
+    );
+
+    db.run(
+        'INSERT INTO activities VALUES ' +
+        '(7, ' +
         "'End of the LAN', " +
         "'Sunday at 16:00', " +
         "'static/images/rocket-league.jpg', " +
@@ -127,7 +138,7 @@ db.serialize(() => {
 
     // set the activities sequence correctly
     db.run('DELETE FROM sqlite_sequence');
-    db.run("INSERT INTO sqlite_sequence VALUES ('activities', 5)");
+    db.run("INSERT INTO sqlite_sequence VALUES ('activities', 7)");
 
     db.run('COMMIT');
 });
