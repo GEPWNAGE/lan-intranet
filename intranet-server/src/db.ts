@@ -92,7 +92,7 @@ db.serialize(() => {
             "'Competition: Rocket League', " +
             "'Main room, Sunday at 12:00', " +
             "'static/images/rocket-league.jpg', " +
-            `'You will be playing 2v2 soccer matches on a LAN server in a
+            `'You will be playing 2v2 soccar matches on a LAN server in a
                 double-elimination tournament. Please make sure you have
                 a copy of the game installed on your system!', ` +
             '1,' +
