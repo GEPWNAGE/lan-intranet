@@ -30,6 +30,7 @@ export default function WebsiteShoutboxForm() {
                             className="form-control"
                             placeholder="Shout something..."
                             autoFocus
+                            maxLength={128}
                         />
                     </div>
                     <div className="col-auto">

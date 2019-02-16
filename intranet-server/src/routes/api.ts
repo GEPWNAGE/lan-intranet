@@ -180,6 +180,14 @@ router.post(
 );
 
 async function sendMessage(hostname: string, body: string, time = new Date()) {
+    // Disallow empty messages
+    if (body.length === 0) {
+        return;
+    }
+
+    // Cut-off long messages
+    body = body.substring(0, 128);
+
     // save the message in the database
     const sql =
         'INSERT INTO shoutbox (id, hostname, body, sent_at) VALUES (NULL, ?, ?, ?)';
