@@ -12,11 +12,12 @@ export default function PanelGroup({
     children,
     direction,
     flex,
+    style,
 }: PanelGroupProps) {
     return (
         <div
             className={cx('PanelGroup', `PanelGroup--${direction}`)}
-            style={{ flex }}
+            style={{ flex, ...style }}
         >
             {children}
         </div>

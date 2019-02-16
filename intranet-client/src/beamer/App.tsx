@@ -19,7 +19,7 @@ export default function App() {
                         <ActivityPanel />
                     </PanelGroup>
                 </PanelGroup>
-                <ShoutboxPanel flex="3 1" />
+                <ShoutboxPanel flex="0 0 auto" style={{ width: '36vw' }} />
             </PanelGroup>
         </SocketProvider>
     );

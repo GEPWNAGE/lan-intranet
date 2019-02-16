@@ -8,7 +8,7 @@ export default function TimePanel() {
     const [time] = useTime();
 
     return (
-        <Panel flex="0 0 330px" style={{ justifyContent: 'center' }}>
+        <Panel flex="0 0 230px" style={{ justifyContent: 'center' }}>
             <div className="Time">
                 <div className="Time__time">
                     {/* nl-NL to ensure 24 hour time formatting */}
