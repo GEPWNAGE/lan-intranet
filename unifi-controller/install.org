@@ -13,17 +13,19 @@ Most of the configuration takes place on the Unifi controller.
 
 We run the controller ourselves on Debian, with the Unifi controller software installed.
 ** Network configuration
-As seen in the Network Map, the UniFi USG has two ports. We use LAN2 for the 'Corporate' network,
-without captive portal. And we use LAN1 for the 'Guest' network.
+As seen in the Network Map, the UniFi USG has two LAN ports. We use LAN2 for the
+'Corporate' network, without captive portal. And we use LAN1 for the 'Guest'
+network.
 
-Everyone, except for the controller and select circumstances, is in the LAN1 'Guest' network. Which,
-by default, blocks all network access except for allowed users.
+Everyone, except for the controller and select circumstances, is in the LAN1
+'Guest' network. Which, by default, blocks all network access except for allowed
+users. Users will be allowed when the authenticate with a voucher.
 
 Note that we will also put devices such as a steam cache in the LAN1 network.
 These instances should NOT be put in the LAN2 network, because the connection
-between the LAN1 and LAN2 ports on the USG is not very high-bandwith (there
-is no good switching hardware there). About the only reason to put hardware
-in the LAN2 network, is debugging.
+between the LAN1 and LAN2 ports on the USG is not very high-bandwith (there is
+no good switching hardware there). About the only reason to put hardware in the
+LAN2 network, is debugging.
 ** Theory of operation
 *** Participant flow
 
@@ -64,6 +66,9 @@ directory of the SD-card.
 SSH-ing in, the default username and password for Raspbian are ~pi~ and
 ~raspberry~. *Do not forget to change this!*
 
+An option is to create a different user using ~adduser~ and remove the pi user
+using ~sudo deluser pi~.
+
 Also, make sure that SSH will start in the future, by executing ~sudo systemctl enable ssh~
 
 Set the hostname to ~controller~ using:
@@ -71,6 +76,8 @@ Set the hostname to ~controller~ using:
 #+BEGIN_SRC sh
 echo "controller" | sudo tee /etc/hostname
 #+END_SRC
+
+And edit ~/etc/hosts~ and change the hostname there as well.
 
 Note that we will not setup a static IP address. During the setup, we can find
 the controller IP using ~nmap~. Later we will set an IP address for the
@@ -86,7 +93,7 @@ sudo curl -o /etc/apt/trusted.gpg.d/unifi-repo.gpg https://dl.ubnt.com/unifi/uni
 Install the controller:
 #+BEGIN_SRC sh
 sudo apt update
-sudo apt install unifi
+sudo apt install openjdk-8-jre-headless unifi
 sudo apt upgrade # so we also install all debian updates
 #+END_SRC
 
@@ -98,6 +105,18 @@ factory default USG IP range, if this has been changed, use that IP range).
 The controller will have ports 8080 and 8443 active. You should navigate to
 https://<controller-ip>:8443 in your browser and accept the certificate to
 continue to the setup.
+**** UniFi setup
+When the setup runs, choose ~GEPWNAGE LAN~ as the controller name.
+
+In the second step, choose advanced setup. Disable cloud access and using the
+ubiquity account for local access. Instead, create a user on the controller
+itself.
+
+During WiFi setup, choose ~GEPWNAGE LAN~ as SSID with the correct password.
+
+You can immediately adopt the USG at the end of the setup.
+
+Most other settings can be left at defaults, but check them to be sure.
 **** First stage settings
 In the first stage, the controller should be connected to the LAN1 port of the
 USG. We want to move it to the LAN2 port. Thus, we create a new network.
@@ -114,27 +133,9 @@ Leave all other settings to their defaults.
 
 Save and wait until the USG has finished provisioning (can take a few minutes)
 and move the controller to the WAN 2 / LAN 2 port.
-**** Second stage settings
-After the controller is reconnected, find it again using ~nmap 10.13.42.0/24~
-and connect to it. This assumes that the current computer is connected on the
-LAN1 port and the controller on the LAN2 port.
-
-We change the network on the LAN1 port:
-
-| Name             | GEPWNAGE LAN       |                                                 |
-| Purpose          | Corporate          | Note: this will become Guest later, but not yet |
-| Network Group    | LAN                |                                                 |
-| Port             | LAN1               |                                                 |
-| Gateway / Subnet | 10.13.37.1/24      | Note: click update DHCP range when asked        |
-| Domain Name      | admin.gepwnage.lan |                                                 |
-| DHCP Mode        | DHCP Server        |                                                 |
-
-Leave all other settings to their defaults.
-
-Again, save and wait for provisioning.
 **** Setup DNS and fixed IP for controller
 Go to Clients and select the controller. Under Configuration > Network, set Use
-fixed IP address and give it the IP address ~10.13.42.3~.
+fixed IP address and give it the IP address ~10.13.42.3~ in the Admin network.
 
 Using SSH on the controller, edit
 ~/usr/lib/unifi/data/sites/default/config.gateway.json~ (create the directories
@@ -158,7 +159,28 @@ if they don't exist) and configure as follows for static DNS:
 
 Then force provision the USG by going to Devices, select the USG and go to
 Config, under manage device click the Provision button under Force provision.
-**** TODO Create an (API) user on the controller for the portal
+**** Second stage settings
+After the controller is reconnected, find it again using ~nmap 10.13.42.0/24~
+and connect to it. This assumes that the current computer is connected on the
+LAN1 port and the controller on the LAN2 port.
+
+We change the network on the LAN1 port:
+
+| Name             | GEPWNAGE LAN  |                                                 |
+| Purpose          | Corporate     | Note: this will become Guest later, but not yet |
+| Network Group    | LAN           |                                                 |
+| Port             | LAN1          |                                                 |
+| Gateway / Subnet | 10.13.37.1/24 | Note: click update DHCP range when asked        |
+| Domain Name      | gepwnage.lan  |                                                 |
+| DHCP Mode        | DHCP Server   |                                                 |
+
+Leave all other settings to their defaults.
+
+Again, save and wait for provisioning.
+**** Create an (API) user on the controller for the portal
+Under Settings > Admins, add a new admin. Manually set and share the password.
+Generate a secure password somehow. Should not be read-only, and does not need
+additional permissions.
 *** Install the portal
 First install all requirements:
 
@@ -172,7 +194,7 @@ Clone this repository to ~/var/www/lan~:
 #+BEGIN_SRC sh
 cd /var/www
 sudo chown -R www-data:www-data .
-sudo git clone https://github.com/gepwnage/lan
+sudo -u www-data git clone https://github.com/gepwnage/lan.git
 #+END_SRC
 
 Go into the portal directory, configure the environment and install dependencies:
@@ -199,8 +221,8 @@ changes:
 
 - Change the root to ~/var/www/lan/portal/public~
 - Add ~index.php~ to the index list
-- Uncomment the PHP FastCGI section (except for the TCP socket line).
 - In the ~try_files~ directive under ~location /~ change ~=404~ to ~/index.php?$query_string~
+- Uncomment the PHP FastCGI section (except for the TCP socket line).
 
 Edit the nginx config file ~/etc/nginx/snippets/fastcgi-php.conf~ and change the
 ~try_files~ directive. Replace ~=404~ with ~/index.php~.
@@ -213,8 +235,8 @@ sudo nginx -t
 sudo systemctl restart php7.3-fpm nginx
 #+END_SRC
 
-Now going to http://<controller-ip> should show the GEPWNAGE portal. Make sure
-that it is not just waiting for data. It should also show client details.
+Now going to http://portal.gepwnage.lan should show the GEPWNAGE portal. Make
+sure that it is not just waiting for data. It should also show client details.
 *** UniFi Captive Portal configuration
 Under Guest Control, check ~Enable Guest Portal~. Under Authentication, select
 ~External portal server~ and set the IP address to ~10.13.42.3~. Set Redirect
