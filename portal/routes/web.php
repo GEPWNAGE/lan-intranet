@@ -17,7 +17,7 @@ Route::post('/authenticate', 'PortalController@authenticate')->name('authenticat
 
 Route::get('/status', 'PortalController@status')->name('status');
 
-Route::get('/admin', 'Admin\IndexController@home')->name('admin home');
+Route::get('/admin', 'Admin\IndexController@home')->name('admin home')->middleware('auth');
 
 Auth::routes([
     'register' => false,
