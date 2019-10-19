@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Voucher;
 
 class IndexController extends Controller
 {
 
     public function home()
     {
-        return view('admin.index');
+        $vouchers = Voucher::all();
+        return view('admin.index', [
+            'vouchers' => $vouchers
+        ]);
     }
 }
