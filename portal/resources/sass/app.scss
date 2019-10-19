@@ -84,9 +84,10 @@ header {
 }
 
 body.admin {
-  background-color: $white;
+  background-color: $body-bg;
+  color: $darkgrey;
 }
 
 nav.navbar {
-    background-color: $lightgrey;
+  background-color: $lightgrey;
 }
