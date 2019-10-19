@@ -82,3 +82,11 @@ header {
     transform: rotate(360deg);
   }
 }
+
+body.admin {
+  background-color: $white;
+}
+
+nav.navbar {
+    background-color: $lightgrey;
+}
