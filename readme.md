@@ -7,8 +7,8 @@ GEPWNAGE LAN Party System
 Checklist of what has to be done for the network setup:
 
 1. Connect the internet to the UniFi USG (internet port)
-2. Setup the controller (Note: port LAN 1 of the USG)
-3. Connect core switch to the USG (Note: port LAN 2 of the USG)
+2. Setup the controller (Note: port LAN 2 of the USG)
+3. Connect core switch to the USG (Note: port LAN 1 of the USG)
 4. Setup the intranet website / beamer machine
 5. Verify the above
 6. Install other switches in the room
