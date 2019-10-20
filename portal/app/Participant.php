@@ -11,4 +11,12 @@ use Illuminate\Database\Eloquent\Model;
 class Participant extends Model
 {
     public $timestamps = false;
+
+    /**
+     * Get all vouchers for this participant.
+     */
+    public function vouchers()
+    {
+        return $this->hasMany(Voucher::class);
+    }
 }
