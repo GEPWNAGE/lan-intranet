@@ -26,6 +26,9 @@ Route::get('/admin/participants', 'Admin\ParticipantController@list')
 Route::get('/admin/participants/{participant}', 'Admin\ParticipantController@show')
     ->name('participant.show')
     ->middleware('auth');
+Route::post('/admin/participants/{participant}', 'Admin\ParticipantController@addVoucher')
+    ->name('participant.addvoucher')
+    ->middleware('auth');
 
 Auth::routes([
     'register' => false,

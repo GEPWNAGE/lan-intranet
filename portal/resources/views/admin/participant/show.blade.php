@@ -5,21 +5,35 @@
 <div class="container">
     <h1>{{$participant->name}}</h1>
 
-    <h3>Vouchers with MAC addresses</h3>
+    <form method="post" action="{{ route('participant.addvoucher', ['participant' => $participant]) }}">
+        @csrf
+        <div class="row">
+            <div class="form-group col">
+                <input type="number" class="form-control" id="voucher-id" name="voucher-id" placeholder="Voucher ID">
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-success">Add voucher</button>
+            </div>
+        </div>
+    </form>
+
+    <h3>Vouchers</h3>
     <table class="table">
         <thead>
             <tr>
                 <th>#</th>
                 <th>Key</th>
                 <th>MAC</th>
+                <th>Used At</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($participant->vouchers() as $voucher)
+            @foreach ($participant->vouchers()->get() as $voucher)
                 <tr>
                     <td>{{$voucher->id}}</td>
                     <td>{{$voucher->key}}</td>
                     <td>{{$voucher->mac}}</td>
+                    <td>{{$voucher->used_at}}</td>
                 </tr>
             @endforeach
         </tbody>

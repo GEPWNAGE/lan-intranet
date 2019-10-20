@@ -19,6 +19,7 @@ class CreateParticipantsTable extends Migration
         });
 
         Schema::table('vouchers', function (Blueprint $table) {
+            $table->integer('participant_id')->nullable();
             $table->foreign('participant_id')->references('id')->on('participants');
         });
     }
