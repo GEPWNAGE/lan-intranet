@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container">
+<div class="container" id="participant-search" data-participants='{!! json_encode($participants) !!}'>
     <table class="table">
         <thead>
             <tr>
