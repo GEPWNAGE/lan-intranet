@@ -50,6 +50,7 @@ class PortalController extends Controller
         $this->unifi->authorize_guest($client->mac, 0);
 
         $voucher->used_at = now();
+        $voucher->mac = $client->mac;
         $voucher->save();
 
         return $this->status();

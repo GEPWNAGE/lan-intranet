@@ -7,6 +7,7 @@
             <tr>
                 <th>#</th>
                 <th>Key</th>
+                <th>MAC</th>
                 <th>Used At</th>
             </tr>
         </thead>
@@ -15,6 +16,7 @@
                 <tr>
                     <td>{{$voucher->id}}</td>
                     <td>{{$voucher->key}}</td>
+                    <td>{{$voucher->mac}}</td>
                     <td>{{$voucher->used_at}}</td>
                 </tr>
             @endforeach
