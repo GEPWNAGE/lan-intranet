@@ -5,13 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Voucher;
 
-class IndexController extends Controller
+class VoucherController extends Controller
 {
 
-    public function home()
+    public function list()
     {
         $vouchers = Voucher::all();
-        return view('admin.index', [
+        return view('admin.voucher.list', [
             'vouchers' => $vouchers
         ]);
     }

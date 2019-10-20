@@ -17,7 +17,7 @@ Route::post('/authenticate', 'PortalController@authenticate')->name('authenticat
 
 Route::get('/status', 'PortalController@status')->name('status');
 
-Route::get('/admin', 'Admin\IndexController@home')->name('admin home')->middleware('auth');
+Route::get('/admin', 'Admin\VoucherController@list')->name('voucher list')->middleware('auth');
 
 Auth::routes([
     'register' => false,
