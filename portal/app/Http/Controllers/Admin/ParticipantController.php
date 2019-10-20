@@ -15,4 +15,11 @@ class ParticipantController extends Controller
             'participants' => Participant::all()
         ]);
     }
+
+    public function show(Participant $participant)
+    {
+        return view('admin.participant.show', [
+            'participant' => $participant
+        ]);
+    }
 }

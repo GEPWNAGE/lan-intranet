@@ -7,6 +7,7 @@
             <tr>
                 <th>#</th>
                 <th>Name</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -14,6 +15,9 @@
                 <tr>
                     <td>{{$participant->id}}</td>
                     <td>{{$participant->name}}</td>
+                    <td><a class="btn btn-primary btn-sm" href="{{ route('participant.show', ['participant' => $participant]) }}">
+                        Show
+                    </a></td>
                 </tr>
             @endforeach
         </tbody>
