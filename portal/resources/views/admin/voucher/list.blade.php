@@ -9,6 +9,7 @@
                 <th>Key</th>
                 <th>MAC</th>
                 <th>Used At</th>
+                <th>Participant</th>
             </tr>
         </thead>
         <tbody>
@@ -18,6 +19,12 @@
                     <td>{{$voucher->key}}</td>
                     <td>{{$voucher->mac}}</td>
                     <td>{{$voucher->used_at}}</td>
+                    <td>
+                        @if ($voucher->participant !== null)
+                            <a href="{{route('participant.show', ['participant' => $voucher->participant])}}">
+                            {{$voucher->participant->name}}
+                        @endif
+                    </td>
                 </tr>
             @endforeach
         </tbody>

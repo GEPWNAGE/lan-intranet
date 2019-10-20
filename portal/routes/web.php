@@ -21,7 +21,7 @@ Route::get('/admin', 'Admin\VoucherController@list')
     ->name('voucher list')
     ->middleware('auth');
 Route::get('/admin/participants', 'Admin\ParticipantController@list')
-    ->name('participant list')
+    ->name('participant.list')
     ->middleware('auth');
 Route::get('/admin/participants/{participant}', 'Admin\ParticipantController@show')
     ->name('participant.show')

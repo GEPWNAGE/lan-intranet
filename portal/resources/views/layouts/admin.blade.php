@@ -30,7 +30,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('participant list') }}">
+                            <a class="nav-link" href="{{ route('participant.list') }}">
                                 Participants
                             </a>
                         </li>
