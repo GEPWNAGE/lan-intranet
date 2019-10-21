@@ -34,6 +34,11 @@
                                 Participants
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('voucher.clients') }}">
+                                Clients
+                            </a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

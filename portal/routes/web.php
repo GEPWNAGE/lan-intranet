@@ -20,6 +20,9 @@ Route::get('/status', 'PortalController@status')->name('status');
 Route::get('/admin', 'Admin\VoucherController@list')
     ->name('voucher list')
     ->middleware('auth');
+Route::get('/admin/clients', 'Admin\VoucherController@clients')
+    ->name('voucher.clients')
+    ->middleware('auth');
 Route::get('/admin/participants', 'Admin\ParticipantController@list')
     ->name('participant.list')
     ->middleware('auth');
