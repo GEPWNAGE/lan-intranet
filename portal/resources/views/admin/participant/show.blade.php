@@ -38,5 +38,13 @@
             @endforeach
         </tbody>
     </table>
+
+    @if (isset($updateNames))
+        Names updated.
+    @endif
+    <form method="post" action="{{ route('participant.names', ['participant' => $participant])  }}">
+        @csrf
+        <button type="submit" class="btn btn-primary">Update Names in Controller</button>
+    </form>
 </div>
 @endsection

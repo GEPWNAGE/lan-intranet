@@ -65,7 +65,7 @@ class PortalController extends Controller
         }
     }
 
-    private function getStatusObject() :array
+    private function getStatusObject() : array
     {
         $client = (array)$this->getClient();
 
