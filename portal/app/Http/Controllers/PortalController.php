@@ -53,6 +53,13 @@ class PortalController extends Controller
         $voucher->mac = $client->mac;
         $voucher->save();
 
+        // also attempt to update the name in the controller
+        $participant = $voucher->participant()->get();
+        if (count($participant) > 0) {
+            $participant = $participant[0];
+            $this->unifi->set_sta_name($client->user_id, $participant->name);
+        }
+
         return $this->status();
     }
 
