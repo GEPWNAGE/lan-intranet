@@ -9,7 +9,7 @@
         @csrf
         <div class="row">
             <div class="form-group col">
-                <input type="number" class="form-control" id="voucher-id" name="voucher-id" placeholder="Voucher ID">
+                <input type="number" class="form-control" id="voucher-id" name="voucher-id" placeholder="Voucher ID" autofocus>
             </div>
             <div class="col">
                 <button type="submit" class="btn btn-success">Add voucher</button>
