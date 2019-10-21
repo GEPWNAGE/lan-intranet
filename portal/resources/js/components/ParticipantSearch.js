@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
 const ParticipantRow = props => (
@@ -15,26 +15,42 @@ const ParticipantRow = props => (
     </tr>
 );
 
+const SearchBar = props => (
+    <input className="form-control"
+           value={props.value}
+           onChange={props.onChange}
+           placeholder="Search"
+           autoFocus/>
+);
+
 const ParticipantSearch = props => {
+    const [search, setSearch] = useState('');
+
     const participants = JSON.parse(props.participants);
 
-    const participantList = participants.map(
+    const participantList = participants.filter(
+        participant => search == '' || participant.name.toLowerCase().match(search)
+    ).map(
         participant => <ParticipantRow key={participant.id} url={props.url} participant={participant} />
     );
 
     return (
-        <table className="table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {participantList}
-          </tbody>
-        </table>
+        <div>
+          <SearchBar value={search} onChange={e => setSearch(e.target.value.toLowerCase())}/>
+          <br/>
+          <table className="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {participantList}
+            </tbody>
+          </table>
+        </div>
     );
 };
 
