@@ -1,7 +1,11 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container" id="participant-search" data-participants='{!! json_encode($participants) !!}'>
+<div
+    class="container"
+    id="participant-search"
+    data-url={{ route('participant.show', ['participant' => '_participant_'])  }}
+    data-participants='{!! json_encode($participants) !!}'>
     <table class="table">
         <thead>
             <tr>

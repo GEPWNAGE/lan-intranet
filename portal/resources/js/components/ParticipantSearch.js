@@ -1,15 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const ParticipantSearch = data => {
-    const participants = JSON.parse(data.participants);
+const ParticipantRow = props => (
+    <tr>
+      <td>{props.participant.id}</td>
+      <td>{props.participant.name}</td>
+      <td>
+        <a
+          href={props.url.replace('_participant_', props.participant.id)}
+          className="btn btn-primary">
+          Show
+        </a>
+      </td>
+    </tr>
+);
+
+const ParticipantSearch = props => {
+    const participants = JSON.parse(props.participants);
 
     const participantList = participants.map(
-        participant => <tr key={participant.id}>
-                         <td>{participant.id}</td>
-                         <td>{participant.name}</td>
-                         <td>TODO: Action</td>
-                       </tr>
+        participant => <ParticipantRow key={participant.id} url={props.url} participant={participant} />
     );
 
     return (
