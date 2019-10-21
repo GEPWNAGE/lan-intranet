@@ -46,6 +46,7 @@ const ParticipantSearch = props => {
                          selected={selected == num++} />
     );
 
+    // move the caret or go to the page of the participant
     const changeSelected = e => {
         if (e.key == 'ArrowUp' && selected > 0) {
             setSelected(selected - 1);
@@ -61,6 +62,7 @@ const ParticipantSearch = props => {
             window.location.href = props.url.replace('_participant_', participant.id)
         }
     };
+    // search for the participant, reset the caret
     const changeSearch = e => {
         setSelected(0);
         setSearch(e.target.value.toLowerCase());
@@ -73,7 +75,7 @@ const ParticipantSearch = props => {
             onChange={changeSearch}
             onKeyUp={changeSelected}/>
           <br/>
-          <table className="table table-hover">
+          <table className="table">
             <thead>
               <tr>
                 <th style={{width: '32px'}}/>
