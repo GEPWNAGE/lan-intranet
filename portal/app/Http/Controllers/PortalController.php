@@ -47,7 +47,10 @@ class PortalController extends Controller
             return $this->status();
         }
 
-        $this->unifi->authorize_guest($client->mac, 0);
+        // TODO: configuration of duration
+        // we assume we are running a weekend long, 3 days
+        $minutes = 60*24*3;
+        $this->unifi->authorize_guest($client->mac, $minutes);
 
         $voucher->used_at = now();
         $voucher->mac = $client->mac;
