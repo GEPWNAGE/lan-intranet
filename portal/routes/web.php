@@ -17,24 +17,24 @@ Route::post('/authenticate', 'PortalController@authenticate')->name('authenticat
 
 Route::get('/status', 'PortalController@status')->name('status');
 
-Route::get('/admin', 'Admin\VoucherController@list')
-    ->name('voucher list')
-    ->middleware('auth');
-Route::get('/admin/clients', 'Admin\VoucherController@clients')
-    ->name('voucher.clients')
-    ->middleware('auth');
-Route::get('/admin/participants', 'Admin\ParticipantController@list')
-    ->name('participant.list')
-    ->middleware('auth');
-Route::get('/admin/participants/{participant}', 'Admin\ParticipantController@show')
-    ->name('participant.show')
-    ->middleware('auth');
-Route::post('/admin/participants/{participant}', 'Admin\ParticipantController@addVoucher')
-    ->name('participant.addvoucher')
-    ->middleware('auth');
-Route::post('/admin/participants/{participant}/names', 'Admin\ParticipantController@updateNames')
-    ->name('participant.names')
-    ->middleware('auth');
+Route::group([
+    'prefix' => '/admin',
+    'middleware' => 'auth',
+], function () {
+    Route::get('', 'Admin\VoucherController@list')
+        ->name('voucher list');
+    Route::get('/clients', 'Admin\VoucherController@clients')
+        ->name('voucher.clients');
+    Route::get('/participants', 'Admin\ParticipantController@list')
+        ->name('participant.list');
+    Route::get('/participants/{participant}', 'Admin\ParticipantController@show')
+        ->name('participant.show');
+    Route::post('/participants/{participant}', 'Admin\ParticipantController@addVoucher')
+        ->name('participant.addvoucher');
+    Route::post('/participants/{participant}/names', 'Admin\ParticipantController@updateNames')
+        ->name('participant.names');
+});
+
 
 Auth::routes([
     'register' => false,
