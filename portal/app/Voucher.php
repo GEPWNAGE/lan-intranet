@@ -17,4 +17,12 @@ class Voucher extends Model
     protected $dates = [
         'used_at',
     ];
+
+    /**
+     * Get the participant for this voucher.
+     */
+    public function participant()
+    {
+        return $this->belongsTo(Participant::class);
+    }
 }

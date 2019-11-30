@@ -47,10 +47,19 @@ class PortalController extends Controller
             return $this->status();
         }
 
-        $this->unifi->authorize_guest($client->mac, 0);
+        // TODO: configuration of duration
+        // we assume we are running a weekend long, 3 days
+        $minutes = 60*24*3;
+        $this->unifi->authorize_guest($client->mac, $minutes);
 
         $voucher->used_at = now();
+        $voucher->mac = $client->mac;
         $voucher->save();
+
+        // also attempt to update the name in the controller
+        if ($voucher->participant) {
+            $this->unifi->set_sta_name($client->user_id, $voucher->participant->name);
+        }
 
         return $this->status();
     }
@@ -64,7 +73,7 @@ class PortalController extends Controller
         }
     }
 
-    private function getStatusObject() :array
+    private function getStatusObject() : array
     {
         $client = (array)$this->getClient();
 
@@ -97,7 +106,7 @@ class PortalController extends Controller
         }
 
         $clients = array_where($clients, function ($client) {
-            return ($client->ip ?? '') === request()->ip() || ($client->mac ?? '') === "98:54:1b:a2:a4:7c";
+            return ($client->ip ?? '') === request()->ip();
         });
 
         if (empty($clients)) {

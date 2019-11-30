@@ -34,7 +34,7 @@ export default class Auth extends Component {
           <input type="text" id="voucher" placeholder="Voucher" onChange={this.handleVoucher} className={classNames}/>
           {error}
         </div>
-        <button type="submit" className="btn">Sign in</button>
+        <button type="submit" className="btn btn-light">Sign in</button>
       </form>
     )
   }

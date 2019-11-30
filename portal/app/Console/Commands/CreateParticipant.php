@@ -2,25 +2,25 @@
 
 namespace App\Console\Commands;
 
-use App\Voucher;
 use Illuminate\Console\Command;
+use App\Participant;
 
-class ListVouchers extends Command
+class CreateParticipant extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'voucher:list
-        {--available : List only available vouchers}';
+    protected $signature = 'participant:create
+        {name : The name of the participant}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'List all vouchers in the system.';
+    protected $description = 'Create a participant';
 
     /**
      * Create a new command instance.
@@ -39,13 +39,12 @@ class ListVouchers extends Command
      */
     public function handle()
     {
-        $headers = ['Id', 'Voucher', 'MAC', 'Used'];
-        $fields = ['id', 'key', 'mac', 'used_at'];
+        $participant = new Participant();
 
-        $vouchers = $this->option('available')
-            ? Voucher::whereNull('used_at')->get(['key', 'used_at'])
-            : Voucher::all($fields);
+        $participant->name = $this->argument('name');
 
-        $this->table($headers, $vouchers);
+        $participant->save();
+
+        $this->line(sprintf('Participant %s with ID %d created successfully.', $participant->name, $participant->id));
     }
 }
