@@ -33,8 +33,8 @@ After cloning, copy `.env.example` (or `.env.dev-example` for development) to `.
 and apply the credentials. Then run:
 
 ```bash
-# Install PHP dependencies
-composer install
+# Install PHP dependencies (without --no-dev for development)
+composer install --no-dev
 
 # Generate random hash
 php artisan key:generate
