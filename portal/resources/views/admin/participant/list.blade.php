@@ -4,7 +4,7 @@
 <div
     class="container"
     id="participant-search"
-    data-url={{ route('participant.show', ['participant' => '_participant_'])  }}
+    data-url="{{ route('participant.show', ['participant' => '_participant_'])  }}"
     data-participants='@json($participants)'>
     <table class="table">
         <thead>
