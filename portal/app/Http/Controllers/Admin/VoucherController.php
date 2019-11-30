@@ -41,7 +41,7 @@ class VoucherController extends Controller
         $clients = array_map(function ($client) {
             $date = new \DateTime();
             $date->setTimestamp($client->end);
-            $date->setTimezone(new \DateTimeZone('Europe/Amsterdam'));
+            $date->setTimezone(new \DateTimeZone(config('app.timezone')));
             $client->endDate = $date;
             return $client;
         }, $clients);
