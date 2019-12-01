@@ -44,6 +44,7 @@ touch database/database.sqlite
 php artisan migrate
 
 # Compile frontend resources
+npm install
 npm run production
 
 # Create API user (optional)
