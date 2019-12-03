@@ -209,7 +209,7 @@ sudo -u www-data cp .env.example .env
 # edit the .env file, and set the UNIFI_USERNAME and UNIFI_PASSWORD to the API user created earlier
 sudo -u www-data vim .env
 
-sudo -u www-data composer install --no-dev
+sudo -u www-data composer install --no-dev -o
 sudo -u www-data php artisan key:generate
 
 sudo -u www-data touch database/database.sqlite
