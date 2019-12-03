@@ -18,7 +18,8 @@ class Main extends Component {
       state: 'start',
       tries: 0,
       data: {},
-      authError: null
+      authError: null,
+      waiting: false
     };
   }
   checkStatus() {
@@ -27,6 +28,7 @@ class Main extends Component {
         // if request = good, move to next state
         this.setState({
           state: 'loaded',
+          waiting: false,
           data
         })
       })
@@ -44,22 +46,26 @@ class Main extends Component {
   }
   handleAuth(voucher) {
     console.log(voucher);
+    this.setState({ waiting: true });
     api.authenticate(voucher)
       .then(data => {
-        this.setState({ state: 'start' });
+        this.setState({ state: 'start', waiting: true });
         this.checkStatus();
       })
       .catch(err => {
-        this.setState({ authError: err.json.reason });
+        this.setState({ authError: err.json.reason, waiting: false });
       });
   }
   componentDidMount() {
     this.checkStatus();
   }
   render() {
+    if (this.state.waiting) {
+      return <Start type="loading"/>
+    }
     switch (this.state.state) {
       case 'start':
-        return <Start handleStart={this.handleStart}/>;
+        return <Start type="details"/>;
       case 'loaded':
         if (this.state.data.authorized) {
           return (

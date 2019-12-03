@@ -3,6 +3,13 @@ import beer from '../../img/logo_beer.svg';
 
 export default class Start extends Component {
   render() {
+    if (this.props.type == 'loading') {
+      return (
+        <div className="text-center">
+          <img src={beer} className='spin-img mx-auto d-block'/>
+        </div>
+      );
+    }
     return (
       <div className="text-center">
         <img src={beer} className='spin-img mx-auto d-block'/>
