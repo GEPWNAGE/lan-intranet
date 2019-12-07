@@ -73,6 +73,7 @@ class Main extends Component {
               <h2>Welcome to the Internet!</h2>
               <img src={welcome}/>
               <Info data={this.state.data}/>
+              <a href="http://gepwnage.lan" class="btn btn-light">Continue</a>
             </div>
           );
         }
