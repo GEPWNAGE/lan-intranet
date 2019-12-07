@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'PortalController@home')->name('home');
+Route::get('/guest/s/default', 'PortalController@home')->name('home');
 
 Route::post('/authenticate', 'PortalController@authenticate')->name('authenticate');
 
