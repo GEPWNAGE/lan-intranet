@@ -1,19 +1,31 @@
 {% extends "layout.twig" %}
 
 {% block head_links %}
+    {#
     {% for url in entrypoints('beamer', 'css')  %}
         <link rel="stylesheet" href="{{ url }}">
     {% endfor %}
+    #}
 {% endblock %}
 
 {% block body_scripts %}
+    {#
     {% for url in entrypoints('beamer', 'js')  %}
         <script src="{{ url }}"></script>
     {% endfor %}
+    #}
+    <script src="{{ static('static/js/bundle.js') }}"></script>
+    <script src="{{ static('static/js/0.chunk.js') }}"></script>
+    <script src="{{ static('static/js/1.chunk.js') }}"></script>
+    <script src="{{ static('static/js/main.chunk.js') }}"></script>
 {% endblock %}
 
 {% block title %}Beamer - GEPWNAGE LAN{% endblock %}
 
 {% block content %}
     <div id="root"></div>
+{% endblock %}
+
+{% block alternate_html %}
+<html lang="en" id="beamer">
 {% endblock %}

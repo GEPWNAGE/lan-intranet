@@ -88,7 +88,7 @@ export default function useShoutbox(): [Message[]] {
 
         if (socket !== null) {
             socket.on('shoutbox message', callback);
-            return () => socket.off('shoutbox message', callback);
+            socket.off('shoutbox message', callback);
         }
     }, [socket]);
 
