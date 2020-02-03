@@ -7,6 +7,7 @@ import dotenv from 'dotenv';
 import * as twig from 'twig';
 import serveFavicon from 'serve-favicon';
 import proxy from 'express-http-proxy';
+import fetch from 'node-fetch';
 
 import routes from './routes';
 import apiRoutes from './routes/api';
@@ -30,7 +31,11 @@ app.set('view engine', 'twig');
 twig.cache(app.get('view cache') === true);
 
 const CLIENT_DIR = path.resolve(__dirname, '../../intranet-client');
-app.use('/static', express.static(path.resolve(CLIENT_DIR, 'build/static')));
+
+if (app.get('env') === 'production') {
+    // in production, serve from build
+    app.use('/static', express.static(path.resolve(CLIENT_DIR, 'build/static')));
+}
 
 // TODO: Set this only in development (or remove it altogether?)
 app.use(function(req, res, next) {
@@ -46,52 +51,45 @@ app.use(function(req, res, next) {
 app.use('/api', apiRoutes);
 app.use(routes);
 
-
 if (app.get('env') === 'development') {
+    // in development, proxy non-matching requests to webpack server
     app.use('/', proxy('localhost:3000'));
 }
-/*
-const MANIFEST_PATH = path.resolve(CLIENT_DIR, 'webpack.manifest.json');
-//const ASSETS_URL =
-//    app.get('env') === 'production' ? '/' : process.env.WEBPACK_DEV_SERVER_URL;
-const ASSETS_URL = '/';
 
-console.log(MANIFEST_PATH);
+const MANIFEST_PATH = path.resolve(CLIENT_DIR, 'build/asset-manifest.json');
+const MANIFEST_URL = 'http://localhost:3000/asset-manifest.json';
+let MANIFEST = <any>{};
 
-function getManifest(): any {
+// TODO: in dev, automatically reload manifest
+
+async function loadManifest() {
+    if (app.get('env') === 'development') {
+        const res = await fetch(MANIFEST_URL);
+        return await res.json();
+    }
+
     delete require.cache[require.resolve(MANIFEST_PATH)];
     return require(MANIFEST_PATH);
 }
 
-// Function to get entry files of a specific entrypoint
-app.locals.entrypoints = function(key: string, type: string) {
-    const manifest = getManifest();
+// load and set the manifest
+loadManifest().then(manifest => MANIFEST = manifest);
 
-    if (!(key in manifest.entrypoints)) {
-        return [];
-    }
+// we either proxy or serve ourselves
+const ASSETS_URL = '/';
 
-    const entrypoints = manifest.entrypoints[key];
-    if (!(type in entrypoints)) {
-        return [];
-    }
-
-    // Rewrite the urls
-    return entrypoints[type].map((url: string) => ASSETS_URL + url);
-};
+app.locals.entrypoints = function(type: string) {
+    // TODO: compare type with extension
+    return MANIFEST.entrypoints.map((url: string) => ASSETS_URL + url);
+}
 
 app.locals.static = function(key: string) {
-    const manifest = getManifest();
-
-    if (!(key in manifest)) {
-        return ASSETS_URL + key;
+    if (key in MANIFEST.files) {
+        return MANIFEST.files[key]
     }
 
-    return ASSETS_URL + manifest[key];
-};*/
+    return ASSETS_URL + key;
 
-app.locals.static = function(key: string) {
-    return '/' + key;
 }
 
 const server = new Server(app);

@@ -9,15 +9,9 @@
 {% endblock %}
 
 {% block body_scripts %}
-    {#
-    {% for url in entrypoints('beamer', 'js')  %}
+    {% for url in entrypoints('js')  %}
         <script src="{{ url }}"></script>
     {% endfor %}
-    #}
-    <script src="{{ static('static/js/bundle.js') }}"></script>
-    <script src="{{ static('static/js/0.chunk.js') }}"></script>
-    <script src="{{ static('static/js/1.chunk.js') }}"></script>
-    <script src="{{ static('static/js/main.chunk.js') }}"></script>
 {% endblock %}
 
 {% block title %}Beamer - GEPWNAGE LAN{% endblock %}

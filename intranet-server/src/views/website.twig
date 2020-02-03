@@ -1,23 +1,17 @@
 {% extends "layout.twig" %}
 
 {% block head_links %}
-    {#
-    {% for url in entrypoints('website', 'css') %}
+    {# TODO: add this when fixed type comparison in entrypoints
+    {% for url in entrypoints('css') %}
         <link rel="stylesheet" href="{{ url }}">
     {% endfor %}
     #}
 {% endblock %}
 
 {% block body_scripts %}
-    {#
-    {% for url in entrypoints('website', 'js') %}
+    {% for url in entrypoints('js') %}
         <script src="{{ url }}"></script>
     {% endfor %}
-    #}
-    <script src="{{ static('static/js/bundle.js') }}"></script>
-    <script src="{{ static('static/js/0.chunk.js') }}"></script>
-    <script src="{{ static('static/js/1.chunk.js') }}"></script>
-    <script src="{{ static('static/js/main.chunk.js') }}"></script>
 {% endblock %}
 
 {% block title %}Intranet - GEPWNAGE LAN{% endblock %}
