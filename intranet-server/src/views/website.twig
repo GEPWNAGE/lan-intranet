@@ -1,11 +1,9 @@
 {% extends "layout.twig" %}
 
 {% block head_links %}
-    {# TODO: add this when fixed type comparison in entrypoints
     {% for url in entrypoints('css') %}
         <link rel="stylesheet" href="{{ url }}">
     {% endfor %}
-    #}
 {% endblock %}
 
 {% block body_scripts %}

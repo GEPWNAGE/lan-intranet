@@ -78,9 +78,10 @@ loadManifest().then(manifest => MANIFEST = manifest);
 // we either proxy or serve ourselves
 const ASSETS_URL = '/';
 
-app.locals.entrypoints = function(type: string) {
-    // TODO: compare type with extension
-    return MANIFEST.entrypoints.map((url: string) => ASSETS_URL + url);
+app.locals.entrypoints = function(typ: string) {
+    return MANIFEST.entrypoints
+        .filter((url: string) => url.substring(url.length - typ.length, url.length) === typ)
+        .map((url: string) => ASSETS_URL + url);
 }
 
 app.locals.static = function(key: string) {
@@ -89,7 +90,6 @@ app.locals.static = function(key: string) {
     }
 
     return ASSETS_URL + key;
-
 }
 
 const server = new Server(app);
