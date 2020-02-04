@@ -73,7 +73,9 @@ async function loadManifest() {
 }
 
 // load and set the manifest
-loadManifest().then(manifest => MANIFEST = manifest);
+setInterval(() => loadManifest()
+            .then(manifest => MANIFEST = manifest)
+            .catch(error => console.log(error.code, "Asset manifest currently unavailable")), 1000);
 
 // we either proxy or serve ourselves
 const ASSETS_URL = '/';
