@@ -213,4 +213,8 @@ router.get('/shoutbox', (req, res) => {
     res.render('website/shoutbox');
 });
 
+router.get('/challenge', (req, res) => {
+    res.render('website/challenge');
+});
+
 export default router;

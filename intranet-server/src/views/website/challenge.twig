@@ -1,0 +1,36 @@
+{% extends "../website.twig" %}
+
+{% set nav_active = 'challenge' %}
+
+{% block website_content %}
+    <main class="my-4">
+        <div class="container">
+            <h4>Challenge GEPWNAGE</h4>
+            <p class="text-muted">{{ activity.details }}</p>
+
+            <div class="mb-3">
+                TODO: describe Challenge GEPWNAGE
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Game</th>
+                        <th>Current best</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Just Dance</th>
+                        <th>Nadym van Schaik</th>
+                    </tr>
+                    <tr>
+                        <th>F1 2017</th>
+                        <th>Koen Klaren</th>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </main>
+{% endblock %}
