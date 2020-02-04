@@ -49,18 +49,19 @@ class TexVouchers extends Command
             $qb->whereNull('used_at');
         }
 
-        $vouchers = $qb->get(['id', 'key', 'used_at']);
+        $vouchers = $qb->get(['id', 'key', 'participant_id', 'used_at']);
 
         $tex = "";
 
         foreach ($vouchers as $voucher) {
-            $tex .= "\\voucher{{$voucher->id}}{{$voucher->key}}\n";
+            $name = $voucher->participant !== null ? $voucher->participant->name : '';
+            $tex .= "\\voucher{{$voucher->id}}{{$voucher->key}}{{$name}}\n";
         }
 
         file_put_contents("resources/latex/vouchers.tex", $tex);
 
         $this->line("Generated vouchers tex file.");
-        $this->line("Go to the <info>resource/latex</info> directory and execute <info>make</info>");
+        $this->line("Go to the <info>resources/latex</info> directory and execute <info>make</info>");
         $this->line("");
         $this->line("This will generate <info>pages.pdf</info>, which is a printable document of all vouchers.");
         $this->info("Note: pdflatex needs to be installed, with several packages. Recommended distribution is texlive-full.");
