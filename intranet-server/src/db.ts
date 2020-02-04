@@ -94,7 +94,7 @@ db.serialize(() => {
                 Mars Ft. Cardi B., "Bang Bang Bang" by BIGBANG,
                 "Shaky Shaky" by Daddy Yankee and more!', ` +
         '1,' +
-        "'2020-03-07 23:00:00')",
+        "'2020-03-07 23:00:00')"
     );
 
     db.run(
@@ -107,7 +107,7 @@ db.serialize(() => {
                 double-elimination tournament. Please make sure you have
                 a copy of the game installed on your system!', ` +
         '1,' +
-        "'2020-03-08 12:00:00')",
+        "'2020-03-08 12:00:00')"
     );
 
     db.run(
@@ -118,13 +118,13 @@ db.serialize(() => {
         "'static/images/rocket-league.jpg', " +
         `'', ` +
         '0,' +
-        "'2020-03-08 16:00:00')",
+        "'2020-03-08 16:00:00')"
     );
 
     db.run(
         'CREATE TABLE IF NOT EXISTS subscriptions ' +
             '(id integer not null primary key autoincrement, ' +
-            'activity_id inter not null,' +
+            'activity_id integer not null,' +
             'hostname varchar not null,' +
             'FOREIGN KEY (activity_id) REFERENCES activities(id), ' +
             'UNIQUE(activity_id, hostname))',
@@ -136,9 +136,39 @@ db.serialize(() => {
             'nick varchar not null)',
     );
 
-    // set the activities sequence correctly
+    db.run(
+        'CREATE TABLE IF NOT EXISTS challenge ' +
+            '(id integer not null primary key autoincrement, ' +
+            'game varchar not null, ' +
+            'best varchar nut null)'
+    );
+
+    // insert new challenges
+    db.run(
+        'INSERT OR IGNORE INTO challenge VALUES ' +
+        '(1, ' +
+        "'Just Dance', " +
+        "'Nadym van Schaik')"
+    );
+    db.run(
+        'INSERT OR IGNORE INTO challenge VALUES ' +
+        '(2, ' +
+        "'F1 2017', " +
+        "'Koen Klaren')"
+    );
+    db.run(
+        'INSERT OR IGNORE INTO challenge VALUES ' +
+        '(3, ' +
+        "'Super Hexagon', " +
+        "'Mitchel Brunings')"
+    );
+
+
+
+    // set the activities and challenge sequence correctly
     db.run('DELETE FROM sqlite_sequence');
     db.run("INSERT INTO sqlite_sequence VALUES ('activities', 7)");
+    db.run("INSERT INTO sqlite_sequence VALUES ('challenge', 3)");
 
     db.run('COMMIT');
 });

@@ -213,8 +213,9 @@ router.get('/shoutbox', (req, res) => {
     res.render('website/shoutbox');
 });
 
-router.get('/challenge', (req, res) => {
-    res.render('website/challenge');
+router.get('/challenge', async (req, res) => {
+    const challenges = await dbAll("SELECT id, game, best FROM challenge");
+    res.render('website/challenge', { challenges });
 });
 
 export default router;
