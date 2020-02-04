@@ -60,8 +60,6 @@ const MANIFEST_PATH = path.resolve(CLIENT_DIR, 'build/asset-manifest.json');
 const MANIFEST_URL = 'http://localhost:3000/asset-manifest.json';
 let MANIFEST = <any>{};
 
-// TODO: in dev, automatically reload manifest
-
 async function loadManifest() {
     if (app.get('env') === 'development') {
         const res = await fetch(MANIFEST_URL);
@@ -72,10 +70,19 @@ async function loadManifest() {
     return require(MANIFEST_PATH);
 }
 
+function saveManifest() {
+    loadManifest()
+        .then(manifest => MANIFEST = manifest)
+        .catch(error => console.log(error.code, "Asset manifest currently unavailable"))
+}
+
 // load and set the manifest
-setInterval(() => loadManifest()
-            .then(manifest => MANIFEST = manifest)
-            .catch(error => console.log(error.code, "Asset manifest currently unavailable")), 1000);
+if (app.get('env') === 'development') {
+    setInterval(saveManifest, 1000);
+} else {
+    // in production, no need to reload the manifest every second
+    saveManifest();
+}
 
 // we either proxy or serve ourselves
 const ASSETS_URL = '/';
