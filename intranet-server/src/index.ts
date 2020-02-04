@@ -6,7 +6,7 @@ import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import * as twig from 'twig';
 import serveFavicon from 'serve-favicon';
-import proxy from 'express-http-proxy';
+import proxy from 'http-proxy-middleware';
 import fetch from 'node-fetch';
 
 import routes from './routes';
@@ -53,7 +53,7 @@ app.use(routes);
 
 if (app.get('env') === 'development') {
     // in development, proxy non-matching requests to webpack server
-    app.use('/', proxy('localhost:3000'));
+    app.use('/', proxy({ target: 'http://localhost:3000', ws: true }));
 }
 
 const MANIFEST_PATH = path.resolve(CLIENT_DIR, 'build/asset-manifest.json');

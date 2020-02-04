@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@types/express-http-proxy": "^1.5.12",
+    "@types/http-proxy-middleware": "^0.19.3",
     "@types/node-fetch": "^2.5.4",
     "@types/serve-favicon": "^2.2.30",
     "@types/twig": "^1.12.2",
@@ -11,7 +11,7 @@
     "cross-env": "^5.2.0",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
-    "express-http-proxy": "^1.6.0",
+    "http-proxy-middleware": "^0.20.0",
     "node-fetch": "^2.6.0",
     "serve-favicon": "^2.5.0",
     "socket.io": "^2.2.0",
