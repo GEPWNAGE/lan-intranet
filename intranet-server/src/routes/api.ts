@@ -11,12 +11,12 @@ import { ioShoutbox } from '../index';
 const router = Router();
 
 router.get('/nick', async (req, res) => {
-    const hostname = await getHostnameFromIp(req);
-    const nickname = await getNickFromHostname(hostname);
+    const host = await getHostnameFromIp(req);
+    const nickname = await getNickFromHostname(host.name);
 
     res.json({
         nick: nickname,
-        hostname,
+        hostname: host.name,
     });
 });
 
@@ -33,7 +33,7 @@ router.post('/nick', async (req, res) => {
     }
 
     // get the hostname
-    const hostname: string = await getHostnameFromIp(req);
+    const hostname: string = (await getHostnameFromIp(req)).name;
 
     try {
         // check if we already have a username
@@ -97,8 +97,8 @@ router.post('/shoutbox', async (req, res) => {
         return;
     }
 
-    const hostname = await getHostnameFromIp(req);
-    sendMessage(hostname, req.body.body);
+    const host = await getHostnameFromIp(req);
+    sendMessage(host.name, req.body.body);
     res.json('Message sent');
 });
 

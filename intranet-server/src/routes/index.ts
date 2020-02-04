@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import {
+    Hostname,
     getHostnameFromIp,
     getNickFromHostname,
     getUsername,
@@ -9,11 +10,13 @@ import db, { dbAll, dbRun } from '../db';
 const router = Router();
 
 router.use(async (req, res, next) => {
-    const hostname = await getHostnameFromIp(req);
-    const nick = await getNickFromHostname(hostname);
-    const username = getUsername(nick, hostname);
+    const host = await getHostnameFromIp(req);
+    const nick = await getNickFromHostname(host.name);
+    const username = getUsername(nick, host.name);
 
-    res.locals.hostname = hostname;
+    res.locals.hostname = host.name;
+    res.locals.fullHostname = host.full;
+    res.locals.ip = host.ip;
     res.locals.nick = nick;
     res.locals.username = username;
 

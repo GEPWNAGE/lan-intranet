@@ -19,7 +19,13 @@
                 </p>
                 <p class="mt-5">
                     <strong>LAN address:</strong>
-                    <code>{{ hostname }}.gepwnage.lan</code> <br>
+                    <code>
+                        {% if hostname == fullHostname %}
+                            {{ ip }}
+                        {% else %}
+                            {{ fullHostname }}
+                        {% endif %}
+                    </code> <br>
                     <small>Others on the LAN can connect to you via this address.</small>
                 </p>
             </div>
