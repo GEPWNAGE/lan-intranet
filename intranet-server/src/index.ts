@@ -88,13 +88,17 @@ if (app.get('env') === 'development') {
 const ASSETS_URL = '/';
 
 app.locals.entrypoints = function(typ: string) {
+    if (MANIFEST.entrypoints === undefined) {
+        return [];
+    }
+
     return MANIFEST.entrypoints
         .filter((url: string) => url.substring(url.length - typ.length, url.length) === typ)
         .map((url: string) => ASSETS_URL + url);
 }
 
 app.locals.static = function(key: string) {
-    if (key in MANIFEST.files) {
+    if (MANIFEST.files !== undefined && key in MANIFEST.files) {
         return MANIFEST.files[key]
     }
 
