@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import Panel, { PanelProps } from '../Panel';
+import Panel from '../Panel';
 import useTime from './useTime';
 import './TimePanel.scss';
 

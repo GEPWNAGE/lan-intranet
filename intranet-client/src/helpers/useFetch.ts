@@ -18,7 +18,7 @@ export default function useFetch<V>(
         fetch(actualUrl)
             .then(handleResponse)
             .then(setValue);
-    }, [actualUrl, version]);
+    }, [actualUrl, version, handleResponse]);
 
     return value;
 }
