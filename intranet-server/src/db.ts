@@ -39,13 +39,13 @@ db.serialize(() => {
         "'', " +
         `'', ` +
         '0,' +
-        "'2019-02-16 00:00:00')",
+        "'2020-03-07 00:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(2, ' +
-        "'Competition: Xonotic', " +
+        "'Competition: TBA', " +
         "'Main room, Saturday at 12:00', " +
         "'static/images/xonotic.jpg', " +
         `'Shoot yourself to the top with Xonotic 1v1, an addictive
@@ -54,13 +54,13 @@ db.serialize(() => {
                 mechanics with in-your-face action to elevate your
                 heart rate. BEST OF ALL IT''S FREE.', ` +
         '1,' +
-        "'2019-02-16 12:00:00')",
+        "'2020-03-07 12:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(3, ' +
-        "'Competition: Keep Talking and Nobody Explodes', " +
+        "'Competition: TBA', " +
         "'Main room stage, Saturday at 16:00', " +
         "'static/images/keep-talking.png', " +
         `'We will provide the game and bomb defusal manuals. You
@@ -68,7 +68,7 @@ db.serialize(() => {
                 of skills. (Personalized bomb defusal manuals are
                 allowed.)', ` +
         '1,' +
-        "'2019-02-16 16:00:00')",
+        "'2020-03-07 16:00:00')",
     );
 
     db.run(
@@ -79,7 +79,7 @@ db.serialize(() => {
         "'', " +
         "'', " +
         '0,' +
-        "'2019-02-16 19:00:00')",
+        "'2020-03-07 19:00:00')",
     );
 
     db.run(
@@ -94,20 +94,20 @@ db.serialize(() => {
                 Mars Ft. Cardi B., "Bang Bang Bang" by BIGBANG,
                 "Shaky Shaky" by Daddy Yankee and more!', ` +
         '1,' +
-        "'2019-02-16 23:00:00')",
+        "'2020-03-07 23:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(6, ' +
-        "'Competition: Rocket League', " +
+        "'Competition: TBA', " +
         "'Main room, Sunday at 12:00', " +
         "'static/images/rocket-league.jpg', " +
         `'You will be playing 2v2 soccar matches on a LAN server in a
                 double-elimination tournament. Please make sure you have
                 a copy of the game installed on your system!', ` +
         '1,' +
-        "'2019-02-17 12:00:00')",
+        "'2020-03-08 12:00:00')",
     );
 
     db.run(
@@ -118,7 +118,7 @@ db.serialize(() => {
         "'static/images/rocket-league.jpg', " +
         `'', ` +
         '0,' +
-        "'2019-02-17 16:00:00')",
+        "'2020-03-08 16:00:00')",
     );
 
     db.run(
