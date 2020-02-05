@@ -11,6 +11,7 @@ import fetch from 'node-fetch';
 
 import routes from './routes';
 import apiRoutes from './routes/api';
+import adminRoutes from './routes/admin';
 
 
 // Load vars from .env file
@@ -49,6 +50,7 @@ app.use(function(req, res, next) {
 
 // Load routes
 app.use('/api', apiRoutes);
+app.use('/admin', adminRoutes);
 app.use(routes);
 
 if (app.get('env') === 'development') {
