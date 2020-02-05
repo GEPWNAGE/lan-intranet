@@ -163,6 +163,13 @@ db.serialize(() => {
     );
 
 
+    db.run(
+        'CREATE TABLE IF NOT EXISTS logins ' +
+            '(id integer not null primary key autoincrement, ' +
+            'login varchar not null, ' +
+            'hash varchar nut null)'
+    );
+
 
     // set the activities and challenge sequence correctly
     db.run('DELETE FROM sqlite_sequence');
