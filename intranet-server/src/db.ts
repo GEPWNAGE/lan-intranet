@@ -60,15 +60,14 @@ db.serialize(() => {
     db.run(
         'INSERT INTO activities VALUES ' +
         '(3, ' +
-        "'Competition: TBA', " +
+        "'Competition: Minecraft', " +
         "'Main room stage, Saturday at 16:00', " +
-        "'static/images/keep-talking.png', " +
-        `'We will provide the game and bomb defusal manuals. You
-                provide a team of 2 to 4 people and a very specific set
-                of skills. (Personalized bomb defusal manuals are
-                allowed.)', ` +
+        "'static/images/minecraft.png', " +
+        `'Show off your creativity in the Minecraft competition! Everyone will
+               work in creative mode, to create the best models. The theme will
+               be announced at the start of the competition!', ` +
         '1,' +
-        "'2020-03-07 16:00:00')",
+        "'2020-03-07 13:00:00')",
     );
 
     db.run(
