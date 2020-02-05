@@ -13,10 +13,28 @@ router.get('/', (req, res) => {
     res.render('admin/login');
 });
 
-router.post('/login', (req, res) => {
-    bcrypt.hash(req.body.password, 11).then((hashed: any) => console.log(hashed));
+router.post('/login', async (req, res) => {
+    const logins = await dbAll("SELECT login, hash FROM logins WHERE login = ?", [ req.body.login ]);
 
-    res.render('admin/login');
+    if (logins.length != 1) {
+        res.render('admin/login', {
+            error: true,
+            login: req.body.login
+        });
+        return;
+    }
+
+    const login = logins[0];
+
+    if (!await bcrypt.compare(req.body.password, login.hash)) {
+        res.render('admin/login', {
+            error: true,
+            login: req.body.login
+        });
+        return;
+    }
+
+    res.render('admin/login-success');
 });
 
 export default router;

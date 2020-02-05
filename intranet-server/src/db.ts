@@ -167,7 +167,8 @@ db.serialize(() => {
         'CREATE TABLE IF NOT EXISTS logins ' +
             '(id integer not null primary key autoincrement, ' +
             'login varchar not null, ' +
-            'hash varchar nut null)'
+            'hash varchar nut null, ' +
+            'UNIQUE(login))'
     );
 
 

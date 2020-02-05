@@ -7,10 +7,16 @@
         <div class="container">
             <h2>Admin login</h2>
 
+            {% if (error) %}
+                <div class="alert alert-danger" role="alert">
+                    Login unsuccessful
+                </div>
+            {% endif %}
+
             <form method="post" action="/admin/login">
                 <div class="form-group">
                     <label for="login">Login</label>
-                    <input type="input" class="form-control" name="login" id="login">
+                    <input type="input" class="form-control" name="login" value="{{login|e}}" id="login">
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
