@@ -1,13 +1,13 @@
 {% extends "layout.twig" %}
 
 {% block head_links %}
-    {% for url in entrypoints('website', 'css') %}
+    {% for url in entrypoints('css') %}
         <link rel="stylesheet" href="{{ url }}">
     {% endfor %}
 {% endblock %}
 
 {% block body_scripts %}
-    {% for url in entrypoints('website', 'js') %}
+    {% for url in entrypoints('js') %}
         <script src="{{ url }}"></script>
     {% endfor %}
 {% endblock %}

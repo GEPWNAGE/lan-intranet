@@ -1,5 +1,4 @@
 import { ReactNode, Ref, UIEventHandler, useRef } from 'react';
-import * as React from 'react';
 import usePrevious from '../../../helpers/usePrevious';
 import { useScrollBottom } from '../../../helpers/useScrollBottom';
 

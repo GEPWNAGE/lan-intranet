@@ -33,7 +33,7 @@ export default function SlidesPanel({ ...otherProps }: SlidesPanelProps) {
                     className="SlidesPanel__slide"
                     style={{ ...props, backgroundColor: item.color }}
                 >
-                    <img className="SlidesPanel__logo" src={item.logo} />
+                    <img className="SlidesPanel__logo" alt="a logo" src={item.logo} />
                 </animated.div>
             ))}
         </Panel>

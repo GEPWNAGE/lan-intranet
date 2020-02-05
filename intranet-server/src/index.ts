@@ -6,6 +6,8 @@ import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import * as twig from 'twig';
 import serveFavicon from 'serve-favicon';
+import proxy from 'http-proxy-middleware';
+import fetch from 'node-fetch';
 
 import routes from './routes';
 import apiRoutes from './routes/api';
@@ -29,7 +31,11 @@ app.set('view engine', 'twig');
 twig.cache(app.get('view cache') === true);
 
 const CLIENT_DIR = path.resolve(__dirname, '../../intranet-client');
-app.use('/static', express.static(path.resolve(CLIENT_DIR, 'build/static')));
+
+if (app.get('env') === 'production') {
+    // in production, serve from build
+    app.use('/static', express.static(path.resolve(CLIENT_DIR, 'build/static')));
+}
 
 // TODO: Set this only in development (or remove it altogether?)
 app.use(function(req, res, next) {
@@ -45,41 +51,59 @@ app.use(function(req, res, next) {
 app.use('/api', apiRoutes);
 app.use(routes);
 
-const MANIFEST_PATH = path.resolve(CLIENT_DIR, 'webpack.manifest.json');
-const ASSETS_URL =
-    app.get('env') === 'production' ? '/' : process.env.WEBPACK_DEV_SERVER_URL;
+if (app.get('env') === 'development') {
+    // in development, proxy non-matching requests to webpack server
+    app.use('/', proxy({ target: 'http://localhost:3000', ws: true }));
+}
 
-function getManifest(): any {
+const MANIFEST_PATH = path.resolve(CLIENT_DIR, 'build/asset-manifest.json');
+const MANIFEST_URL = 'http://localhost:3000/asset-manifest.json';
+let MANIFEST = <any>{};
+
+async function loadManifest() {
+    if (app.get('env') === 'development') {
+        const res = await fetch(MANIFEST_URL);
+        return await res.json();
+    }
+
     delete require.cache[require.resolve(MANIFEST_PATH)];
     return require(MANIFEST_PATH);
 }
 
-// Function to get entry files of a specific entrypoint
-app.locals.entrypoints = function(key: string, type: string) {
-    const manifest = getManifest();
+function saveManifest() {
+    loadManifest()
+        .then(manifest => MANIFEST = manifest)
+        .catch(error => console.log(error.code, "Asset manifest currently unavailable"))
+}
 
-    if (!(key in manifest.entrypoints)) {
+// load and set the manifest
+if (app.get('env') === 'development') {
+    setInterval(saveManifest, 1000);
+} else {
+    // in production, no need to reload the manifest every second
+    saveManifest();
+}
+
+// we either proxy or serve ourselves
+const ASSETS_URL = '/';
+
+app.locals.entrypoints = function(typ: string) {
+    if (MANIFEST.entrypoints === undefined) {
         return [];
     }
 
-    const entrypoints = manifest.entrypoints[key];
-    if (!(type in entrypoints)) {
-        return [];
-    }
-
-    // Rewrite the urls
-    return entrypoints[type].map((url: string) => ASSETS_URL + url);
-};
+    return MANIFEST.entrypoints
+        .filter((url: string) => url.substring(url.length - typ.length, url.length) === typ)
+        .map((url: string) => ASSETS_URL + url);
+}
 
 app.locals.static = function(key: string) {
-    const manifest = getManifest();
-
-    if (!(key in manifest)) {
-        return ASSETS_URL + key;
+    if (MANIFEST.files !== undefined && key in MANIFEST.files) {
+        return MANIFEST.files[key]
     }
 
-    return ASSETS_URL + manifest[key];
-};
+    return ASSETS_URL + key;
+}
 
 const server = new Server(app);
 export const io = socketIo(server);
