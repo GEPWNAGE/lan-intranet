@@ -6,10 +6,29 @@ import {
 } from '../data/names';
 import db, { dbAll, dbRun } from '../db';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 const router = Router();
 
+router.use((req, res, next) => {
+    const cookie = req.cookies['pwn-admin'];
+
+    if (cookie) {
+        const decoded = <any>jwt.verify(cookie, 'TODO: move secret to .env');
+
+        if (decoded) {
+            res.locals.loggedin = true;
+            res.locals.login = decoded.login;
+        }
+    }
+
+    next();
+});
+
 router.get('/', (req, res) => {
+    res.render('admin/login');
+});
+router.get('/login', (req, res) => {
     res.render('admin/login');
 });
 
@@ -33,6 +52,11 @@ router.post('/login', async (req, res) => {
         });
         return;
     }
+
+    const token = jwt.sign({ login: req.body.login }, 'TODO: move secret to .env');
+
+    // login verified, now save that the user is logged in
+    res.cookie('pwn-admin', token);
 
     res.render('admin/login-success');
 });
