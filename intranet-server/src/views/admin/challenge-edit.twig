@@ -1,0 +1,16 @@
+{% extends "../admin.twig" %}
+
+{% set nav_active = 'challenge' %}
+
+{% block website_main %}
+    <main class="my-4">
+        <div class="container">
+            <h4>Challenge GEPWNAGE</h4>
+
+            {{challenge.id}}<br>
+            {{challenge.game}}<br>
+            {{challenge.best}}
+
+        </div>
+    </main>
+{% endblock %}

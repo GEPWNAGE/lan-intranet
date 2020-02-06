@@ -98,4 +98,21 @@ router.get('/challenge', async (req, res) => {
     res.render('admin/challenge', { challenges });
 });
 
+router.get('/challenge/:challengeId([0-9]+)', async (req, res) => {
+    const id = parseInt(req.params.challengeId);
+
+    const sql = "SELECT id, game, best FROM challenge WHERE id = ?";
+    db.get(sql, [id], async (err, challenge) => {
+        if (err !== null || challenge === undefined) {
+            console.log(err);
+            res.render('website/error');
+            return;
+        }
+
+        res.render('admin/challenge-edit', {
+            challenge
+        });
+    });
+});
+
 export default router;
