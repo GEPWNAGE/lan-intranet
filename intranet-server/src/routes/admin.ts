@@ -63,7 +63,7 @@ router.post('/login', async (req, res) => {
         return;
     }
 
-    // set expiration
+    // sign a token including expiration
     const token = jwt.sign({
         login: req.body.login
     }, 'TODO: move secret to .env', {
@@ -86,6 +86,16 @@ router.get('/logout', (req, res) => {
     delete res.locals.login;
 
     res.render('admin/logout');
+});
+
+router.get('/challenge', async (req, res) => {
+    if (!res.locals.loggedin) {
+        res.redirect('/admin/login');
+        return;
+    }
+
+    const challenges = await dbAll("SELECT id, game, best FROM challenge");
+    res.render('admin/challenge', { challenges });
 });
 
 export default router;

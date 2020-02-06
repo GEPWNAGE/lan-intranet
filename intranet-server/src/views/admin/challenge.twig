@@ -1,0 +1,39 @@
+{% extends "../admin.twig" %}
+
+{% set nav_active = 'challenge' %}
+
+{% block website_main %}
+    <main class="my-4">
+        <div class="container">
+            <h4>Challenge GEPWNAGE</h4>
+
+            <div class="mb-3">
+                TODO: describe Challenge GEPWNAGE
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Game</th>
+                        <th>Current best</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for challenge in challenges %}
+                        <tr>
+                            <td>{{ challenge.game }}</td>
+                            <td>{{ challenge.best }}</td>
+                            <td>
+                                <a href="/admin/challenge/{{ challenge.id }}" class="btn btn-sm btn-success">
+                                    Change
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </main>
+{% endblock %}
