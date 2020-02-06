@@ -13,6 +13,8 @@ const router = Router();
 router.use((req, res, next) => {
     const cookie = req.cookies['pwn-admin'];
 
+    res.locals.loggedin = false;
+
     if (cookie) {
         const decoded = <any>jwt.verify(cookie, 'TODO: move secret to .env');
 
@@ -53,12 +55,25 @@ router.post('/login', async (req, res) => {
         return;
     }
 
+    // TODO: set expiration
     const token = jwt.sign({ login: req.body.login }, 'TODO: move secret to .env');
+
+    res.locals.loggedin = true;
+    res.locals.login = req.body.login;
 
     // login verified, now save that the user is logged in
     res.cookie('pwn-admin', token);
 
     res.render('admin/login-success');
+});
+
+router.get('/logout', (req, res) => {
+    res.cookie('pwn-admin', '', { expires: new Date() });
+
+    res.locals.loggedin = false;
+    res.locals.login = undefined;
+
+    res.render('admin/logout');
 });
 
 export default router;

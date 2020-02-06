@@ -53,18 +53,22 @@
                 </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
+                        {% if (loggedin) %}
                         <a
                             href="#"
                             class="nav-link dropdown-toggle"
                             data-toggle="dropdown"
                         >
-                            Hello, <strong>{{ username|e }}</strong>
+                            Hello, <strong>{{ login|e }}</strong>
                         </a>
                         <div class="dropdown-menu">
-                            <a href="/change-nickname" class="dropdown-item">
-                                Change nickname
+                            <a href="/admin/logout" class="dropdown-item">
+                                Logout
                             </a>
                         </div>
+                        {% else %}
+                        <a href="/"></a>
+                        {% endif %}
                     </li>
                 </ul>
             </div>
