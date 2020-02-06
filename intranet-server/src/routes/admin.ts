@@ -115,4 +115,32 @@ router.get('/challenge/:challengeId([0-9]+)', async (req, res) => {
     });
 });
 
+router.post('/challenge/:challengeId([0-9]+)', async (req, res) => {
+    const id = parseInt(req.params.challengeId);
+
+    const sql = "SELECT id, game, best FROM challenge WHERE id = ?";
+    db.get(sql, [id], async (err, challenge) => {
+        if (err !== null || challenge === undefined) {
+            console.log(err);
+            res.render('website/error');
+            return;
+        }
+
+        const changeSql = "UPDATE challenge SET best = ? WHERE id = ?";
+
+        try {
+            await dbRun(changeSql, [req.body.best, id]);
+
+            res.redirect('/admin/challenge');
+        } catch (err) {
+            console.log(err);
+
+            res.render('admin/challenge-edit', {
+                challenge
+            });
+        }
+
+    });
+});
+
 export default router;

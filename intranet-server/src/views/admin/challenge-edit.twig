@@ -7,10 +7,22 @@
         <div class="container">
             <h4>Challenge GEPWNAGE</h4>
 
-            {{challenge.id}}<br>
-            {{challenge.game}}<br>
-            {{challenge.best}}
+            <p>
+            Challenge: {{challenge.game|e}}
+            </p>
 
+            <form action="/admin/challenge/{{challenge.id}}" method="post">
+                <div class="form-group">
+                    <label for="best">Best player</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="best"
+                        name="best"
+                        value="{{challenge.best|e}}">
+                </div>
+                <button type="submit" class="btn btn-primary">Change</button>
+            </form>
         </div>
     </main>
 {% endblock %}
