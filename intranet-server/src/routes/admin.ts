@@ -28,9 +28,17 @@ router.use((req, res, next) => {
 });
 
 router.get('/', (req, res) => {
+    if (res.locals.loggedin) {
+        res.render('admin/welcome');
+        return;
+    }
     res.render('admin/login');
 });
 router.get('/login', (req, res) => {
+    if (res.locals.loggedin) {
+        res.redirect('/admin');
+        return;
+    }
     res.render('admin/login');
 });
 
