@@ -99,6 +99,11 @@ router.get('/challenge', async (req, res) => {
 });
 
 router.get('/challenge/:challengeId([0-9]+)', async (req, res) => {
+    if (!res.locals.loggedin) {
+        res.redirect('/admin/login');
+        return;
+    }
+
     const id = parseInt(req.params.challengeId);
 
     const sql = "SELECT id, game, best FROM challenge WHERE id = ?";
@@ -116,6 +121,11 @@ router.get('/challenge/:challengeId([0-9]+)', async (req, res) => {
 });
 
 router.post('/challenge/:challengeId([0-9]+)', async (req, res) => {
+    if (!res.locals.loggedin) {
+        res.redirect('/admin/login');
+        return;
+    }
+
     const id = parseInt(req.params.challengeId);
 
     const sql = "SELECT id, game, best FROM challenge WHERE id = ?";
