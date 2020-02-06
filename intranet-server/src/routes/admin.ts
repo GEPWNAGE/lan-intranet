@@ -63,8 +63,12 @@ router.post('/login', async (req, res) => {
         return;
     }
 
-    // TODO: set expiration
-    const token = jwt.sign({ login: req.body.login }, 'TODO: move secret to .env');
+    // set expiration
+    const token = jwt.sign({
+        login: req.body.login
+    }, 'TODO: move secret to .env', {
+        expiresIn: '1h'
+    });
 
     res.locals.loggedin = true;
     res.locals.login = req.body.login;
