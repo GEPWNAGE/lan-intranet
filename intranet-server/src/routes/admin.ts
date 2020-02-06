@@ -71,7 +71,7 @@ router.get('/logout', (req, res) => {
     res.cookie('pwn-admin', '', { expires: new Date() });
 
     res.locals.loggedin = false;
-    res.locals.login = undefined;
+    delete res.locals.login;
 
     res.render('admin/logout');
 });
