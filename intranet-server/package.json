@@ -3,16 +3,24 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/bcrypt": "^3.0.0",
+    "@types/cookie-parser": "^1.4.2",
     "@types/http-proxy-middleware": "^0.19.3",
+    "@types/jsonwebtoken": "^8.3.7",
     "@types/node-fetch": "^2.5.4",
+    "@types/readline-sync": "^1.4.3",
     "@types/serve-favicon": "^2.2.30",
     "@types/twig": "^1.12.2",
+    "bcrypt": "^3.0.7",
     "casual": "^1.6.0",
+    "cookie-parser": "^1.4.4",
     "cross-env": "^5.2.0",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "http-proxy-middleware": "^0.20.0",
+    "jsonwebtoken": "^8.5.1",
     "node-fetch": "^2.6.0",
+    "readline-sync": "^1.4.10",
     "serve-favicon": "^2.5.0",
     "socket.io": "^2.2.0",
     "sqlite3": "^4.0.6",
@@ -23,7 +31,8 @@
   "scripts": {
     "start:production": "cross-env NODE_ENV=production ts-node src/index.ts",
     "start": "cross-env NODE_ENV=development ts-node src/index.ts",
-    "watch": "nodemon --watch src --ext ts"
+    "watch": "nodemon --watch src --ext ts",
+    "create:user": "ts-node scripts/create-user.ts"
   },
   "devDependencies": {
     "@types/dotenv": "^6.1.0",

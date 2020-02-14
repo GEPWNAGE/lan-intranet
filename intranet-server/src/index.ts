@@ -8,9 +8,11 @@ import * as twig from 'twig';
 import serveFavicon from 'serve-favicon';
 import proxy from 'http-proxy-middleware';
 import fetch from 'node-fetch';
+import cookieParser from 'cookie-parser';
 
 import routes from './routes';
 import apiRoutes from './routes/api';
+import adminRoutes from './routes/admin';
 
 
 // Load vars from .env file
@@ -21,6 +23,8 @@ const app = express();
 // Express Config
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(cookieParser());
 
 app.use(serveFavicon(__dirname + "/favicon.ico"));
 
@@ -49,6 +53,7 @@ app.use(function(req, res, next) {
 
 // Load routes
 app.use('/api', apiRoutes);
+app.use('/admin', adminRoutes);
 app.use(routes);
 
 if (app.get('env') === 'development') {

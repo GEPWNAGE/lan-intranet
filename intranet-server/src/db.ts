@@ -161,13 +161,45 @@ db.serialize(() => {
         "'Super Hexagon', " +
         "'Mitchel Brunings')"
     );
+    db.run(
+        'INSERT OR IGNORE INTO challenge VALUES ' +
+        '(4, ' +
+        "'Command & Conquer: Generals (with zero hour expansion)', " +
+        "'Kevin Jilissen')"
+    );
+    db.run(
+        'INSERT OR IGNORE INTO challenge VALUES ' +
+        '(5, ' +
+        "'Supreme Commander: Forged Alliance', " +
+        "'Pieter Kokx')"
+    );
+    db.run(
+        'INSERT OR IGNORE INTO challenge VALUES ' +
+        '(6, ' +
+        "'Total Annihilation', " +
+        "'Pieter Kokx')"
+    );
+    db.run(
+        'INSERT OR IGNORE INTO challenge VALUES ' +
+        '(7, ' +
+        "'OpenTTD', " +
+        "'Marcin van de Ven')"
+    );
 
+
+    db.run(
+        'CREATE TABLE IF NOT EXISTS logins ' +
+            '(id integer not null primary key autoincrement, ' +
+            'login varchar not null, ' +
+            'hash varchar nut null, ' +
+            'UNIQUE(login))'
+    );
 
 
     // set the activities and challenge sequence correctly
     db.run('DELETE FROM sqlite_sequence');
     db.run("INSERT INTO sqlite_sequence VALUES ('activities', 7)");
-    db.run("INSERT INTO sqlite_sequence VALUES ('challenge', 3)");
+    db.run("INSERT INTO sqlite_sequence VALUES ('challenge', 7)");
 
     db.run('COMMIT');
 });

@@ -1,4 +1,4 @@
-{% extends "../website.twig" %}
+{% extends "../admin.twig" %}
 
 {% set nav_active = 'challenge' %}
 
@@ -16,13 +16,19 @@
                     <tr>
                         <th>Game</th>
                         <th>Current best</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for challenge in challenges %}
                         <tr>
-                            <td>{{ challenge.game|e }}</td>
-                            <td>{{ challenge.best|e }}</td>
+                            <td>{{ challenge.game }}</td>
+                            <td>{{ challenge.best }}</td>
+                            <td>
+                                <a href="/admin/challenge/{{ challenge.id }}" class="btn btn-sm btn-success">
+                                    Change
+                                </a>
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>
