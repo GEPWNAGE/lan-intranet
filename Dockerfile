@@ -2,12 +2,12 @@ FROM node:13
 
 WORKDIR /usr/share/app
 
-COPY intranet-server intranet-server
-COPY intranet-client intranet-client
+COPY server server
+COPY client client
 
-RUN cd intranet-server && yarn
-RUN cd intranet-client && yarn && yarn build:production
+RUN cd server && yarn
+RUN cd client && yarn && yarn build:production
 
-WORKDIR /usr/share/app/intranet-server
+WORKDIR /usr/share/app/server
 
 CMD ["yarn", "start:production"]
