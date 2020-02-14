@@ -34,7 +34,7 @@ app.set('view engine', 'twig');
 
 twig.cache(app.get('view cache') === true);
 
-const CLIENT_DIR = path.resolve(__dirname, '../../intranet-client');
+const CLIENT_DIR = path.resolve(__dirname, '../../client');
 
 if (app.get('env') === 'production') {
     // in production, serve from build
