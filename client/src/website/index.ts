@@ -8,3 +8,6 @@ import '../logos/gepwnage-logo.png';
 if (document.querySelector('#mount-shoutbox')) {
     import('./shoutbox/index');
 }
+if (document.querySelector('#mount-paint')) {
+    import('./paint/index');
+}
