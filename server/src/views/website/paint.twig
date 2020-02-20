@@ -1,0 +1,13 @@
+{% extends "../website.twig" %}
+
+{% set nav_active = 'paint' %}
+
+{% block website_main %}
+    <main class="my-4 d-flex flex-column flex-grow-1">
+        <div class="container d-flex flex-column flex-grow-1">
+            <h4 class="mb-3">Multiplayer Paint</h4>
+            <div id="mount-paint" class="d-flex flex-column flex-grow-1"></div>
+            <img src="/paint/image"/>
+        </div>
+    </main>
+{% endblock %}

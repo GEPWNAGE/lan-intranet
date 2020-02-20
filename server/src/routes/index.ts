@@ -6,6 +6,7 @@ import {
     getUsername,
 } from '../data/names';
 import db, { dbAll, dbRun } from '../db';
+import * as path from 'path';
 
 const router = Router();
 
@@ -214,6 +215,14 @@ router.get('/competitions', async (req, res) => {
 
 router.get('/shoutbox', (req, res) => {
     res.render('website/shoutbox');
+});
+
+router.get('/paint', (req, res) => {
+    res.render('website/paint');
+});
+
+router.get('/paint/image', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../../baseimage.png'));
 });
 
 router.get('/challenge', async (req, res) => {
