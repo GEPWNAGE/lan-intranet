@@ -21,6 +21,33 @@ export interface PaintCanvasProps {
 export default function PaintCanvas(props: PaintCanvasProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [color, setColor] = useState('#013370');
+    const [grid, setGrid] = useState(() => {
+        let grid = [];
+
+        for (let y = 0; y < 128; y++) {
+            let row = [];
+
+            for (let x = 0; x < 128; x++) {
+                if ((x + y) % 2 === 0) {
+                    row.push('#ffff00');
+                } else {
+                    row.push('#013370');
+                }
+            }
+
+            grid.push(row);
+        }
+
+        return grid;
+    });
+
+    function paintGrid(x: number, y: number) {
+        const newGrid = grid;
+        newGrid[y][x] = color;
+        setGrid(newGrid);
+    }
+
+    console.log(grid);
 
     useEffect(() => {
         const canvas = canvasRef.current as HTMLCanvasElement;
@@ -47,20 +74,15 @@ export default function PaintCanvas(props: PaintCanvasProps) {
 
             context.fillStyle = color;
             context.fillRect(pixelSize*pixelLoc.x, pixelSize*pixelLoc.y, pixelSize, pixelSize);
+            paintGrid(pixelLoc.x, pixelLoc.y);
         });
 
-        for (let x = 0; x < 256; x++) {
-            for (let y = 0; y < 256; y++) {
-                if ((x + y) % 2 === 0) {
-                    context.fillStyle = 'black';
-                } else {
-                    context.fillStyle = 'red';
-                }
-
+        for (let y = 0; y < 128; y++) {
+            for (let x = 0; x < 128; x++) {
+                context.fillStyle = grid[y][x];
                 context.fillRect(pixelSize*x, pixelSize*y, pixelSize, pixelSize);
             }
         }
-
     });
 
     return (

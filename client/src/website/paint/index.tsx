@@ -7,7 +7,7 @@ import PaintCanvas from './PaintCanvas';
 const container = document.querySelector('#mount-paint');
 ReactDOM.render(
     <div>
-        <PaintCanvas size={768} />
+        <PaintCanvas size={896} />
     </div>,
     container,
 );
