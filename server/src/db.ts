@@ -60,7 +60,7 @@ db.serialize(() => {
         '(3, ' +
         "'Competition: Mario Kart Switch', " +
         "'Downstairs lounge, Friday at 21:00', " +
-        "'static/images/xonotic.jpg', " +
+        "'static/images/mario-kart.png', " +
         `'Race like a pro on Mario Kart for the Switch. Show your skills in
             navigating the racetrack. No prior skills required, fun for
             everyone guaranteed. Watch out for blue shells!', ` +
@@ -73,7 +73,7 @@ db.serialize(() => {
         '(4, ' +
         "'Competition: Dota Underlords', " +
         "'Main room stage, Saturday at 13:30', " +
-        "'static/images/minecraft.png', " +
+        "'static/images/dota-underlords.png', " +
         `'Play the newly released chess-based auto battler Dota Underlords
             with us!',` +
         '1,' +
@@ -96,7 +96,7 @@ db.serialize(() => {
         '(6, ' +
         "'Competition: Just Dance', " +
         "'Downstairs lounge, Sunday at 0:00', " +
-        "'static/images/just-dance.png', " +
+        "'static/images/just-dance-2020.png', " +
         `'Show off your dance moves with Just Dance 2020, the ultimate
                 party game with several hot tracks from chart-topping hits to
                 family favorites, including "10.000 Luchtballonnen" by K3,
