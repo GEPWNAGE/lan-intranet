@@ -45,8 +45,21 @@ db.serialize(() => {
     db.run(
         'INSERT INTO activities VALUES ' +
         '(2, ' +
-        "'Competition: TBA', " +
-        "'Main room, Saturday at 12:00', " +
+        "'Competition: Minecraft', " +
+        "'Main room, the entire weekend', " +
+        "'static/images/minecraft.png', " +
+        `'Show off your creativity in the Minecraft competition! Everyone will
+               work in creative mode, to create the best models. The theme will
+               be announced at the start of the competition!', ` +
+        '1,' +
+        "'2020-03-06 17:00:00')",
+    );
+
+    db.run(
+        'INSERT INTO activities VALUES ' +
+        '(3, ' +
+        "'Competition: Mario Kart Switch', " +
+        "'Downstairs lounge, Friday at 21:00', " +
         "'static/images/xonotic.jpg', " +
         `'Shoot yourself to the top with Xonotic 1v1, an addictive
                 arena-style first person shooter with crisp movement
@@ -54,25 +67,25 @@ db.serialize(() => {
                 mechanics with in-your-face action to elevate your
                 heart rate. BEST OF ALL IT''S FREE.', ` +
         '1,' +
-        "'2020-03-07 12:00:00')",
-    );
-
-    db.run(
-        'INSERT INTO activities VALUES ' +
-        '(3, ' +
-        "'Competition: Minecraft', " +
-        "'Main room stage, Saturday at 16:00', " +
-        "'static/images/minecraft.png', " +
-        `'Show off your creativity in the Minecraft competition! Everyone will
-               work in creative mode, to create the best models. The theme will
-               be announced at the start of the competition!', ` +
-        '1,' +
-        "'2020-03-07 13:00:00')",
+        "'2020-03-06 21:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(4, ' +
+        "'Competition: DotA Underlords', " +
+        "'Main room stage, Saturday at 13:30', " +
+        "'static/images/minecraft.png', " +
+        `'Show off your creativity in the Minecraft competition! Everyone will
+               work in creative mode, to create the best models. The theme will
+               be announced at the start of the competition!', ` +
+        '1,' +
+        "'2020-03-07 13:30:00')",
+    );
+
+    db.run(
+        'INSERT INTO activities VALUES ' +
+        '(5, ' +
         "'Dinner: Fries & Snacks', " +
         "'Courtyard, Saturday at 19:00', " +
         "'', " +
@@ -83,9 +96,9 @@ db.serialize(() => {
 
     db.run(
         'INSERT INTO activities VALUES ' +
-        '(5, ' +
+        '(6, ' +
         "'Competition: Just Dance', " +
-        "'Downstairs lounge, Saturday at 23:00', " +
+        "'Downstairs lounge, Sunday at 0:00', " +
         "'static/images/just-dance.png', " +
         `'Show off your dance moves with Just Dance 2019, the ultimate
                 party game with 40 hot tracks from chart-topping hits to
@@ -93,20 +106,7 @@ db.serialize(() => {
                 Mars Ft. Cardi B., "Bang Bang Bang" by BIGBANG,
                 "Shaky Shaky" by Daddy Yankee and more!', ` +
         '1,' +
-        "'2020-03-07 23:00:00')"
-    );
-
-    db.run(
-        'INSERT INTO activities VALUES ' +
-        '(6, ' +
-        "'Competition: TBA', " +
-        "'Main room, Sunday at 12:00', " +
-        "'static/images/rocket-league.jpg', " +
-        `'You will be playing 2v2 soccar matches on a LAN server in a
-                double-elimination tournament. Please make sure you have
-                a copy of the game installed on your system!', ` +
-        '1,' +
-        "'2020-03-08 12:00:00')"
+        "'2020-03-08 00:00:00')"
     );
 
     db.run(
@@ -114,7 +114,7 @@ db.serialize(() => {
         '(7, ' +
         "'End of the LAN', " +
         "'Sunday at 16:00', " +
-        "'static/images/rocket-league.jpg', " +
+        "'', " +
         `'', ` +
         '0,' +
         "'2020-03-08 16:00:00')"
@@ -184,6 +184,36 @@ db.serialize(() => {
         '(7, ' +
         "'OpenTTD', " +
         "'Marcin van de Ven')"
+    );
+    db.run(
+        'INSERT OR IGNORE INTO challenge VALUES ' +
+        '(8, ' +
+        "'CS:GO 1v1 with racing wheel', " +
+        "'Max Langerak')"
+    );
+    db.run(
+        'INSERT OR IGNORE INTO challenge VALUES ' +
+        '(9, ' +
+        "'Super Smash Bros Melee', " +
+        "'Dante Spekken')"
+    );
+    db.run(
+        'INSERT OR IGNORE INTO challenge VALUES ' +
+        '(10, ' +
+        "'Trackmania', " +
+        "'Mark van Helvoort')"
+    );
+    db.run(
+        'INSERT OR IGNORE INTO challenge VALUES ' +
+        '(11, ' +
+        "'Smite 1v1', " +
+        "'Steven Miltenburg')"
+    );
+    db.run(
+        'INSERT OR IGNORE INTO challenge VALUES ' +
+        '(12, ' +
+        "'Captain Sonar 2v2', " +
+        "'Henk Alkema & Steven Miltenburg')"
     );
 
 
