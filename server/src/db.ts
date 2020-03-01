@@ -61,11 +61,9 @@ db.serialize(() => {
         "'Competition: Mario Kart Switch', " +
         "'Downstairs lounge, Friday at 21:00', " +
         "'static/images/xonotic.jpg', " +
-        `'Shoot yourself to the top with Xonotic 1v1, an addictive
-                arena-style first person shooter with crisp movement
-                and a wide array of weapons. It combines intuitive
-                mechanics with in-your-face action to elevate your
-                heart rate. BEST OF ALL IT''S FREE.', ` +
+        `'Race like a pro on Mario Kart for the Switch. Show your skills in
+            navigating the racetrack. No prior skills required, fun for
+            everyone guaranteed. Watch out for blue shells!', ` +
         '1,' +
         "'2020-03-06 21:00:00')",
     );
@@ -73,12 +71,11 @@ db.serialize(() => {
     db.run(
         'INSERT INTO activities VALUES ' +
         '(4, ' +
-        "'Competition: DotA Underlords', " +
+        "'Competition: Dota Underlords', " +
         "'Main room stage, Saturday at 13:30', " +
         "'static/images/minecraft.png', " +
-        `'Show off your creativity in the Minecraft competition! Everyone will
-               work in creative mode, to create the best models. The theme will
-               be announced at the start of the competition!', ` +
+        `'Play the newly released chess-based auto battler Dota Underlords
+            with us!',` +
         '1,' +
         "'2020-03-07 13:30:00')",
     );
