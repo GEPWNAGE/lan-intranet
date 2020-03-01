@@ -97,11 +97,11 @@ db.serialize(() => {
         "'Competition: Just Dance', " +
         "'Downstairs lounge, Sunday at 0:00', " +
         "'static/images/just-dance.png', " +
-        `'Show off your dance moves with Just Dance 2019, the ultimate
-                party game with 40 hot tracks from chart-topping hits to
-                family favorites, including "Finesse (Remix)" by Bruno
-                Mars Ft. Cardi B., "Bang Bang Bang" by BIGBANG,
-                "Shaky Shaky" by Daddy Yankee and more!', ` +
+        `'Show off your dance moves with Just Dance 2020, the ultimate
+                party game with several hot tracks from chart-topping hits to
+                family favorites, including "10.000 Luchtballonnen" by K3,
+                "Bangarang" by Skrillex (Ft. Sirah),
+                "Everybody (Backstreet''s back)" by the Backstreet Boys and more!', ` +
         '1,' +
         "'2020-03-08 00:00:00')"
     );
@@ -167,48 +167,42 @@ db.serialize(() => {
     db.run(
         'INSERT OR IGNORE INTO challenge VALUES ' +
         '(5, ' +
-        "'Supreme Commander: Forged Alliance', " +
-        "'Pieter Kokx')"
-    );
-    db.run(
-        'INSERT OR IGNORE INTO challenge VALUES ' +
-        '(6, ' +
         "'Total Annihilation', " +
         "'Pieter Kokx')"
     );
     db.run(
         'INSERT OR IGNORE INTO challenge VALUES ' +
-        '(7, ' +
+        '(6, ' +
         "'OpenTTD', " +
         "'Marcin van de Ven')"
     );
     db.run(
         'INSERT OR IGNORE INTO challenge VALUES ' +
-        '(8, ' +
+        '(7, ' +
         "'CS:GO 1v1 with racing wheel', " +
         "'Max Langerak')"
     );
     db.run(
         'INSERT OR IGNORE INTO challenge VALUES ' +
-        '(9, ' +
+        '(8, ' +
         "'Super Smash Bros Melee', " +
         "'Dante Spekken')"
     );
     db.run(
         'INSERT OR IGNORE INTO challenge VALUES ' +
-        '(10, ' +
+        '(9, ' +
         "'Trackmania', " +
         "'Mark van Helvoort')"
     );
     db.run(
         'INSERT OR IGNORE INTO challenge VALUES ' +
-        '(11, ' +
+        '(10, ' +
         "'Smite 1v1', " +
         "'Steven Miltenburg')"
     );
     db.run(
         'INSERT OR IGNORE INTO challenge VALUES ' +
-        '(12, ' +
+        '(11, ' +
         "'Captain Sonar 2v2', " +
         "'Henk Alkema & Steven Miltenburg')"
     );

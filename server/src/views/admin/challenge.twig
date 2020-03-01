@@ -22,8 +22,8 @@
                 <tbody>
                     {% for challenge in challenges %}
                         <tr>
-                            <td>{{ challenge.game }}</td>
-                            <td>{{ challenge.best }}</td>
+                            <td>{{ challenge.game|e }}</td>
+                            <td>{{ challenge.best|e }}</td>
                             <td>
                                 <a href="/admin/challenge/{{ challenge.id }}" class="btn btn-sm btn-success">
                                     Change
