@@ -9,4 +9,13 @@ import {
 
 const router = Router();
 
+router.post('/pixel', async (req, res) => {
+
+    console.log(req.body);
+
+    res.json({
+        success: true
+    });
+});
+
 export default router;

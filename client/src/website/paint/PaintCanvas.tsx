@@ -18,6 +18,17 @@ export interface PaintCanvasProps {
     size: number;
 }
 
+async function sendPixelChange(x: number, y: number, color: string) {
+    await fetch('/paint/api/pixel', {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({x, y, color})
+    });
+}
+
 export default function PaintCanvas(props: PaintCanvasProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const [color, setColor] = useState('#013370');
@@ -47,8 +58,6 @@ export default function PaintCanvas(props: PaintCanvasProps) {
         setGrid(newGrid);
     }
 
-    console.log(grid);
-
     useEffect(() => {
         const canvas = canvasRef.current as HTMLCanvasElement;
         const context = canvas.getContext('2d');
@@ -60,7 +69,7 @@ export default function PaintCanvas(props: PaintCanvasProps) {
         const pixelSize = props.size / 128;
         context.clearRect(0, 0, props.size, props.size);
 
-        canvas.addEventListener('mousedown', e => {
+        const listener = (e: MouseEvent) => {
             const bounding = canvas.getBoundingClientRect();
             const mouseLoc = {
                 x: e.clientX - bounding.left,
@@ -72,10 +81,15 @@ export default function PaintCanvas(props: PaintCanvasProps) {
                 y: Math.floor(mouseLoc.y / pixelSize)
             };
 
+            sendPixelChange(pixelLoc.x, pixelLoc.y, color);
+
             context.fillStyle = color;
             context.fillRect(pixelSize*pixelLoc.x, pixelSize*pixelLoc.y, pixelSize, pixelSize);
             paintGrid(pixelLoc.x, pixelLoc.y);
-        });
+        };
+
+        canvas.removeEventListener('mousedown', listener);
+        canvas.addEventListener('mousedown', listener);
 
         for (let y = 0; y < 128; y++) {
             for (let x = 0; x < 128; x++) {
