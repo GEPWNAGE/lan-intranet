@@ -52,11 +52,39 @@ export default function PaintCanvas(props: PaintCanvasProps) {
         return grid;
     });
 
+    const pixelSize = props.size / 128;
+
     function paintGrid(x: number, y: number) {
         const newGrid = grid;
         newGrid[y][x] = color;
         setGrid(newGrid);
     }
+
+    function handleCanvasClick(e: any) {
+        const canvas = canvasRef.current as HTMLCanvasElement;
+        const context = canvas.getContext('2d');
+
+        if (context === null) {
+            return;
+        }
+
+        const bounding = canvas.getBoundingClientRect();
+        const mouseLoc = {
+            x: e.clientX - bounding.left,
+            y: e.clientY - bounding.top
+        };
+
+        const pixelLoc = {
+            x: Math.floor(mouseLoc.x / pixelSize),
+            y: Math.floor(mouseLoc.y / pixelSize)
+        };
+
+        sendPixelChange(pixelLoc.x, pixelLoc.y, color);
+
+        context.fillStyle = color;
+        context.fillRect(pixelSize*pixelLoc.x, pixelSize*pixelLoc.y, pixelSize, pixelSize);
+        paintGrid(pixelLoc.x, pixelLoc.y);
+    };
 
     useEffect(() => {
         const canvas = canvasRef.current as HTMLCanvasElement;
@@ -66,30 +94,7 @@ export default function PaintCanvas(props: PaintCanvasProps) {
             return;
         }
 
-        const pixelSize = props.size / 128;
         context.clearRect(0, 0, props.size, props.size);
-
-        const listener = (e: MouseEvent) => {
-            const bounding = canvas.getBoundingClientRect();
-            const mouseLoc = {
-                x: e.clientX - bounding.left,
-                y: e.clientY - bounding.top
-            };
-
-            const pixelLoc = {
-                x: Math.floor(mouseLoc.x / pixelSize),
-                y: Math.floor(mouseLoc.y / pixelSize)
-            };
-
-            sendPixelChange(pixelLoc.x, pixelLoc.y, color);
-
-            context.fillStyle = color;
-            context.fillRect(pixelSize*pixelLoc.x, pixelSize*pixelLoc.y, pixelSize, pixelSize);
-            paintGrid(pixelLoc.x, pixelLoc.y);
-        };
-
-        canvas.removeEventListener('mousedown', listener);
-        canvas.addEventListener('mousedown', listener);
 
         for (let y = 0; y < 128; y++) {
             for (let x = 0; x < 128; x++) {
@@ -105,7 +110,7 @@ export default function PaintCanvas(props: PaintCanvasProps) {
                 <ColorPicker color={color} changeColor={setColor}/>
             </div>
             <div className="col-11">
-                <canvas ref={canvasRef} width={props.size} height={props.size}/>
+                <canvas ref={canvasRef} onClick={handleCanvasClick} width={props.size} height={props.size}/>
             </div>
         </div>
     );
