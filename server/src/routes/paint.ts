@@ -6,6 +6,7 @@ import {
     getNickFromHostname,
     getUsername,
 } from '../data/names';
+import { ioPaint } from '../index';
 
 const router = Router();
 
@@ -32,6 +33,12 @@ router.post('/pixel', async (req, res) => {
             req.body.y
         ]
     );
+
+    ioPaint.emit('pixel change', {
+        x: req.body.x,
+        y: req.body.y,
+        color: req.body.color
+    });
 
     res.json({
         success: true

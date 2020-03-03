@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useEffect, useState, useRef } from 'react';
+import useSocket from '../../helpers/useSocket';
 
 interface ColorPickerProps {
     color: string;
@@ -17,6 +18,12 @@ function ColorPicker(props: ColorPickerProps) {
 export interface PaintCanvasProps {
     size: number;
 }
+
+interface PaintMessage {
+    x: number;
+    y: number;
+    color: string;
+};
 
 async function sendPixelChange(x: number, y: number, color: string) {
     await fetch('/paint/api/pixel', {
@@ -49,18 +56,43 @@ export default function PaintCanvas(props: PaintCanvasProps) {
     });
     const [gridLoaded, setGridLoaded] = useState(false);
 
+    const socket = useSocket();
+
+    useEffect(() => {
+        function callback(msg: PaintMessage) {
+            paintGrid(msg.x, msg.y, msg.color);
+        }
+
+        if (socket !== null) {
+            socket.removeAllListeners();
+            socket.on('pixel change', callback);
+        }
+    });
+
     useEffect(() => {
         if (gridLoaded) {
             return;
         }
         setGridLoaded(true);
 
-        fetch('/paint/api/grid').then(res => res.json()).then(body => setGrid(body));
-    });
+        fetch('/paint/api/grid')
+            .then(res => res.json())
+            .then(body => setGrid(body));
+    }, [gridLoaded]);
 
     const pixelSize = props.size / 128;
 
-    function paintGrid(x: number, y: number) {
+    function paintGrid(x: number, y: number, color: string) {
+        const canvas = canvasRef.current as HTMLCanvasElement;
+        const context = canvas.getContext('2d');
+
+        if (context === null) {
+            return;
+        }
+
+        context.fillStyle = color;
+        context.fillRect(pixelSize*x, pixelSize*y, pixelSize, pixelSize);
+
         const newGrid = grid;
         newGrid[y][x] = color;
         setGrid(newGrid);
@@ -68,11 +100,6 @@ export default function PaintCanvas(props: PaintCanvasProps) {
 
     function handleCanvasClick(e: any) {
         const canvas = canvasRef.current as HTMLCanvasElement;
-        const context = canvas.getContext('2d');
-
-        if (context === null) {
-            return;
-        }
 
         const bounding = canvas.getBoundingClientRect();
         const mouseLoc = {
@@ -86,10 +113,6 @@ export default function PaintCanvas(props: PaintCanvasProps) {
         };
 
         sendPixelChange(pixelLoc.x, pixelLoc.y, color);
-
-        context.fillStyle = color;
-        context.fillRect(pixelSize*pixelLoc.x, pixelSize*pixelLoc.y, pixelSize, pixelSize);
-        paintGrid(pixelLoc.x, pixelLoc.y);
     };
 
     useEffect(() => {

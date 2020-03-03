@@ -116,6 +116,7 @@ const server = new Server(app);
 export const io = socketIo(server);
 
 export const ioShoutbox = io.of('/shoutbox');
+export const ioPaint = io.of('/paint');
 
 const port = 3030;
 server.listen(port);
