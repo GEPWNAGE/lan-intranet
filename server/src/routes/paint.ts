@@ -38,4 +38,27 @@ router.post('/pixel', async (req, res) => {
     });
 });
 
+router.get('/grid', async (req, res) => {
+    let grid : string[][] = [];
+
+    for (let y = 0; y < 128; y++) {
+        let row = [];
+        for (let x = 0; x < 128; x++) {
+            row.push('#013370');
+        }
+        grid.push(row);
+    }
+
+    const rows = await paintdbAll(
+        "SELECT x, y, color FROM grid WHERE x >= 0 AND x < 128 AND y >= 0 AND y < 128"
+    );
+
+    for (const rownum in rows) {
+        const row = rows[rownum];
+        grid[row.y][row.x] = row.color;
+    }
+
+    res.json(grid);
+});
+
 export default router;
