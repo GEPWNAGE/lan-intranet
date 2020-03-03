@@ -103,8 +103,8 @@ export default function PaintCanvas(props: PaintCanvasProps) {
 
         const bounding = canvas.getBoundingClientRect();
         const mouseLoc = {
-            x: e.clientX - bounding.left,
-            y: e.clientY - bounding.top
+            x: e.clientX - bounding.left - 1,
+            y: e.clientY - bounding.top - 1
         };
 
         const pixelLoc = {
