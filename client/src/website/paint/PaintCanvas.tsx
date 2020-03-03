@@ -39,17 +39,23 @@ export default function PaintCanvas(props: PaintCanvasProps) {
             let row = [];
 
             for (let x = 0; x < 128; x++) {
-                if ((x + y) % 2 === 0) {
-                    row.push('#ffff00');
-                } else {
-                    row.push('#013370');
-                }
+                row.push('#013370');
             }
 
             grid.push(row);
         }
 
         return grid;
+    });
+    const [gridLoaded, setGridLoaded] = useState(false);
+
+    useEffect(() => {
+        if (gridLoaded) {
+            return;
+        }
+        setGridLoaded(true);
+
+        fetch('/paint/api/grid').then(res => res.json()).then(body => setGrid(body));
     });
 
     const pixelSize = props.size / 128;
