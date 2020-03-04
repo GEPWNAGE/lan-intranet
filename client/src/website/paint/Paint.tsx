@@ -71,21 +71,7 @@ interface PaintMessage {
 
 export default function Paint(props: PaintProps) {
     const [color, setColor] = useState('#013370');
-    const [grid, setGrid] = useState(() => {
-        let grid = [];
-
-        for (let y = 0; y < 128; y++) {
-            let row = [];
-
-            for (let x = 0; x < 128; x++) {
-                row.push('#013370');
-            }
-
-            grid.push(row);
-        }
-
-        return grid;
-    });
+    const [grid, setGrid] = useState([['#013370']]);
     const [gridLoaded, setGridLoaded] = useState(false);
     // to force rerendering
     const [number, setNumber] = useState(0);
@@ -112,16 +98,21 @@ export default function Paint(props: PaintProps) {
         if (gridLoaded) {
             return;
         }
-        setGridLoaded(true);
-
         fetch('/paint/api/grid')
             .then(res => res.json())
-            .then(body => setGrid(body));
+            .then(body => {
+                setGrid(body)
+                setGridLoaded(true);
+            });
     }, [gridLoaded]);
 
     function handleCanvasClick(x: number, y: number) {
         sendPixelChange(x, y, color);
     };
+
+    if (!gridLoaded) {
+        return <div/>;
+    }
 
     return (
         <div>
