@@ -44,7 +44,7 @@ function ColorPicker(props: ColorPickerProps) {
     ];
 
     const colorPickers = colors.map(color => (
-        <div className="col-auto">
+        <div key={color} className="col-auto">
             <ColorButton onClick={c => props.changeColor(c)} color={color}/>
         </div>
     ));
