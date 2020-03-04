@@ -24,6 +24,12 @@ export default function PaintSlide(props: PaintSlideProps) {
     useEffect(() => {
         function callback(msg: PaintMessage) {
             let newGrid = grid;
+
+            // return early if not fully initialized yet, simply forget this message
+            if (newGrid.length < msg.y || newGrid[msg.y].length < msg.x ) {
+                return;
+            }
+
             newGrid[msg.y][msg.x] = msg.color;
             setGrid(newGrid);
             // force rerender
