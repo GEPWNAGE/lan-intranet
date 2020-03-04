@@ -59,14 +59,14 @@ function ColorPicker(props: ColorPickerProps) {
     );
 }
 
-export interface PaintProps {
-    size: number;
-}
-
 interface PaintMessage {
     x: number;
     y: number;
     color: string;
+}
+
+export interface PaintProps {
+    size: number;
 }
 
 export default function Paint(props: PaintProps) {
