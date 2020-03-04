@@ -95,12 +95,6 @@ function RenderCanvas(props: RenderCanvasProps) {
         }
     });
 
-    console.log("not effect");
-
-    useEffect(() => {
-        console.log("Effect");
-    });
-
     const handleClick = (e: any) => {
         const canvas = canvasRef.current as HTMLCanvasElement;
 
