@@ -2,11 +2,6 @@ import * as React from 'react';
 import { useEffect, useState, useRef } from 'react';
 import useSocket from '../../helpers/useSocket';
 
-interface ColorPickerProps {
-    color: string;
-    changeColor: (color: string) => void;
-}
-
 async function sendPixelChange(x: number, y: number, color: string) {
     await fetch('/paint/api/pixel', {
         method: 'POST',
@@ -18,10 +13,55 @@ async function sendPixelChange(x: number, y: number, color: string) {
     });
 }
 
+interface ColorButtonProps {
+    color: string;
+    onClick: (color: string) => void;
+}
+
+function ColorButton(props: ColorButtonProps) {
+    return <button onClick={_ => props.onClick(props.color)}
+                   className="btn btn-primary"
+                   style={{ backgroundColor: props.color, borderColor: '#000000' }}>&nbsp;</button>;
+}
+
+interface ColorPickerProps {
+    color: string;
+    changeColor: (color: string) => void;
+}
+
 function ColorPicker(props: ColorPickerProps) {
     return (
-        <div className="form-group">
-            <input type="string" value={props.color} onChange={e => props.changeColor(e.target.value)}/>
+        <div className="form-row">
+            <div className="col-auto">
+                <input type="string" className="form-control" value={props.color} onChange={e => props.changeColor(e.target.value)}/>
+            </div>
+            <div className="col-auto">
+                <ColorButton onClick={color => props.changeColor(color)} color="#000000"/>
+            </div>
+            <div className="col-auto">
+                <ColorButton onClick={color => props.changeColor(color)} color="#FFFFFF"/>
+            </div>
+            <div className="col-auto">
+                <ColorButton onClick={color => props.changeColor(color)} color="#555555"/>
+            </div>
+            <div className="col-auto">
+                <ColorButton onClick={color => props.changeColor(color)} color="#FF0000"/>
+            </div>
+            <div className="col-auto">
+                <ColorButton onClick={color => props.changeColor(color)} color="#FFFF00"/>
+            </div>
+            <div className="col-auto">
+                <ColorButton onClick={color => props.changeColor(color)} color="#013370"/>
+            </div>
+            <div className="col-auto">
+                <ColorButton onClick={color => props.changeColor(color)} color="#FF69B4"/>
+            </div>
+            <div className="col-auto">
+                <ColorButton onClick={color => props.changeColor(color)} color="#00FF00"/>
+            </div>
+            <div className="col-auto">
+                <ColorButton onClick={color => props.changeColor(color)} color="#32E0D0"/>
+            </div>
         </div>
     );
 }
@@ -145,11 +185,11 @@ export default function PaintCanvas(props: PaintCanvasProps) {
     };
 
     return (
-        <div className="row">
-            <div className="col">
+        <div>
+            <div className="row">
                 <ColorPicker color={color} changeColor={setColor}/>
             </div>
-            <div className="col-11">
+            <div className="row mt-2">
                 <RenderCanvas onClick={handleCanvasClick}
                               grid={grid}
                               size={props.size}/>
