@@ -13,6 +13,7 @@ import cookieParser from 'cookie-parser';
 import routes from './routes';
 import apiRoutes from './routes/api';
 import adminRoutes from './routes/admin';
+import paintRoutes from './routes/paint';
 
 
 // Load vars from .env file
@@ -54,6 +55,7 @@ app.use(function(req, res, next) {
 // Load routes
 app.use('/api', apiRoutes);
 app.use('/admin', adminRoutes);
+app.use('/paint/api', paintRoutes);
 app.use(routes);
 
 if (app.get('env') === 'development') {
@@ -114,6 +116,7 @@ const server = new Server(app);
 export const io = socketIo(server);
 
 export const ioShoutbox = io.of('/shoutbox');
+export const ioPaint = io.of('/paint');
 
 const port = 3030;
 server.listen(port);
