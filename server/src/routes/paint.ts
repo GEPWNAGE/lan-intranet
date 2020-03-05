@@ -25,6 +25,23 @@ router.post('/pixel', async (req, res) => {
         return;
     }
 
+    // first, check if this user is not hitting rate-limits
+    const hostname = await getHostnameFromIp(req);
+
+    const row = await paintdbGet(
+        "SELECT COUNT(id) as amount FROM history WHERE hostname=? AND created_on > datetime('now', 'utc', '-15 minutes')",
+        [hostname.ip]
+    );
+
+    if (row.amount > 300) {
+        res.json({
+            success: false,
+            reason: 'Rate limited. Do not make more than 300 requests per 15 minutes.'
+        });
+        return;
+    }
+
+    // update the grid
     await paintdbRun(
         'UPDATE grid SET color=? WHERE x=? AND y=?',
         [
@@ -44,8 +61,7 @@ router.post('/pixel', async (req, res) => {
         success: true
     });
 
-    const hostname = await getHostnameFromIp(req);
-
+    // insert into history
     paintdbRun(
         'INSERT INTO history (id, x, y, color, hostname) VALUES (NULL, ?, ?, ?, ?)',
         [
