@@ -1,0 +1,25 @@
+{% extends "../website.twig" %}
+
+{% set nav_active = 'services' %}
+
+{% block website_main %}
+    <main class="my-4 d-flex flex-column flex-grow-1">
+        <div class="container d-flex flex-column flex-grow-1">
+            <h4 class="mb-3">Minecraft</h4>
+            <p>
+                For the minecraft competition, we are running a minecraft server on <code>minecraft.gepwnage.lan</code>.
+            </p>
+            <p>
+                You can also view the map on <a href="http://minecraft.gepwnage.lan">minecraft.gepwnage.lan</a>.
+            </p>
+
+            <h4 class="mb-3">Mumble</h4>
+            <p>
+                For mumble (TeamSpeak) there is a mumble server on <code>mumble.gepwnage.lan</code>.
+            </p>
+            <p>
+                To download mumble, please visit <a href="https://www.mumble.info/downloads/">mumble.info/downloads</a>.
+            </p>
+        </div>
+    </main>
+{% endblock %}

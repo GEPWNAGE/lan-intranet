@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import {
-    Hostname,
     getHostnameFromIp,
     getNickFromHostname,
     getUsername,
@@ -50,7 +49,7 @@ const getActivity = (req: any, res: any) => {
     const activityId = parseInt(req.params.activityId);
 
     const sql =
-        'SELECT id, title, details, can_subscribe FROM activities WHERE id = ?';
+        'SELECT id, title, details, can_subscribe, description FROM activities WHERE id = ?';
     db.get(sql, [activityId], (err, activity) => {
         if (err !== null || activity === undefined) {
             console.log(err);
@@ -215,6 +214,10 @@ router.get('/competitions', async (req, res) => {
 
 router.get('/shoutbox', (req, res) => {
     res.render('website/shoutbox');
+});
+
+router.get('/services', (req, res) => {
+    res.render('website/services');
 });
 
 router.get('/paint', (req, res) => {

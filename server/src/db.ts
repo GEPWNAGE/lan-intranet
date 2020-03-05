@@ -49,8 +49,9 @@ db.serialize(() => {
         "'Main room, the entire weekend', " +
         "'static/images/minecraft.png', " +
         `'Show off your creativity in the Minecraft competition! Everyone will
-               work in creative mode, to create the best models. The theme will
-               be announced at the start of the competition!', ` +
+               work in creative mode, to create the most impressive ... whatever!
+               The competition will be hosted at
+               <code>minecraft.gepwnage.lan</code>.', ` +
         '1,' +
         "'2020-03-06 17:00:00')",
     );

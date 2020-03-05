@@ -5,7 +5,8 @@
 {% block website_main %}
     <main class="my-4">
         <div class="container">
-            <h4>{{ activity.title }}</h4>
+            <h4 class="mb-3">{{ activity.title }}</h4>
+            <p>{{ activity.description }}</p>
             <p class="text-muted">{{ activity.details }}</p>
             {% if activity.can_subscribe == 1 %}
                 <div class="mb-3">
