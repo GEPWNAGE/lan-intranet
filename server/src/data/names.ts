@@ -18,6 +18,9 @@ export async function getHostnameFromIp(req: Request): Promise<Hostname> {
     if ((ip === '::1' || ip === '127.0.0.1' || ip === '::ffff:127.0.0.1') && req.header('X-Forwarded-For') !== undefined) {
         ip = req.header('X-Forwarded-For');
     }
+    if (process.env.FORWARD_SECRET !== undefined && req.header('X-Custom-Secret') === process.env.FORWARD_SECRET) {
+        ip = req.header('X-Real-Ip');
+    }
 
     try {
         if (ip.startsWith('::ffff:')) {
