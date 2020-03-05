@@ -43,6 +43,18 @@ router.post('/pixel', async (req, res) => {
     res.json({
         success: true
     });
+
+    const hostname = await getHostnameFromIp(req);
+
+    paintdbRun(
+        'INSERT INTO history (id, x, y, color, hostname) VALUES (NULL, ?, ?, ?, ?)',
+        [
+            req.body.x,
+            req.body.y,
+            req.body.color,
+            hostname.ip
+        ]
+    );
 });
 
 router.get('/grid', async (req, res) => {

@@ -25,6 +25,16 @@ paintdb.serialize(() => {
         }
     }
 
+    paintdb.run(
+        'CREATE TABLE IF NOT EXISTS history ' +
+            '(id integer not null primary key autoincrement, '+
+            'x integer not null, ' +
+            'y integer not null, ' +
+            'color varchar not null, ' +
+            'hostname varchar not null, ' +
+            "created_on datetime default (datetime('now', 'utc')))"
+    );
+
     paintdb.run('COMMIT');
 });
 
