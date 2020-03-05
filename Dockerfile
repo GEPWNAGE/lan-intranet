@@ -1,5 +1,4 @@
 FROM node:13
-
 WORKDIR /usr/share/app
 
 COPY server server
