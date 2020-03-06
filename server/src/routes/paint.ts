@@ -33,10 +33,23 @@ router.post('/pixel', async (req, res) => {
         [hostname.ip]
     );
 
-    if (row.amount > 300) {
+    if (row.amount > 1000) {
         res.json({
             success: false,
-            reason: 'Rate limited. Do not make more than 300 requests per 15 minutes.'
+            reason: 'Rate limited. Do not make more than 1000 requests per 15 minutes.'
+        });
+        return;
+    }
+
+    const row2 = await paintdbGet(
+        "SELECT COUNT(id) as amount FROM history WHERE hostname=? AND created_on > datetime('now', 'utc', '-60 minutes')",
+        [hostname.ip]
+    );
+
+    if (row2.amount > 3000) {
+        res.json({
+            success: false,
+            reason: 'Rate limited. Do not make more than 3000 requests per 60 minutes.'
         });
         return;
     }
