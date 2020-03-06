@@ -8,7 +8,6 @@ import PaintSlide from './PaintSlide';
 import { SocketProvider } from '../../../helpers/useSocket';
 
 import gepwnageLogo from '../../../logos/gepwnage-logo.png';
-import washHands from '../../../logos/wash-hands.jpg';
 
 export type SlidesPanelProps = PanelProps;
 
@@ -18,8 +17,7 @@ interface Logo {
 }
 
 const logos: Logo[] = [
-    { logo: gepwnageLogo, color: '#013370' },
-    { logo: washHands, color: '#ffffff' },
+    { logo: gepwnageLogo, color: '#013370' }
 ];
 
 export default function SlidesPanel({ ...otherProps }: SlidesPanelProps) {
