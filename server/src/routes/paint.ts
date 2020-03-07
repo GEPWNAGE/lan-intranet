@@ -109,4 +109,14 @@ router.get('/grid', async (req, res) => {
     res.json(grid);
 });
 
+router.get('/ranks', async (req, res) => {
+    let ranks = await paintdbAll(
+        "SELECT hostname, count(id) as num FROM history GROUP BY hostname ORDER BY num DESC"
+    );
+
+    res.json(ranks);
+});
+
+export default router;
+
 export default router;
