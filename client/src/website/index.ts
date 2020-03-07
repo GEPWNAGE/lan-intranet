@@ -11,3 +11,6 @@ if (document.querySelector('#mount-shoutbox')) {
 if (document.querySelector('#mount-paint')) {
     import('./paint/index');
 }
+if (document.querySelector('#mount-paint-history')) {
+    import('./paint/history');
+}
