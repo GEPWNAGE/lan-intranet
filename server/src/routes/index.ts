@@ -224,8 +224,8 @@ router.get('/paint', (req, res) => {
     res.render('website/paint');
 });
 
-router.get('/paint/image', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../../baseimage.png'));
+router.get('/paint/history', (req, res) => {
+    res.render('website/paint-history');
 });
 
 router.get('/challenge', async (req, res) => {
