@@ -31,11 +31,6 @@ export default function SlidesPanel({ ...otherProps }: SlidesPanelProps) {
         color: '#013370'
     });
 
-    elements.push({
-        element: <iframe style={{width: '100%', height: '100%'}} src="http://minecraft.gepwnage.lan/index.html?worldname=world&mapname=surface&zoom=5&x=79&y=64&z=48&nopanel=true&hidechat=true&nocompass=true"/>,
-        color: '#000000'
-    });
-
     const trans = useSlider(elements, 20000, 5000);
 
     return (

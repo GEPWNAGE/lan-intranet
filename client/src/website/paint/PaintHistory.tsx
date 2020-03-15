@@ -31,7 +31,7 @@ export default function Paint(props: PaintProps) {
 
         setGrid(grid);
         setGridInit(true);
-    });
+    }, [gridInit]);
 
     useEffect(() => {
         if (historyLoaded) {

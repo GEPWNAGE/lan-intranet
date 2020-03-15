@@ -35,87 +35,78 @@ db.serialize(() => {
         'INSERT INTO activities VALUES ' +
         '(1, ' +
         "'Official Opening', " +
-        "'Saturday at 0:00', " +
+        "'Monday at 19:00', " +
         "'', " +
         `'', ` +
         '0,' +
-        "'2020-03-07 00:00:00')",
+        "'2020-03-16 19:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(2, ' +
-        "'Competition: Minecraft', " +
-        "'Main room, the entire weekend', " +
-        "'static/images/minecraft.png', " +
-        `'Show off your creativity in the Minecraft competition! Everyone will
-               work in creative mode, to create the most impressive ... whatever!
-               The competition will be hosted at
-               <code>minecraft.gepwnage.lan</code>.', ` +
+        "'Competition: Dota Underlord', " +
+        "'At your home', " +
+        "'static/images/dota-underlords.png', " +
+        `'Play the newly released chess-based auto battler Dota Underlords
+            with us!.', ` +
         '1,' +
-        "'2020-03-06 17:00:00')",
+        "'2020-03-16 20:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(3, ' +
-        "'Competition: Mario Kart Switch', " +
-        "'Downstairs lounge, Friday at 21:00', " +
+        "'Competition: Jackbox Quiplash', " +
+        "'At your home', " +
         "'static/images/mario-kart.png', " +
-        `'Race like a pro on Mario Kart for the Switch. Show your skills in
-            navigating the racetrack. No prior skills required, fun for
-            everyone guaranteed. Watch out for blue shells!', ` +
+        `'Play the popular Jackbox game with us.', ` +
         '1,' +
-        "'2020-03-06 21:00:00')",
+        "'2020-03-17 20:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(4, ' +
-        "'Competition: Dota Underlords', " +
-        "'Main room stage, Saturday at 13:30', " +
+        "'Competition: CS: GO 2v2', " +
+        "'At your home', " +
         "'static/images/dota-underlords.png', " +
-        `'Play the newly released chess-based auto battler Dota Underlords
-            with us!',` +
+        `'Shout your way to the top with the popular and fast-paced shooter CS:GO!',` +
         '1,' +
-        "'2020-03-07 13:30:00')",
+        "'2020-03-18 20:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(5, ' +
-        "'Dinner: Fries & Snacks', " +
-        "'Courtyard, Saturday at 19:00', " +
-        "'', " +
-        "'', " +
-        '0,' +
-        "'2020-03-07 19:00:00')",
+        "'Competition: skribbl.io', " +
+        "'At your home', " +
+        "'static/images/just-dance-2020.png', " +
+        `'Can you draw quickly? Are you a pro at recognizing other people''s drawings? Then join our skribbl.io competition!', ` +
+        '1,' +
+        "'2020-03-19 20:00:00')"
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(6, ' +
-        "'Competition: Just Dance', " +
-        "'Downstairs lounge, Sunday at 0:00', " +
+        "'Competition: Plague Inc.', " +
+        "'At your home', " +
         "'static/images/just-dance-2020.png', " +
-        `'Show off your dance moves with Just Dance 2020, the ultimate
-                party game with several hot tracks from chart-topping hits to
-                family favorites, including "10.000 Luchtballonnen" by K3,
-                "Bangarang" by Skrillex (Ft. Sirah),
-                "Everybody (Backstreet''s back)" by the Backstreet Boys and more!', ` +
+        `'Can you beat the coronavirus? Are you better at infecting people? Play Plague Inc. and show off your best killer-virus.', ` +
         '1,' +
-        "'2020-03-08 00:00:00')"
+        "'2020-03-20 20:00:00')"
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(7, ' +
-        "'End of the LAN', " +
-        "'Sunday at 16:00', " +
+        "'End of the ELAN', " +
+        "'Friday at 23:59', " +
         "'', " +
         `'', ` +
         '0,' +
-        "'2020-03-08 16:00:00')"
+        "'2020-03-20 23:59:59')"
     );
 
     db.run(
@@ -200,12 +191,6 @@ db.serialize(() => {
         '(10, ' +
         "'Smite 1v1', " +
         "'Steven Miltenburg')"
-    );
-    db.run(
-        'INSERT OR IGNORE INTO challenge VALUES ' +
-        '(11, ' +
-        "'Captain Sonar 2v2', " +
-        "'Henk Alkema & Steven Miltenburg')"
     );
 
 
