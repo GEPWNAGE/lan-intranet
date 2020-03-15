@@ -59,7 +59,7 @@ db.serialize(() => {
         '(3, ' +
         "'Competition: Jackbox Quiplash', " +
         "'At your home', " +
-        "'static/images/mario-kart.png', " +
+        "'static/images/quiplash.png', " +
         `'We''ll be having a night of fun with Quiplash, the Jackbox party game. Everyone can join in with their smartphone!', ` +
         '1,' +
         "'2020-03-17 20:00:00')",
@@ -70,7 +70,7 @@ db.serialize(() => {
         '(4, ' +
         "'Competition: CS: GO 2v2', " +
         "'At your home', " +
-        "'static/images/dota-underlords.png', " +
+        "'static/images/counter-strike-global-offensive.png', " +
         `'Shoot your way to the top with the popular and fast-paced shooter CS:GO!',` +
         '1,' +
         "'2020-03-18 20:00:00')",
@@ -81,7 +81,7 @@ db.serialize(() => {
         '(5, ' +
         "'Competition: skribbl.io', " +
         "'At your home', " +
-        "'static/images/just-dance-2020.png', " +
+        "'static/images/skribbl-io.png', " +
         `'Can you draw quickly? Are you a pro at recognizing other people''s drawings? Then join our skribbl.io competition!', ` +
         '1,' +
         "'2020-03-19 20:00:00')"
@@ -92,7 +92,7 @@ db.serialize(() => {
         '(6, ' +
         "'Competition: Plague Inc.', " +
         "'At your home', " +
-        "'static/images/just-dance-2020.png', " +
+        "'static/images/plague-inc.png', " +
         `'Can you beat the coronavirus? Are you better at infecting people? Play Plague Inc. and show off your best killer-virus.', ` +
         '1,' +
         "'2020-03-20 20:00:00')"
