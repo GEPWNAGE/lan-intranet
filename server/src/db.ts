@@ -45,7 +45,7 @@ db.serialize(() => {
     db.run(
         'INSERT INTO activities VALUES ' +
         '(2, ' +
-        "'Competition: Dota Underlord', " +
+        "'Competition: Dota Underlords', " +
         "'At your home', " +
         "'static/images/dota-underlords.png', " +
         `'Play the newly released chess-based auto battler Dota Underlords
@@ -60,7 +60,7 @@ db.serialize(() => {
         "'Competition: Jackbox Quiplash', " +
         "'At your home', " +
         "'static/images/mario-kart.png', " +
-        `'Play the popular Jackbox game with us.', ` +
+        `'We''ll be having a night of fun with Quiplash, the Jackbox party game. Everyone can join in with their smartphone!', ` +
         '1,' +
         "'2020-03-17 20:00:00')",
     );
@@ -71,7 +71,7 @@ db.serialize(() => {
         "'Competition: CS: GO 2v2', " +
         "'At your home', " +
         "'static/images/dota-underlords.png', " +
-        `'Shout your way to the top with the popular and fast-paced shooter CS:GO!',` +
+        `'Shoot your way to the top with the popular and fast-paced shooter CS:GO!',` +
         '1,' +
         "'2020-03-18 20:00:00')",
     );
