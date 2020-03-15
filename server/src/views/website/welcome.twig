@@ -14,11 +14,11 @@
                     This intranet contains details about the
                     <a href="/schedule">schedule</a>,
                     <a href="/competitions">competitions</a>
-                    and a <a href="/shoutbox">shoutbox</a>
-                    to chat with your fellow gamers.
+                    and <a href="/paint">multiplayer paint</a>
+                    to have fun with your fellow gamers.
                 </p>
                 <p class="mt-5">
-                    <strong>LAN address:</strong>
+                    <strong>Public address:</strong>
                     <code>
                         {% if hostname == fullHostname %}
                             {{ ip }}
@@ -26,7 +26,7 @@
                             {{ fullHostname }}
                         {% endif %}
                     </code> <br>
-                    <small>Others on the LAN can connect to you via this address.</small>
+                    <small>Your network is publicly reachable on the address above. Network configuration might apply to reach you.</small>
                 </p>
             </div>
         </div>
