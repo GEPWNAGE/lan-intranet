@@ -34,13 +34,228 @@ db.serialize(() => {
     db.run(
         'INSERT INTO activities VALUES ' +
         '(1, ' +
-        "'Official Opening', " +
-        "'Monday at 19:00', " +
+        "'Minecraft', " +
+        "'Monday at 14:00', " +
         "'', " +
         `'', ` +
         '0,' +
-        "'2020-03-16 19:00:00')",
+        "'2021-02-15 14:00:00')",
     );
+
+    db.run(
+        'INSERT INTO activities VALUES ' +
+        '(2, ' +
+        "'Factorio', " +
+        "'Monday at 16:00', " +
+        "'', " +
+        `'', ` +
+        '0,' +
+        "'2021-02-15 16:00:00')",
+    );
+
+    db.run(
+        'INSERT INTO activities VALUES ' +
+        '(3, ' +
+        "'Official Opening', " +
+        "'Monday at 18:00', " +
+        "'', " +
+        `'', ` +
+        '0,' +
+        "'2021-02-15 18:00:00')",
+    );
+
+    db.run(
+        'INSERT INTO activities VALUES ' +
+        '(4, ' +
+        "'Jackbox', " +
+        "'Monday at 18:00', " +
+        "'', " +
+        `'', ` +
+        '0,' +
+        "'2021-02-15 18:00:00')",
+    );
+
+    db.run(
+        'INSERT INTO activities VALUES ' +
+        '(5, ' +
+        "'League of Legends', " +
+        "'Tuesday at 16:00', " +
+        "'', " +
+        `'', ` +
+        '0,' +
+        "'2021-02-16 16:00:00')",
+    );
+
+    db.run(
+        'INSERT INTO activities VALUES ' +
+        '(6, ' +
+        "'Dota: Underlords', " +
+        "'Tuesday at 20:00', " +
+        "'', " +
+        `'', ` +
+        '0,' +
+        "'2021-02-16 20:00:00')",
+    );
+
+    db.run(
+        'INSERT INTO activities VALUES ' +
+        '(7, ' +
+        "'Nintento Switch gaming: Mario Kart, Overcooked and more', " +
+        "'Wednesday at 16:00', " +
+        "'', " +
+        `'', ` +
+        '0,' +
+        "'2021-02-17 16:00:00')",
+    );
+
+    db.run(
+        'INSERT INTO activities VALUES ' +
+        '(8, ' +
+        "'Rocket League', " +
+        "'Wednesday at 22:00', " +
+        "'', " +
+        `'', ` +
+        '0,' +
+        "'2021-02-17 22:00:00')",
+    );
+
+    db.run(
+        'INSERT INTO activities VALUES ' +
+        '(9, ' +
+        "'Factorio', " +
+        "'Thursday at 14:00', " +
+        "'', " +
+        `'', ` +
+        '0,' +
+        "'2021-02-18 14:00:00')",
+    );
+
+    db.run(
+        'INSERT INTO activities VALUES ' +
+        '(10, ' +
+        "'Minecraft', " +
+        "'Thursday at 16:00', " +
+        "'', " +
+        `'', ` +
+        '0,' +
+        "'2021-02-18 16:00:00')",
+    );
+
+    db.run(
+        'INSERT INTO activities VALUES ' +
+        '(11, ' +
+        "'Monaco', " +
+        "'Thursday at 18:00', " +
+        "'', " +
+        `'', ` +
+        '0,' +
+        "'2021-02-18 18:00:00')",
+    );
+
+    db.run(
+        'INSERT INTO activities VALUES ' +
+        '(12, ' +
+        "'Golf With Your Friends', " +
+        "'Thursday at 20:00', " +
+        "'', " +
+        `'', ` +
+        '0,' +
+        "'2021-02-18 20:00:00')",
+    );
+
+    db.run(
+        'INSERT INTO activities VALUES ' +
+        '(13, ' +
+        "'Project Winter', " +
+        "'Friday at 12:00', " +
+        "'', " +
+        `'', ` +
+        '0,' +
+        "'2021-02-19 12:00:00')",
+    );
+
+    db.run(
+        'INSERT INTO activities VALUES ' +
+        '(14, ' +
+        "'Codenames', " +
+        "'Friday at 18:00', " +
+        "'', " +
+        `'', ` +
+        '0,' +
+        "'2021-02-19 18:00:00')",
+    );
+
+    db.run(
+        'INSERT INTO activities VALUES ' +
+        '(15, ' +
+        "'Among Us', " +
+        "'Friday at 20:00', " +
+        "'', " +
+        `'', ` +
+        '0,' +
+        "'2021-02-19 20:00:00')",
+    );
+
+    db.run(
+        'INSERT INTO activities VALUES ' +
+        '(16, ' +
+        "'Civ VI', " +
+        "'Saturday at 12:00', " +
+        "'', " +
+        `'', ` +
+        '0,' +
+        "'2021-02-20 12:00:00')",
+    );
+
+    db.run(
+        'INSERT INTO activities VALUES ' +
+        '(17, ' +
+        "'CS:GO', " +
+        "'Saturday at 20:00', " +
+        "'', " +
+        `'', ` +
+        '0,' +
+        "'2021-02-20 20:00:00')",
+    );
+
+    db.run(
+        'INSERT INTO activities VALUES ' +
+        '(18, ' +
+        "'Minecraft', " +
+        "'Sunday at 16:00', " +
+        "'', " +
+        `'', ` +
+        '0,' +
+        "'2021-02-20 16:00:00')",
+    );
+
+    db.run(
+        'INSERT INTO activities VALUES ' +
+        '(19, ' +
+        "'Factorio', " +
+        "'Sunday at 18:00', " +
+        "'', " +
+        `'', ` +
+        '0,' +
+        "'2021-02-20 18:00:00')",
+    );
+
+    db.run(
+        'INSERT INTO activities VALUES ' +
+        '(20, ' +
+        "'Trackmania', " +
+        "'Sunday at 20:00', " +
+        "'', " +
+        `'', ` +
+        '0,' +
+        "'2021-02-20 20:00:00')",
+    );
+
+
+
+
+/*
+
 
     db.run(
         'INSERT INTO activities VALUES ' +
@@ -108,6 +323,7 @@ db.serialize(() => {
         '0,' +
         "'2020-03-20 23:59:59')"
     );
+    */
 
     db.run(
         'CREATE TABLE IF NOT EXISTS subscriptions ' +

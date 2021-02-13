@@ -1,4 +1,7 @@
 import 'bootstrap';
+import '@fortawesome/fontawesome-free-brands';
+import { dom } from '@fortawesome/fontawesome-svg-core';
+
 
 import './index.scss';
 
@@ -14,3 +17,5 @@ if (document.querySelector('#mount-paint')) {
 if (document.querySelector('#mount-paint-history')) {
     import('./paint/history');
 }
+
+dom.watch();
