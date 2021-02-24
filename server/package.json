@@ -11,7 +11,7 @@
     "@types/readline-sync": "^1.4.3",
     "@types/serve-favicon": "^2.2.30",
     "@types/twig": "^1.12.2",
-    "bcrypt": "^3.0.7",
+    "bcrypt": "^5.0.0",
     "casual": "^1.6.0",
     "cookie-parser": "^1.4.4",
     "cross-env": "^5.2.0",
