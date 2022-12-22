@@ -18,7 +18,7 @@
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "http-proxy-middleware": "^0.20.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "node-fetch": "^2.6.0",
     "readline-sync": "^1.4.10",
     "serve-favicon": "^2.5.0",
