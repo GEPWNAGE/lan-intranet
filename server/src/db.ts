@@ -34,296 +34,190 @@ db.serialize(() => {
     db.run(
         'INSERT INTO activities VALUES ' +
         '(1, ' +
-        "'Minecraft', " +
-        "'Monday at 14:00', " +
+        "'Start', " +
+        "'Friday at 15:00', " +
         "'', " +
         `'', ` +
         '0,' +
-        "'2021-02-15 14:00:00')",
+        "'2023-02-24 15:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(2, ' +
-        "'Factorio', " +
-        "'Monday at 16:00', " +
+        "'Dinner', " +
+        "'Friday at 19:30', " +
         "'', " +
         `'', ` +
         '0,' +
-        "'2021-02-15 16:00:00')",
+        "'2023-02-24 19:30:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(3, ' +
-        "'Official Opening', " +
-        "'Monday at 18:00', " +
+        "'Just Dance Competition', " +
+        "'Friday at 20:00', " +
         "'', " +
         `'', ` +
         '0,' +
-        "'2021-02-15 18:00:00')",
+        "'2023-02-24 20:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(4, ' +
-        "'Jackbox', " +
-        "'Monday at 18:00', " +
+        "'Last round', " +
+        "'Friday at 23:00', " +
         "'', " +
         `'', ` +
         '0,' +
-        "'2021-02-15 18:00:00')",
+        "'2023-02-24 23:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(5, ' +
-        "'League of Legends', " +
-        "'Tuesday at 16:00', " +
+        "'Go home :(', " +
+        "'Friday at 23:30', " +
         "'', " +
         `'', ` +
         '0,' +
-        "'2021-02-16 16:00:00')",
+        "'2023-02-24 23:30:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(6, ' +
-        "'Dota: Underlords', " +
-        "'Tuesday at 20:00', " +
+        "'Breakfast', " +
+        "'Saturday at 9:00', " +
         "'', " +
         `'', ` +
         '0,' +
-        "'2021-02-16 20:00:00')",
+        "'2023-02-25 9:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(7, ' +
-        "'Nintento Switch gaming: Mario Kart, Overcooked and more', " +
-        "'Wednesday at 16:00', " +
+        "'Lunch', " +
+        "'Saturday at 12:00', " +
         "'', " +
         `'', ` +
         '0,' +
-        "'2021-02-17 16:00:00')",
+        "'2023-02-25 12:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(8, ' +
-        "'Rocket League', " +
-        "'Wednesday at 22:00', " +
+        "'Smash Competition', " +
+        "'Saturday at 14:00', " +
         "'', " +
         `'', ` +
-        '0,' +
-        "'2021-02-17 22:00:00')",
+        '1,' +
+        "'2023-02-25 14:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(9, ' +
-        "'Factorio', " +
-        "'Thursday at 14:00', " +
+        "'Minecraft Competition (part 1)', " +
+        "'Saturday at 16:00', " +
         "'', " +
         `'', ` +
-        '0,' +
-        "'2021-02-18 14:00:00')",
+        '1,' +
+        "'2023-02-25 16:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(10, ' +
-        "'Minecraft', " +
-        "'Thursday at 16:00', " +
+        "'Dinner', " +
+        "'Saturday at 19:00', " +
         "'', " +
         `'', ` +
         '0,' +
-        "'2021-02-18 16:00:00')",
+        "'2023-02-25 19:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(11, ' +
-        "'Monaco', " +
-        "'Thursday at 18:00', " +
+        "'League of Legends competition', " +
+        "'Saturday at 20:00', " +
         "'', " +
         `'', ` +
-        '0,' +
-        "'2021-02-18 18:00:00')",
+        '1,' +
+        "'2023-02-25 20:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(12, ' +
-        "'Golf With Your Friends', " +
-        "'Thursday at 20:00', " +
+        "'Last round', " +
+        "'Saturday at 23:00', " +
         "'', " +
         `'', ` +
         '0,' +
-        "'2021-02-18 20:00:00')",
+        "'2023-02-25 23:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(13, ' +
-        "'Project Winter', " +
-        "'Friday at 12:00', " +
+        "'Go home :(', " +
+        "'Saturday at 23:30', " +
         "'', " +
         `'', ` +
         '0,' +
-        "'2021-02-19 12:00:00')",
+        "'2023-02-25 23:30:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(14, ' +
-        "'Codenames', " +
-        "'Friday at 18:00', " +
+        "'Start', " +
+        "'Sunday at 9:00', " +
         "'', " +
         `'', ` +
         '0,' +
-        "'2021-02-19 18:00:00')",
+        "'2023-02-26 9:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(15, ' +
-        "'Among Us', " +
-        "'Friday at 20:00', " +
+        "'Brunch', " +
+        "'Sunday at 10:00', " +
         "'', " +
         `'', ` +
         '0,' +
-        "'2021-02-19 20:00:00')",
+        "'2023-02-26 10:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(16, ' +
-        "'Civ VI', " +
-        "'Saturday at 12:00', " +
+        "'Minecraft Competition (part 2)', " +
+        "'Sunday at 11:00', " +
         "'', " +
         `'', ` +
-        '0,' +
-        "'2021-02-20 12:00:00')",
+        '1,' +
+        "'2023-02-26 11:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(17, ' +
-        "'CS:GO', " +
-        "'Saturday at 20:00', " +
+        "'The End :(', " +
+        "'Sunday at 15:00', " +
         "'', " +
         `'', ` +
         '0,' +
-        "'2021-02-20 20:00:00')",
+        "'2023-02-26 15:00:00')",
     );
 
-    db.run(
-        'INSERT INTO activities VALUES ' +
-        '(18, ' +
-        "'Minecraft', " +
-        "'Sunday at 16:00', " +
-        "'', " +
-        `'', ` +
-        '0,' +
-        "'2021-02-20 16:00:00')",
-    );
-
-    db.run(
-        'INSERT INTO activities VALUES ' +
-        '(19, ' +
-        "'Factorio', " +
-        "'Sunday at 18:00', " +
-        "'', " +
-        `'', ` +
-        '0,' +
-        "'2021-02-20 18:00:00')",
-    );
-
-    db.run(
-        'INSERT INTO activities VALUES ' +
-        '(20, ' +
-        "'Trackmania', " +
-        "'Sunday at 20:00', " +
-        "'', " +
-        `'', ` +
-        '0,' +
-        "'2021-02-20 20:00:00')",
-    );
-
-
-
-
-/*
-
-
-    db.run(
-        'INSERT INTO activities VALUES ' +
-        '(2, ' +
-        "'Competition: Dota Underlords', " +
-        "'At your home', " +
-        "'static/images/dota-underlords.png', " +
-        `'Play the newly released chess-based auto battler Dota Underlords
-            with us!.', ` +
-        '1,' +
-        "'2020-03-16 20:00:00')",
-    );
-
-    db.run(
-        'INSERT INTO activities VALUES ' +
-        '(3, ' +
-        "'Competition: Jackbox Quiplash', " +
-        "'At your home', " +
-        "'static/images/quiplash.png', " +
-        `'We''ll be having a night of fun with Quiplash, the Jackbox party game. Everyone can join in with their smartphone!', ` +
-        '1,' +
-        "'2020-03-17 20:00:00')",
-    );
-
-    db.run(
-        'INSERT INTO activities VALUES ' +
-        '(4, ' +
-        "'Competition: CS: GO 2v2', " +
-        "'At your home', " +
-        "'static/images/counter-strike-global-offensive.png', " +
-        `'Shoot your way to the top with the popular and fast-paced shooter CS:GO!',` +
-        '1,' +
-        "'2020-03-18 20:00:00')",
-    );
-
-    db.run(
-        'INSERT INTO activities VALUES ' +
-        '(5, ' +
-        "'Competition: skribbl.io', " +
-        "'At your home', " +
-        "'static/images/skribbl-io.png', " +
-        `'Can you draw quickly? Are you a pro at recognizing other people''s drawings? Then join our skribbl.io competition!', ` +
-        '1,' +
-        "'2020-03-19 20:00:00')"
-    );
-
-    db.run(
-        'INSERT INTO activities VALUES ' +
-        '(6, ' +
-        "'Competition: Plague Inc.', " +
-        "'At your home', " +
-        "'static/images/plague-inc.png', " +
-        `'Can you beat the coronavirus? Are you better at infecting people? Play Plague Inc. and show off your best killer-virus.', ` +
-        '1,' +
-        "'2020-03-20 20:00:00')"
-    );
-
-    db.run(
-        'INSERT INTO activities VALUES ' +
-        '(7, ' +
-        "'End of the ELAN', " +
-        "'Friday at 23:59', " +
-        "'', " +
-        `'', ` +
-        '0,' +
-        "'2020-03-20 23:59:59')"
-    );
-    */
 
     db.run(
         'CREATE TABLE IF NOT EXISTS subscriptions ' +
