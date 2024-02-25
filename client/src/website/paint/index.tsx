@@ -1,15 +1,14 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 import Paint from './Paint';
 import { SocketProvider } from '../../helpers/useSocket';
 
 const container = document.querySelector('#mount-paint');
-ReactDOM.render(
+createRoot(container!).render(
     <div>
         <SocketProvider url="/paint">
             <Paint size={896} />
         </SocketProvider>
-    </div>,
-    container
+    </div>
 );

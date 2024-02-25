@@ -1,12 +1,11 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 import PaintHistory from './PaintHistory';
 
 const container = document.querySelector('#mount-paint-history');
-ReactDOM.render(
+createRoot(container!).render(
     <div>
         <PaintHistory size={896} />
-    </div>,
-    container
+    </div>
 );

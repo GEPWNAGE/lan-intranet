@@ -12,8 +12,7 @@ export default function ActivityPanel() {
 
     return (
         <Panel className="ActivityPanel">
-            {trans.map(
-                ({ item, props, key }) =>
+            {trans(({ props, item, _, key }) =>
                     item && (
                         <animated.div
                             key={key}

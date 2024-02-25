@@ -36,7 +36,7 @@ export default function SlidesPanel({ ...otherProps }: SlidesPanelProps) {
     return (
         <SocketProvider url="/paint">
             <Panel className="SlidesPanel">
-                {trans.map(({ item, props, key }) => (
+                {trans(({ props, item, _, key }) => (
                     item && <animated.div
                                 key={key}
                                 className="SlidesPanel__slide"

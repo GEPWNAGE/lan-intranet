@@ -21,7 +21,7 @@ export default function WebsiteShoutboxForm() {
     return (
         <div className="card-footer">
             <form onSubmit={onSubmit}>
-                <div className="form-row">
+                <div className="row">
                     <div className="col-auto flex-grow-1">
                         <input
                             value={message}

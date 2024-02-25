@@ -5,9 +5,9 @@ import {
     useContext,
     useMemo,
 } from 'react';
-import io from 'socket.io-client';
+import io, { Socket } from 'socket.io-client';
 
-export const SocketContext = createContext<SocketIOClient.Socket | null>(null);
+export const SocketContext = createContext<Socket | null>(null);
 
 export interface SocketProviderProps {
     url: string;
@@ -15,7 +15,7 @@ export interface SocketProviderProps {
 }
 
 export function SocketProvider({ url, ...otherProps }: SocketProviderProps) {
-    const socket = useMemo<SocketIOClient.Socket | null>(() => io(url), [url]);
+    const socket = useMemo<Socket | null>(() => io(url), [url]);
 
     return createElement(SocketContext.Provider, {
         value: socket,

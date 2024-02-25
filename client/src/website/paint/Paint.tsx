@@ -50,7 +50,7 @@ function ColorPicker(props: ColorPickerProps) {
     ));
 
     return (
-        <div className="form-row">
+        <div className="row">
             <div className="col-auto">
                 <input type="string" className="form-control" value={props.color} onChange={e => props.changeColor(e.target.value)}/>
             </div>
@@ -121,9 +121,7 @@ export default function Paint(props: PaintProps) {
 
     return (
         <div>
-            <div className="row">
-                <ColorPicker color={color} changeColor={setColor}/>
-            </div>
+            <ColorPicker color={color} changeColor={setColor}/>
             <div className="row mt-2">
                 <PaintCanvas onClick={handleCanvasClick}
                               grid={grid}
