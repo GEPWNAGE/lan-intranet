@@ -1,16 +1,16 @@
 import express from 'express';
 import { Server } from 'http';
 import * as path from 'path';
-import socketIo from 'socket.io';
+import { Server as IO } from 'socket.io';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import * as twig from 'twig';
 import serveFavicon from 'serve-favicon';
-import proxy from 'http-proxy-middleware';
+import { createProxyMiddleware } from 'http-proxy-middleware';
 import fetch from 'node-fetch';
 import cookieParser from 'cookie-parser';
 
-import routes from './routes';
+import routes from './routes/index';
 import apiRoutes from './routes/api';
 import adminRoutes from './routes/admin';
 import paintRoutes from './routes/paint';
@@ -60,7 +60,7 @@ app.use(routes);
 
 if (app.get('env') === 'development') {
     // in development, proxy non-matching requests to webpack server
-    app.use('/', proxy({ target: 'http://localhost:3000', ws: true }));
+    app.use('/', createProxyMiddleware({ target: 'http://localhost:3000', ws: true }));
 }
 
 const MANIFEST_PATH = path.resolve(CLIENT_DIR, 'build/asset-manifest.json');
@@ -113,7 +113,7 @@ app.locals.static = function(key: string) {
 }
 
 const server = new Server(app);
-export const io = socketIo(server);
+export const io = new IO(server);
 
 export const ioShoutbox = io.of('/shoutbox');
 export const ioPaint = io.of('/paint');

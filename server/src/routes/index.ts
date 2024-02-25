@@ -50,7 +50,7 @@ const getActivity = (req: any, res: any) => {
 
     const sql =
         'SELECT id, title, details, can_subscribe, description FROM activities WHERE id = ?';
-    db.get(sql, [activityId], (err, activity) => {
+    db.get(sql, [activityId], (err, activity: {id: number, title: string, details: string, can_subscribe: boolean, description: string, subscriptions: any[]}) => {
         if (err !== null || activity === undefined) {
             console.log(err);
             res.render('website/error');
@@ -61,7 +61,7 @@ const getActivity = (req: any, res: any) => {
             'SELECT s.id, s.hostname, n.nick FROM subscriptions AS s ' +
             'LEFT JOIN nicknames AS n ON (s.hostname = n.hostname)' +
             'WHERE s.activity_id = ?';
-        db.all(sql, [activityId], (err, rows) => {
+        db.all(sql, [activityId], (err, rows: {id: number, hostname: string, nick: string}[]) => {
             if (err !== null) {
                 console.log(err);
                 res.render('website/error');
@@ -91,14 +91,14 @@ router.post('/activity/:activityId([0-9]+)/subscribe', async (req, res) => {
 
     const sql =
         'SELECT id, title, details, can_subscribe FROM activities WHERE id = ?';
-    db.get(sql, [activityId], async (err, activity) => {
+    db.get(sql, [activityId], async (err, activity: {id: number, title: string, details: string, can_subscribe: boolean}) => {
         if (err !== null || activity === undefined) {
             console.log(err);
             res.render('website/error');
             return;
         }
 
-        if (activity.can_subscribe == 1) {
+        if (activity.can_subscribe) {
             try {
                 await dbRun('INSERT INTO subscriptions VALUES (NULL, ?, ?)', [
                     activityId,
