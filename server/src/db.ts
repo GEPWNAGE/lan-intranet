@@ -164,69 +164,6 @@ db.serialize(() => {
             'best varchar nut null)'
     );
 
-    // insert new challenges
-    db.run(
-        'INSERT OR IGNORE INTO challenge VALUES ' +
-        '(1, ' +
-        "'Just Dance', " +
-        "'Nadym van Schaik')"
-    );
-    db.run(
-        'INSERT OR IGNORE INTO challenge VALUES ' +
-        '(2, ' +
-        "'F1 2017', " +
-        "'Koen Klaren')"
-    );
-    db.run(
-        'INSERT OR IGNORE INTO challenge VALUES ' +
-        '(3, ' +
-        "'Super Hexagon', " +
-        "'Mitchel Brunings')"
-    );
-    db.run(
-        'INSERT OR IGNORE INTO challenge VALUES ' +
-        '(4, ' +
-        "'Command & Conquer: Generals (with zero hour expansion)', " +
-        "'Kevin Jilissen')"
-    );
-    db.run(
-        'INSERT OR IGNORE INTO challenge VALUES ' +
-        '(5, ' +
-        "'Total Annihilation', " +
-        "'Pieter Kokx')"
-    );
-    db.run(
-        'INSERT OR IGNORE INTO challenge VALUES ' +
-        '(6, ' +
-        "'OpenTTD', " +
-        "'Marcin van de Ven')"
-    );
-    db.run(
-        'INSERT OR IGNORE INTO challenge VALUES ' +
-        '(7, ' +
-        "'CS:GO 1v1 with racing wheel', " +
-        "'Max Langerak')"
-    );
-    db.run(
-        'INSERT OR IGNORE INTO challenge VALUES ' +
-        '(8, ' +
-        "'Super Smash Bros Melee', " +
-        "'Dante Spekken')"
-    );
-    db.run(
-        'INSERT OR IGNORE INTO challenge VALUES ' +
-        '(9, ' +
-        "'Trackmania', " +
-        "'Mark van Helvoort')"
-    );
-    db.run(
-        'INSERT OR IGNORE INTO challenge VALUES ' +
-        '(10, ' +
-        "'Smite 1v1', " +
-        "'Steven Miltenburg')"
-    );
-
-
     db.run(
         'CREATE TABLE IF NOT EXISTS logins ' +
             '(id integer not null primary key autoincrement, ' +
