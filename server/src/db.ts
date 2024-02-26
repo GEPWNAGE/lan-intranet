@@ -134,11 +134,11 @@ db.serialize(() => {
         'INSERT INTO activities VALUES ' +
         '(10, ' +
         "'The End :(', " +
-        "'Sunday at 11:00', " +
+        "'Sunday at 10:30', " +
         "'', " +
         `'', ` +
         '0,' +
-        "'2024-03-03 11:00:00')",
+        "'2024-03-03 10:30:00')",
     );
 
 
