@@ -12,7 +12,7 @@ export default function ActivityPanel() {
 
     return (
         <Panel className="ActivityPanel">
-            {trans(({ props, item, _, key }) =>
+            {trans((props, item, _, key) =>
                     item && (
                         <animated.div
                             key={key}

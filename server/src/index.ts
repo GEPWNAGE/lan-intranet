@@ -113,7 +113,7 @@ app.locals.static = function(key: string) {
 }
 
 const server = new Server(app);
-export const io = new IO(server);
+export const io = new IO(server, { allowEIO3: true });
 
 export const ioShoutbox = io.of('/shoutbox');
 export const ioPaint = io.of('/paint');

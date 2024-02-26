@@ -8,6 +8,7 @@ import PaintSlide from './PaintSlide';
 import { SocketProvider } from '../../../helpers/useSocket';
 
 import gepwnageLogo from '../../../logos/gepwnage-logo.png';
+import { useState } from 'react';
 
 export type SlidesPanelProps = PanelProps;
 
@@ -31,12 +32,13 @@ export default function SlidesPanel({ ...otherProps }: SlidesPanelProps) {
         color: '#013370'
     });
 
-    const trans = useSlider(elements, 20000, 5000);
+    const [slides, _] = useState(elements);
+    const trans = useSlider(slides, 20000, 5000);
 
     return (
         <SocketProvider url="/paint">
             <Panel className="SlidesPanel">
-                {trans(({ props, item, _, key }) => (
+                {trans((props, item, _, key) => 
                     item && <animated.div
                                 key={key}
                                 className="SlidesPanel__slide"
@@ -44,7 +46,7 @@ export default function SlidesPanel({ ...otherProps }: SlidesPanelProps) {
                             >
                         {item.element}
                     </animated.div>
-                ))}
+                )}
             </Panel>
         </SocketProvider>
     );

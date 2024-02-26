@@ -34,11 +34,11 @@ export default function PaintCanvas(props: PaintCanvasProps) {
         const canvas = canvasRef.current as HTMLCanvasElement;
 
         const bounding = canvas.getBoundingClientRect();
-        const mousex = e.clientX - bounding.left - 1;
-        const mousey = e.clientY - bounding.top - 1;
+        const mousex = e.clientX - bounding.left;
+        const mousey = e.clientY - bounding.top;
 
-        const x = Math.floor(mousex / pixelSize);
-        const y = Math.floor(mousey / pixelSize);
+        const x = Math.floor(mousex / bounding.width * 128);
+        const y = Math.floor(mousey / bounding.height * 128);
 
         props.onClick(x, y);
     };
