@@ -1,4 +1,4 @@
-FROM node:13
+FROM node:20-alpine
 WORKDIR /usr/share/app
 
 COPY server server
