@@ -56,7 +56,6 @@ export default function RuneScapeSlide(props: RuneScapeSlideProps) {
         fetch(`${RS_API}/hiscores/playersBySkill/${props.world}/${skill}`, {mode: 'cors'})
             .then(res => res.json())
             .then((body: PlayerData[]) => {
-                for (let i = 0; i < 100; ++i) {body.push({'username': 'x', 'level': 1, 'xp': 0})}
                 setHiscores(body.slice(0,16));
                 setSkillLoaded(true);
             })
