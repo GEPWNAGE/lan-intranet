@@ -35,187 +35,110 @@ db.serialize(() => {
         'INSERT INTO activities VALUES ' +
         '(1, ' +
         "'Start', " +
-        "'Friday at 15:00', " +
+        "'Friday at 18:00', " +
         "'', " +
         `'', ` +
         '0,' +
-        "'2023-02-24 15:00:00')",
+        "'2024-03-01 18:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(2, ' +
         "'Dinner', " +
-        "'Friday at 19:30', " +
+        "'Friday at 20:00', " +
         "'', " +
         `'', ` +
         '0,' +
-        "'2023-02-24 19:30:00')",
+        "'2024-03-01 20:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(3, ' +
-        "'Just Dance Competition', " +
-        "'Friday at 20:00', " +
-        "'', " +
-        `'', ` +
-        '0,' +
-        "'2023-02-24 20:00:00')",
+        "'2009scape Competition', " +
+        "'Friday at 22:00', " +
+        "'static/images/2009scape.png', " +
+        `'Let us take you back to 2009 with this classic RPG: RuneScape! We''ll be playing on our private server during the entire LAN party! Don''t worry about not having enough time to level up, as xp rates are drastically increased. Show up in a Rune Platebody before the end to earn your certificate of awesomeness!', ` +
+        '1,' +
+        "'2024-03-01 22:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(4, ' +
-        "'Last round', " +
-        "'Friday at 23:00', " +
+        "'Just Dance Competition', " +
+        "'Saturday at 1:00', " +
         "'', " +
         `'', ` +
         '0,' +
-        "'2023-02-24 23:00:00')",
+        "'2024-03-02 1:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(5, ' +
-        "'Go home :(', " +
-        "'Friday at 23:30', " +
-        "'', " +
-        `'', ` +
-        '0,' +
-        "'2023-02-24 23:30:00')",
+        "'Starcraft II Competition', " +
+        "'Saturday at 13:00', " +
+        "'static/images/starcraft-ii.png', " +
+        `'Embark on a challenging Starcraft 2 journey where completing four selected missions is your key to victory. Here''s the twist: no unit construction or upgrades are allowed unless you accomplishe a side quest or reach a mission checkpoint. Feel free to restart missions to unlock additional resources. The ultimate triumph awaits the first strategist who conquers the final mission. Are you up for the challenge?', ` +
+        '1,' +
+        "'2024-03-02 13:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(6, ' +
-        "'Breakfast', " +
-        "'Saturday at 9:00', " +
-        "'', " +
-        `'', ` +
-        '0,' +
-        "'2023-02-25 9:00:00')",
-    );
-
-    db.run(
-        'INSERT INTO activities VALUES ' +
-        '(7, ' +
-        "'Lunch', " +
-        "'Saturday at 12:00', " +
-        "'', " +
-        `'', ` +
-        '0,' +
-        "'2023-02-25 12:00:00')",
-    );
-
-    db.run(
-        'INSERT INTO activities VALUES ' +
-        '(8, ' +
-        "'Smash Competition', " +
-        "'Saturday at 14:00', " +
-        "'', " +
-        `'', ` +
-        '1,' +
-        "'2023-02-25 14:00:00')",
-    );
-
-    db.run(
-        'INSERT INTO activities VALUES ' +
-        '(9, ' +
-        "'Minecraft Competition (part 1)', " +
-        "'Saturday at 16:00', " +
-        "'', " +
-        `'', ` +
-        '1,' +
-        "'2023-02-25 16:00:00')",
-    );
-
-    db.run(
-        'INSERT INTO activities VALUES ' +
-        '(10, ' +
         "'Dinner', " +
         "'Saturday at 19:00', " +
         "'', " +
         `'', ` +
         '0,' +
-        "'2023-02-25 19:00:00')",
+        "'2024-03-02 19:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
-        '(11, ' +
-        "'League of Legends competition', " +
-        "'Saturday at 20:00', " +
-        "'', " +
-        `'', ` +
+        '(7, ' +
+        "'Sims 4 Competition', " +
+        "'Saturday at 21:00', " +
+        "'static/images/sims-4.png', " +
+        `'Unleash your inner architect as the clock ticks down! You have just one hour to craft the most stunning masterpiece. Let your imagination run wild, but don''t forget the devil''s in the details – a panel of judges awaits to crown the ultimate creator. Remember, stick to the rules: one hour, base game only. Good luck, and may the most breathtaking build win!', ` +
         '1,' +
-        "'2023-02-25 20:00:00')",
+        "'2024-03-02 21:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
-        '(12, ' +
-        "'Last round', " +
-        "'Saturday at 23:00', " +
-        "'', " +
-        `'', ` +
-        '0,' +
-        "'2023-02-25 23:00:00')",
+        '(8, ' +
+        "'Stick Fight Competition', " +
+        "'Sunday at 1:00', " +
+        "'static/images/stick-fight.png', " +
+        `'Enter the arena of Stick Fight: The ultimate battle where victory is everything. Engage in intense rounds against opponents, each one crucial in securing your triumph. Rack up the highest score across multiple rounds to claim ultimate glory. Prepare for adrenaline-pumping action and strategic combat as you fight your way to the top. Can you emerge as the ultimate victor?', ` +
+        '1,' +
+        "'2024-03-03 1:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
-        '(13, ' +
-        "'Go home :(', " +
-        "'Saturday at 23:30', " +
-        "'', " +
-        `'', ` +
-        '0,' +
-        "'2023-02-25 23:30:00')",
-    );
-
-    db.run(
-        'INSERT INTO activities VALUES ' +
-        '(14, ' +
-        "'Start', " +
+        '(9, ' +
+        "'2009scape Competition end', " +
         "'Sunday at 9:00', " +
         "'', " +
         `'', ` +
         '0,' +
-        "'2023-02-26 9:00:00')",
+        "'2024-03-03 9:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
-        '(15, ' +
-        "'Brunch', " +
-        "'Sunday at 10:00', " +
-        "'', " +
-        `'', ` +
-        '0,' +
-        "'2023-02-26 10:00:00')",
-    );
-
-    db.run(
-        'INSERT INTO activities VALUES ' +
-        '(16, ' +
-        "'Minecraft Competition (part 2)', " +
+        '(10, ' +
+        "'The End :(', " +
         "'Sunday at 11:00', " +
         "'', " +
         `'', ` +
-        '1,' +
-        "'2023-02-26 11:00:00')",
-    );
-
-    db.run(
-        'INSERT INTO activities VALUES ' +
-        '(17, ' +
-        "'The End :(', " +
-        "'Sunday at 15:00', " +
-        "'', " +
-        `'', ` +
         '0,' +
-        "'2023-02-26 15:00:00')",
+        "'2024-03-03 11:00:00')",
     );
 
 
