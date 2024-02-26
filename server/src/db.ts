@@ -56,7 +56,7 @@ db.serialize(() => {
     db.run(
         'INSERT INTO activities VALUES ' +
         '(3, ' +
-        "'2009scape Competition', " +
+        "'Opening 2009scape Competition', " +
         "'Friday at 22:00', " +
         "'static/images/2009scape.png', " +
         `'Let us take you back to 2009 with this classic RPG: RuneScape! We''ll be playing on our private server during the entire LAN party! Don''t worry about not having enough time to level up, as xp rates are drastically increased. Show up in a Rune Platebody before the end to earn your certificate of awesomeness!', ` +
