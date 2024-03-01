@@ -123,22 +123,22 @@ db.serialize(() => {
         'INSERT INTO activities VALUES ' +
         '(9, ' +
         "'2009scape Competition end', " +
-        "'Sunday at 9:00', " +
+        "'Sunday at 10:00', " +
         "'', " +
         `'', ` +
         '0,' +
-        "'2024-03-03 9:00:00')",
+        "'2024-03-03 10:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(10, ' +
         "'The End :(', " +
-        "'Sunday at 10:30', " +
+        "'Sunday at 11:00', " +
         "'', " +
         `'', ` +
         '0,' +
-        "'2024-03-03 10:30:00')",
+        "'2024-03-03 11:00:00')",
     );
 
 
