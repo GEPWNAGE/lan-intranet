@@ -56,31 +56,33 @@ export default function RuneScapeSlide(props: RuneScapeSlideProps) {
         fetch(`${RS_API}/hiscores/playersBySkill/${props.world}/${skill}`, {mode: 'cors'})
             .then(res => res.json())
             .then((body: PlayerData[]) => {
-                setHiscores(body.slice(0,16));
+                setHiscores(body.slice(0,10));
                 setSkillLoaded(true);
             })
             .catch(e => { console.error(e) });
     })
 
     return <div className='row'>
-        <h4>RuneScape {RS_SKILLS[skill]} Highscores</h4>
-        <table className="rs-table">
-            <thead>
-            <tr>
-                <th>Rank</th>
-                <th>Name</th>
-                <th>Level</th>
-                <th>XP</th>
-            </tr>
-            </thead>
-            <tbody>
-                {hiscores.map((s: PlayerData, i: number) => <tr>
-                    <td>{i + 1}</td>
-                    <td>{s.username}</td>
-                    <td>{s.level}</td>
-                    <td>{Math.floor(s.xp)}</td>
-                </tr>)}
-            </tbody>
-        </table>
+        <div className='col'>
+            <h4>RuneScape {RS_SKILLS[skill]} Highscores</h4>
+            <table className="rs-table">
+                <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Name</th>
+                    <th>Level</th>
+                    <th>XP</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {hiscores.map((s: PlayerData, i: number) => <tr>
+                        <td>{i + 1}</td>
+                        <td>{s.username}</td>
+                        <td>{s.level}</td>
+                        <td>{Math.floor(s.xp)}</td>
+                    </tr>)}
+                </tbody>
+            </table>
+        </div>
     </div>;
 }
