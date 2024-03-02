@@ -51,6 +51,12 @@ app.use(function(req, res, next) {
     );
     next();
 });
+app.use('/dynmap', createProxyMiddleware({
+    target: 'http://minecraft.gepwnage.lan',
+    pathRewrite: {'^/dynmap' : ''},
+    ws: true,
+    changeOrigin: true,
+}));
 
 // Load routes
 app.use('/api', apiRoutes);

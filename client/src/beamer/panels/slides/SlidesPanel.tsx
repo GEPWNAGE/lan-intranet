@@ -10,6 +10,7 @@ import { SocketProvider } from '../../../helpers/useSocket';
 import gepwnageLogo from '../../../logos/gepwnage-logo.png';
 import { useState } from 'react';
 import RuneScapeSlide from './RuneScapeSlide';
+import DynmapSlide from './DynmapSlide';
 
 export type SlidesPanelProps = PanelProps;
 
@@ -34,7 +35,7 @@ export default function SlidesPanel({ ...otherProps }: SlidesPanelProps) {
     });
 
     elements.push({
-        element: <iframe style={{width: '100%', height: '100%'}} src="http://minecraft.gepwnage.lan/index.html?worldname=world&mapname=surface&zoom=5&x=79&y=64&z=48&nopanel=true&hidechat=true&nocompass=true&nopanel=true"/>,
+        element: <DynmapSlide world={1709386676343}/>,
         color: '#000000'
     });
 
