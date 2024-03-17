@@ -6,7 +6,7 @@ export interface DynmapSlideProps {
     world: number
 }
 
-const DYNMAP_URL = "/dynmap";
+const DYNMAP_URL = "http://minecraft.gepwnage.lan";
 
 const DEFAULT_WORLD = 'world';
 const WORLD_MAPS: {[index: string]: string} = {
