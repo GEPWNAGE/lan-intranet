@@ -39,7 +39,7 @@ db.serialize(() => {
         "'', " +
         `'', ` +
         '0,' +
-        "'2024-03-01 18:00:00')",
+        "'2025-03-07 18:00:00')",
     );
 
     db.run(
@@ -50,40 +50,40 @@ db.serialize(() => {
         "'', " +
         `'', ` +
         '0,' +
-        "'2024-03-01 20:00:00')",
+        "'2024-03-07 20:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(3, ' +
-        "'Opening 2009scape Competition', " +
+        "'Ticket to Ride compo', " +
         "'Friday at 22:00', " +
-        "'static/images/2009scape.png', " +
-        `'Let us take you back to 2009 with this classic RPG: RuneScape! We''ll be playing on our private server during the entire LAN party! Don''t worry about not having enough time to level up, as xp rates are drastically increased. Show up in a Rune Platebody before the end to earn your certificate of awesomeness!', ` +
+        "'static/images/tickettoride.png', " +
+        `'Insert compo text here', ` +
         '1,' +
-        "'2024-03-01 22:00:00')",
+        "'2024-03-07 22:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(4, ' +
-        "'Just Dance Competition', " +
+        "'Among us Competition', " +
         "'Saturday at 1:00', " +
-        "'', " +
-        `'', ` +
-        '0,' +
-        "'2024-03-02 1:00:00')",
+        "'static/images/amongus.png'   , " +
+        `'Insert compo text here', ` +
+        '1,' +
+        "'2024-03-08 1:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(5, ' +
-        "'Starcraft II Competition', " +
+        "'Keep talking and nobody explodes Competition', " +
         "'Saturday at 13:00', " +
-        "'static/images/starcraft-ii.png', " +
-        `'Embark on a challenging Starcraft 2 journey where completing four selected missions is your key to victory. Here''s the twist: no unit construction or upgrades are allowed unless you accomplishe a side quest or reach a mission checkpoint. Feel free to restart missions to unlock additional resources. The ultimate triumph awaits the first strategist who conquers the final mission. Are you up for the challenge?', ` +
+        "'static/images/keeptalking.png', " +
+        `'Insert compo text here', ` +
         '1,' +
-        "'2024-03-02 13:00:00')",
+        "'2024-03-08 13:00:00')",
     );
 
     db.run(
@@ -94,51 +94,29 @@ db.serialize(() => {
         "'', " +
         `'', ` +
         '0,' +
-        "'2024-03-02 19:00:00')",
+        "'2024-03-08 19:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(7, ' +
-        "'Sims 4 Competition', " +
+        "'Zombies Competition', " +
         "'Saturday at 21:00', " +
-        "'static/images/sims-4.png', " +
-        `'Unleash your inner architect as the clock ticks down! You have just one hour to craft the most stunning masterpiece. Let your imagination run wild, but don''t forget the devil''s in the details – a panel of judges awaits to crown the ultimate creator. Remember, stick to the rules: one hour, base game only. Good luck, and may the most breathtaking build win!', ` +
+        "'static/images/nzpzombies.png', " +
+        `'Insert compo text here', ` +
         '1,' +
-        "'2024-03-02 21:00:00')",
+        "'2024-03-08 21:00:00')",
     );
 
     db.run(
         'INSERT INTO activities VALUES ' +
         '(8, ' +
-        "'Stick Fight Competition', " +
-        "'Sunday at 1:00', " +
-        "'static/images/stick-fight.png', " +
-        `'Enter the arena of Stick Fight: The ultimate battle where victory is everything. Engage in intense rounds against opponents, each one crucial in securing your triumph. Rack up the highest score across multiple rounds to claim ultimate glory. Prepare for adrenaline-pumping action and strategic combat as you fight your way to the top. Can you emerge as the ultimate victor?', ` +
-        '1,' +
-        "'2024-03-03 1:00:00')",
-    );
-
-    db.run(
-        'INSERT INTO activities VALUES ' +
-        '(9, ' +
-        "'2009scape Competition end', " +
-        "'Sunday at 10:00', " +
-        "'', " +
-        `'', ` +
-        '0,' +
-        "'2024-03-03 10:00:00')",
-    );
-
-    db.run(
-        'INSERT INTO activities VALUES ' +
-        '(10, ' +
         "'The End :(', " +
         "'Sunday at 11:00', " +
         "'', " +
         `'', ` +
         '0,' +
-        "'2024-03-03 11:00:00')",
+        "'2024-03-09 11:00:00')",
     );
 
 
