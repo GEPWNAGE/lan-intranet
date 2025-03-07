@@ -59,7 +59,7 @@ db.serialize(() => {
         "'Ticket to Ride compo', " +
         "'Friday at 22:00', " +
         "'static/images/tickettoride.png', " +
-        `'Insert compo text here', ` +
+        `'I like trains, choo choo!\nDo you also like trains or like to manage tracks? Play three variants of ticket to ride, namely, ticket to ride Amsterdam, ticket to ride new Amsterdam/new york and english Amsterdam/London, get the highest score and win fun price 🚂🚅🚋🚕', ` +
         '1,' +
         "'2024-03-07 22:00:00')",
     );
@@ -70,7 +70,7 @@ db.serialize(() => {
         "'Among us Competition', " +
         "'Saturday at 1:00', " +
         "'static/images/amongus.png'   , " +
-        `'Insert compo text here', ` +
+        `'There is an imposter among us!\nLook around you, everyone is acting sus... Forge trust and eject the right crew members from the LAN party.', ` +
         '1,' +
         "'2024-03-08 1:00:00')",
     );
@@ -81,7 +81,7 @@ db.serialize(() => {
         "'Keep talking and nobody explodes Competition', " +
         "'Saturday at 13:00', " +
         "'static/images/keeptalking.png', " +
-        `'Insert compo text here', ` +
+        `'Keep talking and nobody explodes! Will you Putin the effort to Trump the other teams? We''ll Xi you there!\nIn this competition you can form teams of up to 4 people. One person to defuse the bomb, and the others to solve the puzzles. We will provide the bombs, bomb manuals, and pen and paper. There will be time to practice before the competition. During the competition itself, we will have some custom bombs. Each team that explodes is eliminated. Last team standing wins :) (Ties will be resolved by more bombs.)', ` +
         '1,' +
         "'2024-03-08 13:00:00')",
     );
@@ -103,7 +103,7 @@ db.serialize(() => {
         "'Zombies Competition', " +
         "'Saturday at 21:00', " +
         "'static/images/nzpzombies.png', " +
-        `'Insert compo text here', ` +
+        `'The dead have risen again, and it''s up to your squad to defeat them!\nGather a squad of 3 soldiers and save the world from the Nazi Zombie Apocalypse. The classic retro game mode (do you feel old already?) of CoD is now brought to you in your web browser. The team surviving the most waves of zombies wins. Grab a refreshing Perk-A-Cola and gear up now!', ` +
         '1,' +
         "'2024-03-08 21:00:00')",
     );
