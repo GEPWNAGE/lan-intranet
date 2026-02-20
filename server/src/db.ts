@@ -59,7 +59,7 @@ db.serialize(() => {
         "'Worms Competition', " +
         "'Friday at 23:00', " +
         "'static/images/worms-wmd.jpg', " +
-        `'', ` +
+        `'Its time to replay an old classic and explode some worms! Control your squad of 3 worms, and use high-powered explosions and shenanigans to blast the opponents off the map! Play in a free for all format, and be the last one standing in the last game!', ` +
         '1,' +
         "'2026-02-20 23:00:00')",
     );
@@ -69,8 +69,8 @@ db.serialize(() => {
         '(4, ' +
         "'Counter Strike 2 Competition', " +
         "'Saturday at 13:00', " +
-        "'static/images/counter-strike-2.png', " +
-        `'', ` +
+        "'static/images/counter-strike-2.jpg', " +
+        `'Gear up for the ultimate shoot-out. In this 2v2 team show-off, go all for tactics or use your best surprise tactics to plant the bomb and win the match!', ` +
         '1,' +
         "'2026-02-21 13:00:00')",
     );
@@ -91,7 +91,7 @@ db.serialize(() => {
         '(6, ' +
         "'Mario Krat Competition', " +
         "'Saturday at 21:00', " +
-        "'static/images/mario-krat.png', " +
+        "'static/images/mario-kart.png', " +
         `'Do you like playing Mario kart with your friends and are looking to add another layer of fun? Are your friends tired of you always winning and want to make it more difficult for you? Or are you just looking for an excuse to drink? Then join the Mario krat tournament! Alcohol free version is also possible', ` +
         '1,' +
         "'2026-02-21 21:00:00')",
@@ -100,9 +100,9 @@ db.serialize(() => {
     db.run(
         'INSERT INTO activities VALUES ' +
         '(7, ' +
-        "'Sky Block Competition Finale', " +
+        "'FTB Skies 2 Competition Finale', " +
         "'Sunday at 11:00', " +
-        "'static/images/sky-block.png', " +
+        "'static/images/ftb-skies-2.webp', " +
         `'', ` +
         '1,' +
         "'2026-02-22 11:00:00')",
